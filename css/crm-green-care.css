@@ -1,0 +1,308 @@
+/* ============================================
+   綠海養護頁面樣式
+   根據 Figma 設計稿 (node-id: 1:3110)
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  /* 主要色彩 */
+  --color-page-bg: #f8f7f5;
+  --color-text-dark: #3a4246;
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-btn-bg: rgba(179, 176, 158, 0.16);
+  --color-btn-border: #b3b09e;
+
+  /* 狀態標籤色彩 */
+  --color-pending-bg: rgba(232, 177, 95, 0.12);
+  --color-pending-text: #c58b36;
+  --color-signed-bg: #dcf1eb;
+  --color-signed-text: #325148;
+
+  /* 首頁按鈕 */
+  --color-home-text: rgba(58, 66, 70, 0.8);
+
+  /* 字型 */
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面整體 --- */
+.crm-green-care {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部導覽列（固定） --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 18px;
+  background-color: var(--color-page-bg);
+}
+
+/* 返回按鈕 */
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.btn-back img {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-back .arrow-icon {
+  width: 16px;
+  height: 15.7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 頁面標題 */
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+}
+
+/* 首頁按鈕 */
+.btn-home {
+  position: absolute;
+  right: 20px;
+  top: 31px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.btn-home .home-icon {
+  width: 21px;
+  height: 21px;
+  display: block;
+}
+
+.btn-home span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(58, 66, 70, 0.8);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 主要內容區域 --- */
+.main-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  padding: 80px 20px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- 合約卡片 --- */
+.contract-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+  width: 100%;
+}
+
+/* 卡片標題列 */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.card-title-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.card-title {
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  white-space: nowrap;
+}
+
+/* 狀態標籤 */
+.status-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.status-badge span {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* 待簽署狀態 */
+.status-pending {
+  background-color: var(--color-pending-bg);
+}
+
+.status-pending span {
+  color: var(--color-pending-text);
+}
+
+/* 已簽署狀態 */
+.status-signed {
+  background-color: var(--color-signed-bg);
+}
+
+.status-signed span {
+  color: var(--color-signed-text);
+}
+
+/* 合約資訊區 */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.card-info p {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  line-height: normal;
+  width: 100%;
+}
+
+.card-info .info-label {
+  font-weight: 500;
+}
+
+.card-info .info-value {
+  font-weight: 400;
+}
+
+/* 操作按鈕區 */
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 4px;
+  width: 100%;
+}
+
+.action-row {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  width: 100%;
+}
+
+/* 操作按鈕 */
+.btn-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  background-color: var(--color-btn-bg);
+  border: 1px solid var(--color-btn-border);
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 1px;
+  min-width: 1px;
+}
+
+.btn-action span {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  white-space: nowrap;
+}
+
+/* 按鈕互動效果 */
+.btn-action:active {
+  background-color: rgba(179, 176, 158, 0.3);
+}
+
+/* --- 響應式設計 --- */
+

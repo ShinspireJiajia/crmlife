@@ -1,0 +1,551 @@
+/* ============================================
+   生活服務預約詳情頁樣式
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-white: #ffffff;
+  --color-border-light: #eeeeee;
+  --color-border-input: #e0e0e0;
+  --color-hint-bg: #f5f4f0;
+  --color-time-text: rgba(58, 66, 70, 0.45);
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面容器 --- */
+.crm-booking-detail {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- 主內容區 --- */
+.record-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 90px 20px 40px;
+}
+
+/* ======================================
+   詳情卡片
+   ====================================== */
+.detail-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* 卡片標頭：單號 + 狀態 */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-number {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+/* 狀態標籤 */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.status-badge.status-confirmed {
+  background-color: rgba(39, 174, 96, 0.12);
+  color: #27AE60;
+}
+
+.status-badge.status-completed {
+  background-color: rgba(52, 152, 219, 0.12);
+  color: #3498DB;
+}
+
+.status-badge.status-cancelled {
+  background-color: rgba(231, 76, 60, 0.10);
+  color: #E74C3C;
+}
+
+.status-badge.status-service-cancelled {
+  background-color: rgba(231, 76, 60, 0.10);
+  color: #E74C3C;
+}
+
+.status-badge.status-pending {
+  background-color: rgba(243, 156, 18, 0.12);
+  color: #F39C12;
+}
+
+/* 資訊列表 */
+.detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-row {
+  font-family: var(--font-family);
+  font-size: 15px;
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.detail-label-bold {
+  font-weight: 700;
+  display: inline-block;
+  width: 70px;
+  letter-spacing: 0.5px;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: rgba(58, 66, 70, 0.65);
+  display: inline-block;
+  width: 70px;
+  letter-spacing: 0.5px;
+}
+
+/* 聯絡時段標籤（顯示於電話旁） */
+.detail-contact-period {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-gold);
+  background-color: rgba(184, 166, 118, 0.12);
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
+/* 區塊型描述（備註、完成說明） */
+.detail-block {
+  margin-top: 8px;
+}
+
+.block-label {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-text-dark);
+  margin-bottom: 6px;
+}
+
+.block-value {
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: rgba(58, 66, 70, 0.78);
+  line-height: 1.7;
+  background-color: var(--color-hint-bg);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+/* 分隔線 */
+.card-divider {
+  margin: 16px 0;
+  text-align: center;
+}
+
+.card-divider img {
+  width: 100%;
+  max-width: 320px;
+}
+
+/* 完成資訊 */
+.completion-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* --- 取消預約按鈕 --- */
+.btn-cancel-booking {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  margin-top: 16px;
+  border: 1px solid #E74C3C;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #E74C3C;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-cancel-booking:hover {
+  background-color: #E74C3C;
+  color: #fff;
+}
+
+.btn-cancel-booking:active {
+  opacity: 0.8;
+}
+
+/* ======================================
+   留言板 / 聯絡專員區
+   ====================================== */
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px;
+}
+
+.section-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.section-title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+/* 聊天區域 */
+.chat-area {
+  background-color: var(--color-hint-bg);
+  border-radius: 12px;
+  padding: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+
+/* 使用者訊息（靠右） */
+.chat-msg-user {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.chat-msg-user .msg-bubble {
+  background-color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  word-break: break-word;
+}
+
+.chat-msg-user .msg-time {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-time-text);
+  text-align: right;
+  padding: 0 12px;
+  margin: 0;
+}
+
+/* 專員訊息（靠左） */
+.chat-msg-agent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.chat-msg-agent .msg-bubble {
+  background-color: rgba(179, 176, 158, 0.32);
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  word-break: break-word;
+}
+
+.chat-msg-agent .msg-sender {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-time-text);
+  padding: 0 12px;
+  margin: 0;
+}
+
+/* 聊天區內附件卡片 */
+.chat-msg-agent .attachment-item {
+  align-self: stretch;
+}
+
+.attachment-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(179,176,158,0.04) 0%, rgba(179,176,158,0.04) 100%),
+              linear-gradient(90deg, #fff 0%, #fff 100%);
+}
+
+.attachment-item .file-name {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  margin: 0;
+}
+
+.attachment-item .download-btn {
+  width: 44px;
+  height: 42px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.attachment-item .download-btn img {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- 我要留言按鈕 --- */
+.btn-leave-message {
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  background-color: var(--color-gold);
+  color: #ffffff;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.btn-leave-message:hover {
+  opacity: 0.9;
+}
+
+/* ======================================
+   我要留言彈窗
+   ====================================== */
+.message-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.message-modal-overlay.active {
+  display: flex;
+}
+
+.message-modal {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.message-input-area {
+  background-color: var(--color-hint-bg);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.message-textarea {
+  width: 100%;
+  min-height: 48px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  resize: vertical;
+  outline: none;
+}
+
+.message-textarea::placeholder {
+  color: rgba(58, 66, 70, 0.35);
+}
+
+/* 附件上傳區 */
+.message-upload-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-select-file {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  background-color: var(--color-white);
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: border-color 0.2s;
+  align-self: flex-start;
+}
+
+.btn-select-file:hover {
+  border-color: var(--color-gold);
+}
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background-color: var(--color-hint-bg);
+  border-radius: 6px;
+}
+
+.selected-file .file-name {
+  font-size: 13px;
+  color: var(--color-text-dark);
+  margin: 0;
+  word-break: break-all;
+}
+
+.btn-remove-file {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.btn-remove-file img {
+  width: 18px;
+  height: 18px;
+}
+
+.upload-hint {
+  font-size: 12px;
+  color: rgba(58, 66, 70, 0.45);
+  margin: 0;
+}
+
+/* 操作按鈕 */
+.message-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.message-modal-actions .btn {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.btn-modal-cancel {
+  background-color: #e8e5e0;
+  color: var(--color-text-dark);
+}
+
+.btn-modal-send {
+  background-color: var(--color-gold);
+  color: #ffffff;
+}
+
+.btn-modal-cancel:hover,
+.btn-modal-send:hover {
+  opacity: 0.88;
+}
