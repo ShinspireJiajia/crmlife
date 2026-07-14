@@ -1,0 +1,193 @@
+/* ============================================
+   物業人員註冊結果頁面樣式（成功 / 失敗共用）
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-text-dark: #3a4246;
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-gold: #b8a676;
+  --color-white: #ffffff;
+  --color-muted-bg: rgba(179, 176, 158, 0.16);
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面整體 --- */
+.crm-bind-property-result {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部導覽列（凍結固定） --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 20px;
+  background-color: var(--color-page-bg);
+}
+
+/* 返回按鈕 */
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.btn-back img {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-back .arrow-icon {
+  width: 16px;
+  height: 15.7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 頁面標題 */
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+}
+
+/* --- 主要內容區域 --- */
+.main-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 82px 20px 32px;
+  width: 100%;
+}
+
+/* --- 結果畫面 --- */
+.view-result {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  padding-top: 8px;
+}
+
+/* 結果卡片 */
+.result-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  width: 100%;
+  background-color: var(--color-muted-bg);
+  border-radius: 8px;
+}
+
+/* 結果圖示 */
+.result-icon {
+  width: 64px;
+  height: 64px;
+}
+
+/* 結果文字 */
+.result-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.32px;
+  line-height: normal;
+  width: 100%;
+}
+
+/* 確認按鈕 */
+.btn-confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-gold);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.btn-confirm span {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-white);
+  line-height: normal;
+  text-align: center;
+  flex: 1;
+}
+
+.btn-confirm:active {
+  opacity: 0.85;
+}

@@ -1,0 +1,303 @@
+/* ============================================
+   報價單內容頁面樣式
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-white: #ffffff;
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面整體 --- */
+.crm-quotation-detail {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 主要內容區域 --- */
+.quotation-content {
+  position: relative;
+  z-index: 1;
+  padding: 80px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* --- 報價單標題卡片 --- */
+.quotation-header-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.quotation-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.quotation-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  letter-spacing: 4px;
+}
+
+.quotation-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background-color: #fff3e0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #e65100;
+}
+
+.quotation-badge.status-confirmed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.quotation-no-row {
+  font-size: 14px;
+  color: #6b6560;
+}
+
+.quotation-no-row .q-label {
+  margin-right: 8px;
+}
+
+.quotation-no-row .q-value {
+  font-weight: 500;
+  color: var(--color-gold);
+}
+
+/* --- 基本資訊卡片 --- */
+.info-card,
+.detail-card,
+.summary-card,
+.remark-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.card-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(179, 176, 158, 0.2);
+}
+
+.info-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.info-row {
+  display: flex;
+  align-items: baseline;
+  font-size: 14px;
+  color: var(--color-text-dark);
+}
+
+.info-row .info-label {
+  width: 80px;
+  flex-shrink: 0;
+  font-weight: 400;
+  color: #6b6560;
+}
+
+.info-row .info-value {
+  flex: 1;
+  font-weight: 500;
+}
+
+.info-desc {
+  padding-top: 12px;
+  border-top: 1px dashed rgba(179, 176, 158, 0.3);
+}
+
+.info-desc .desc-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: #6b6560;
+  margin-bottom: 4px;
+}
+
+.info-desc .desc-value {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  line-height: 1.6;
+}
+
+/* --- 報價明細表格 --- */
+.detail-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.quotation-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.quotation-table thead {
+  background-color: #5D4037;
+}
+
+.quotation-table th {
+  color: #ffffff;
+  font-weight: 500;
+  padding: 10px 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.quotation-table td {
+  padding: 10px 8px;
+  text-align: center;
+  color: var(--color-text-dark);
+  border-bottom: 1px solid rgba(179, 176, 158, 0.15);
+}
+
+.quotation-table tbody tr:nth-child(odd) {
+  background-color: #f8f7f5;
+}
+
+.quotation-table .th-no { width: 40px; }
+.quotation-table .th-item { text-align: left; }
+.quotation-table .td-item { text-align: left; }
+.quotation-table .th-qty { width: 50px; }
+.quotation-table .th-amount { width: 80px; }
+
+/* --- 金額匯總卡片 --- */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--color-text-dark);
+}
+
+.summary-row .summary-label {
+  color: #6b6560;
+}
+
+.summary-row .summary-value {
+  font-weight: 500;
+}
+
+.summary-row.total-row {
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 2px solid var(--color-gold);
+}
+
+.summary-row.total-row .summary-label {
+  font-weight: 600;
+  color: var(--color-text-dark);
+  font-size: 15px;
+}
+
+.summary-row.total-row .summary-value {
+  font-weight: 700;
+  color: var(--color-gold);
+  font-size: 18px;
+}
+
+/* --- 備註卡片 --- */
+.remark-list {
+  list-style: none;
+  padding: 0;
+}
+
+.remark-list li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #6b6560;
+  line-height: 1.6;
+}
+
+.remark-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+  font-weight: 700;
+}
+
+/* --- 底部返回按鈕 --- */
+.btn-back-to-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px;
+  background-color: var(--color-gold);
+  color: #ffffff;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-top: 8px;
+}
+
+.btn-back-to-detail:hover {
+  opacity: 0.9;
+}
+
+.btn-back-to-detail:active {
+  opacity: 0.8;
+}
