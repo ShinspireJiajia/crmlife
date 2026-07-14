@@ -1,0 +1,276 @@
+/* ============================================
+   報修表單進度 — 完整清單頁面樣式
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-gold-light: rgba(184, 166, 118, 0.2);
+  --color-text-dark: #3a4246;
+  --color-text-dimmed: rgba(58, 66, 70, 0.8);
+  --color-white: #ffffff;
+  --color-border-light: #eeeeee;
+  --color-status-done-bg: #dcf1eb;
+  --color-status-processing-bg: #dce6f1;
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面容器 --- */
+.crm-repair-list {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 頂部導覽列佔位（固定列高度補償） --- */
+.header-spacer {
+  height: 80px;
+}
+
+/* --- 主內容區 --- */
+.main-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px 40px;
+}
+
+/* --- 搜尋列 --- */
+.search-bar {
+  position: relative;
+  width: 100%;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  background: var(--color-white);
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: var(--color-text-dark);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-bar input::placeholder {
+  color: rgba(58, 66, 70, 0.4);
+}
+
+.search-bar input:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(184, 166, 118, 0.12);
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  color: rgba(58, 66, 70, 0.4);
+}
+
+/* --- 搜尋關鍵字提示標籤 --- */
+.active-search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  background-color: rgba(184, 166, 118, 0.14);
+  border: 1px solid var(--color-gold);
+  border-radius: 20px;
+  padding: 6px 8px 6px 12px;
+  font-family: var(--font-family);
+  font-size: 13px;
+  color: var(--color-text-dark);
+}
+
+.active-search-chip[hidden] {
+  display: none;
+}
+
+.active-search-chip svg {
+  width: 14px;
+  height: 14px;
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.active-search-chip button {
+  border: none;
+  background: none;
+  font-size: 17px;
+  line-height: 1;
+  color: rgba(58, 66, 70, 0.5);
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+/* --- 篩選標籤列 --- */
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-tab {
+  flex-shrink: 0;
+  background: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--color-text-dimmed);
+  line-height: normal;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-tab.active {
+  background-color: var(--color-gold-light);
+  border: 1px solid var(--color-gold);
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+/* --- 報修卡片清單 --- */
+.repair-order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- 報修卡片 --- */
+.repair-order-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.order-number {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-gold);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.order-status {
+  padding: 4px 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-status span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.status-done {
+  background-color: var(--color-status-done-bg);
+}
+
+.status-processing {
+  background-color: var(--color-status-processing-bg);
+}
+
+/* 訂單資訊 */
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.order-info p {
+  margin: 0;
+}
+
+.info-label {
+  font-weight: 500;
+}
+
+.info-value {
+  font-weight: 400;
+}
+
+/* 內容查看按鈕 */
+.btn-view-order {
+  width: 100%;
+  background-color: var(--color-gold);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-view-order span {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-white);
+  text-align: center;
+  line-height: normal;
+}
+
+.btn-view-order:hover {
+  opacity: 0.9;
+}
+
+.btn-view-order:active {
+  opacity: 0.8;
+}
