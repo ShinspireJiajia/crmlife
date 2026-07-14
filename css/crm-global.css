@@ -1,0 +1,51 @@
+/* ============================================
+   全站共用樣式 — 手機版限寬 & 桌面背景
+   適用所有 CRM-line 頁面
+   ============================================ */
+
+/* --- 桌面版 body 背景色 --- */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e8e4df;
+}
+
+/* ============================================
+   共用空狀態元件（無資料時顯示）
+   ============================================ */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 80px 0 40px;
+}
+
+.empty-state .empty-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 32px;
+  background-color: rgba(179, 176, 158, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.empty-state .empty-icon img {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.empty-state .empty-text {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #3a4246;
+  text-align: center;
+  line-height: normal;
+  margin: 0;
+}
