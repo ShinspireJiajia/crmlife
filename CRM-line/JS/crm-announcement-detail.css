@@ -1,0 +1,137 @@
+/* ============================================
+   社區公告 — 詳情頁面樣式
+   ============================================ */
+
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-text-dimmed: rgba(58, 66, 70, 0.8);
+  --color-white: #ffffff;
+  --color-tag-important-bg: #f7dede;
+  --color-tag-important-text: #c1453f;
+  --color-tag-water-power-bg: #dce6f1;
+  --color-tag-water-power-text: #3a6ea5;
+  --color-tag-activity-bg: #dcf1eb;
+  --color-tag-activity-text: #2f8f6f;
+  --color-tag-maintenance-bg: #f0ece0;
+  --color-tag-maintenance-text: #8a7a4f;
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.crm-announcement-detail {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+.detail-content {
+  position: relative;
+  z-index: 1;
+  padding: 80px 20px 40px;
+}
+
+.detail-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tag-pinned {
+  background-color: var(--color-gold);
+  color: var(--color-white);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.tag-category {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.tag-important { background-color: var(--color-tag-important-bg); color: var(--color-tag-important-text); }
+.tag-water-power { background-color: var(--color-tag-water-power-bg); color: var(--color-tag-water-power-text); }
+.tag-activity { background-color: var(--color-tag-activity-bg); color: var(--color-tag-activity-text); }
+.tag-maintenance { background-color: var(--color-tag-maintenance-bg); color: var(--color-tag-maintenance-text); }
+
+.announcement-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  line-height: 1.4;
+}
+
+.announcement-date {
+  font-size: 13px;
+  color: rgba(58, 66, 70, 0.5);
+}
+
+.card-divider {
+  width: 100%;
+  height: 1px;
+  border: none;
+  margin: 4px 0;
+}
+
+.card-divider img {
+  display: block;
+  width: 100%;
+  height: 1px;
+}
+
+.announcement-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.announcement-content p {
+  font-size: 15px;
+  color: var(--color-text-dark);
+  line-height: 1.8;
+  white-space: pre-line;
+}
