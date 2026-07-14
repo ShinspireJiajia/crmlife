@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Grid More">
+<rect id="Square 1" x="3" y="3" width="7.5" height="7.5" rx="1.75" stroke="var(--stroke-0, #3A4246)" stroke-width="2"/>
+<rect id="Square 2" x="13.5" y="3" width="7.5" height="7.5" rx="1.75" stroke="var(--stroke-0, #3A4246)" stroke-width="2"/>
+<rect id="Square 3" x="3" y="13.5" width="7.5" height="7.5" rx="1.75" stroke="var(--stroke-0, #3A4246)" stroke-width="2"/>
+<rect id="Square 4" x="13.5" y="13.5" width="7.5" height="7.5" rx="1.75" stroke="var(--stroke-0, #3A4246)" stroke-width="2"/>
+</g>
+</svg>
