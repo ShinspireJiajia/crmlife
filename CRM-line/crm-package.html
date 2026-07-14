@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的包裹</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-package.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 我的包裹頁面容器 -->
+  <div class="crm-package">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="我的包裹" data-back="crm-index_life.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="package-content">
+
+      <!-- 篩選標籤列 -->
+      <div class="filter-tabs" id="packageFilterTabs">
+        <button class="filter-tab active" data-filter="all">全部</button>
+        <button class="filter-tab" data-filter="pending">待領取</button>
+        <button class="filter-tab" data-filter="urging">催收中</button>
+        <button class="filter-tab" data-filter="picked">已領取</button>
+      </div>
+
+      
+      <!-- 包裹卡片清單 -->
+      <div class="package-list" id="packageList">
+
+        <!-- 包裹 1：待領取（尚無照片） -->
+        <div class="package-card" data-status="pending"
+             data-number="PKG-20260712-006"
+             data-recipient="王小明" data-unit="A3-3"
+             data-courier="黑貓宅急便" data-arrival="2026/07/12 15:20"
+             data-location="社區管理中心" data-note="需簽收正本，包裹體積較大"
+             data-photos="">
+          <div class="package-header">
+            <p class="package-number">PKG-20260712-006</p>
+            <div class="package-status status-pending"><span>待領取</span></div>
+          </div>
+          <div class="package-info">
+            <p><span class="info-label">收件人</span><span class="info-value">｜王小明（A3-3）</span></p>
+            <p><span class="info-label">物流業者</span><span class="info-value">｜黑貓宅急便</span></p>
+            <p><span class="info-label">到件時間</span><span class="info-value">｜2026/07/12 15:20</span></p>
+            <p><span class="info-label">存放地點</span><span class="info-value">｜社區管理中心</span></p>
+          </div>
+          <button class="btn-package-action">出示條碼</button>
+        </div>
+
+        <!-- 包裹 2：待領取（管理室已上傳照片） -->
+        <div class="package-card" data-status="pending"
+             data-number="PKG-20260710-005"
+             data-recipient="王小明" data-unit="A3-3"
+             data-courier="新竹物流" data-arrival="2026/07/10 10:05"
+             data-location="社區警衛室" data-note=""
+             data-photos="assets/package-photo-sample.svg">
+          <div class="package-header">
+            <p class="package-number">PKG-20260710-005</p>
+            <div class="package-status status-pending"><span>待領取</span></div>
+          </div>
+          <div class="package-info">
+            <p><span class="info-label">收件人</span><span class="info-value">｜王小明（A3-3）</span></p>
+            <p><span class="info-label">物流業者</span><span class="info-value">｜新竹物流</span></p>
+            <p><span class="info-label">到件時間</span><span class="info-value">｜2026/07/10 10:05</span></p>
+            <p><span class="info-label">存放地點</span><span class="info-value">｜社區警衛室</span></p>
+          </div>
+          <button class="btn-package-action">出示條碼</button>
+        </div>
+
+        <!-- 包裹 3：催收中（逾期未領取，管理室標記催收） -->
+        <div class="package-card" data-status="urging"
+             data-number="PKG-20260620-001"
+             data-recipient="王小明" data-unit="A3-3"
+             data-courier="黑貓宅急便" data-arrival="2026/06/20 09:15"
+             data-location="社區管理中心" data-note="已逾期 20 天未領取，請儘速前往管理室領取"
+             data-photos="assets/package-photo-sample.svg">
+          <div class="package-header">
+            <p class="package-number">PKG-20260620-001</p>
+            <div class="package-status status-urging"><span>催收中</span></div>
+          </div>
+          <div class="package-info">
+            <p><span class="info-label">收件人</span><span class="info-value">｜王小明（A3-3）</span></p>
+            <p><span class="info-label">物流業者</span><span class="info-value">｜黑貓宅急便</span></p>
+            <p><span class="info-label">到件時間</span><span class="info-value">｜2026/06/20 09:15</span></p>
+            <p><span class="info-label">存放地點</span><span class="info-value">｜社區管理中心</span></p>
+          </div>
+          <p class="package-urging-note">⚠ 已逾期 20 天未領取，請儘速前往領取</p>
+          <button class="btn-package-action">出示條碼</button>
+        </div>
+
+        <!-- 包裹 4：已領取（管理室留存簽收照片） -->
+        <div class="package-card" data-status="picked"
+             data-number="PKG-20260708-004"
+             data-recipient="王小明" data-unit="A3-3"
+             data-courier="蝦皮店到店" data-arrival="2026/07/08 09:40"
+             data-location="社區管理中心" data-note=""
+             data-pickup-time="2026/07/08 18:22" data-pickup-name="王小明"
+             data-photos="assets/package-photo-sample.svg">
+          <div class="package-header">
+            <p class="package-number">PKG-20260708-004</p>
+            <div class="package-status status-picked"><span>已領取</span></div>
+          </div>
+          <div class="package-info">
+            <p><span class="info-label">收件人</span><span class="info-value">｜王小明（A3-3）</span></p>
+            <p><span class="info-label">物流業者</span><span class="info-value">｜蝦皮店到店</span></p>
+            <p><span class="info-label">到件時間</span><span class="info-value">｜2026/07/08 09:40</span></p>
+            <p><span class="info-label">領取時間</span><span class="info-value">｜2026/07/08 18:22</span></p>
+          </div>
+          <button class="btn-package-action btn-secondary">查看詳情</button>
+        </div>
+
+        <!-- 包裹 5：已領取 -->
+        <div class="package-card" data-status="picked"
+             data-number="PKG-20260705-003"
+             data-recipient="王小明" data-unit="A3-3"
+             data-courier="中華郵政" data-arrival="2026/07/05 14:00"
+             data-location="社區管理中心" data-note=""
+             data-pickup-time="2026/07/06 08:15" data-pickup-name="王小明"
+             data-photos="">
+          <div class="package-header">
+            <p class="package-number">PKG-20260705-003</p>
+            <div class="package-status status-picked"><span>已領取</span></div>
+          </div>
+          <div class="package-info">
+            <p><span class="info-label">收件人</span><span class="info-value">｜王小明（A3-3）</span></p>
+            <p><span class="info-label">物流業者</span><span class="info-value">｜中華郵政</span></p>
+            <p><span class="info-label">到件時間</span><span class="info-value">｜2026/07/05 14:00</span></p>
+            <p><span class="info-label">領取時間</span><span class="info-value">｜2026/07/06 08:15</span></p>
+          </div>
+          <button class="btn-package-action btn-secondary">查看詳情</button>
+        </div>
+
+      </div>
+      <!-- /package-list -->
+
+      <!-- 空狀態：篩選後無資料時顯示 -->
+      <div class="empty-state" id="packageEmptyState" style="display: none;">
+        <div class="empty-icon">
+          <img src="assets/empty-record-icon.svg" alt="" loading="lazy">
+        </div>
+        <p class="empty-text">無相關包裹紀錄</p>
+      </div>
+
+    </div>
+    <!-- /package-content -->
+
+  </div>
+  <!-- /crm-package -->
+
+  <!-- 包裹詳情 / 確認領取 Modal -->
+  <div class="package-modal-overlay" id="packageModalOverlay">
+    <div class="package-modal-container">
+
+      <!-- 標頭 -->
+      <div class="package-modal-header">
+        <h2>包裹詳情</h2>
+        <button class="package-modal-close" id="packageModalClose">&times;</button>
+      </div>
+
+      <!-- 內容區 -->
+      <div class="package-modal-body">
+
+        <div class="modal-package-top">
+          <p class="modal-package-number" id="modalPackageNumber"></p>
+          <div class="modal-package-status" id="modalPackageStatus"><span></span></div>
+        </div>
+
+        <div class="modal-info-list" id="modalInfoList">
+          <!-- 由 JS 動態產生 -->
+        </div>
+
+        <!-- 包裹照片（管理室維護，住戶僅可檢視） -->
+        <div class="modal-photo-section">
+          <div class="modal-section-title">包裹照片</div>
+          <div class="modal-photo-grid" id="modalPhotoGrid">
+            <!-- 由 JS 動態產生 -->
+          </div>
+        </div>
+
+        <!-- 住戶收件條碼（僅待領取／催收中包裹顯示，供管理室掃描完成領取） -->
+        <div class="barcode-section" id="barcodeSection">
+          <div class="modal-section-title">住戶收件條碼</div>
+          <div class="barcode-visual" id="barcodeVisual" aria-hidden="true"></div>
+          <p class="barcode-code" id="barcodeCode"></p>
+          <p class="barcode-hint">請至存放地點出示此條碼，由管理室掃描後即完成領取；包裹狀態僅由管理室核對維護，住戶無法自行變更。</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /包裹詳情 Modal -->
+
+  <!-- 照片放大檢視 Lightbox -->
+  <div class="photo-lightbox-overlay" id="photoLightboxOverlay">
+    <button class="photo-lightbox-close" id="photoLightboxClose" aria-label="關閉">&times;</button>
+    <img class="photo-lightbox-img" id="photoLightboxImg" src="" alt="包裹照片放大檢視">
+  </div>
+  <!-- /Lightbox -->
+
+  <!-- 頁面互動邏輯 -->
+  <!-- 共用頂部導覽列元件 -->
+  <script src="js/crm-header.js" defer></script>
+
+  <script src="js/crm-package.js" defer></script>
+
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

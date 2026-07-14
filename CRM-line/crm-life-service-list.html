@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鄰里生活服務專區</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-life-service-list.css">
+  <link rel="stylesheet" href="css/crm-bottom-nav.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 鄰里生活服務清單頁面容器 -->
+  <div class="crm-life-service-list has-bottom-nav">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="鄰里生活服務" data-back="crm-index.html"></div>
+
+    <!-- 頂部導覽列佔位 -->
+    <div class="header-spacer"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <!-- 搜尋列 -->
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="搜尋服務名稱或廠商..." autocomplete="off">
+      </div>
+
+      <!-- 分類標籤切換列 -->
+      <div class="life-service-tabs" id="lifeServiceTabs">
+        <button class="life-tab" data-category="booking">📋 預約紀錄</button>
+        <button class="life-tab active" data-category="all">全部</button>
+        <button class="life-tab" data-category="housekeeping">🧹 家政服務</button>
+        <button class="life-tab" data-category="car">🚗 汽車美容</button>
+        <button class="life-tab" data-category="food">🍽️ 餐飲優惠</button>
+        <button class="life-tab" data-category="life">🌿 生活服務</button>
+      </div>
+
+      <!-- 預約紀錄列表（切換到預約紀錄時顯示） -->
+      <div class="booking-record-section" id="bookingRecordSection" style="display:none;">
+
+        <!-- 預約紀錄卡片：待確認 -->
+        <div class="booking-record-card" data-booking-id="LS20260421-004">
+          <div class="booking-card-header">
+            <p class="booking-order-no">LS20260421-004</p>
+            <div class="booking-status status-pending">待確認</div>
+          </div>
+          <div class="booking-card-body">
+            <p class="booking-info-row"><span class="booking-label">服務名稱</span><span class="booking-value">｜靜心瑜伽工作室</span></p>
+            <p class="booking-info-row"><span class="booking-label">服務項目</span><span class="booking-value">｜十堂課程包</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約日期</span><span class="booking-value">｜2026/04/25</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約戶別</span><span class="booking-value">｜A3-3</span></p>
+          </div>
+          <button class="btn-booking-detail" data-booking-id="LS20260421-004">查看詳情</button>
+        </div>
+
+        <!-- 預約紀錄卡片：已確認 -->
+        <div class="booking-record-card" data-booking-id="LS20260415-001">
+          <div class="booking-card-header">
+            <p class="booking-order-no">LS20260415-001</p>
+            <div class="booking-status status-confirmed">已確認</div>
+          </div>
+          <div class="booking-card-body">
+            <p class="booking-info-row"><span class="booking-label">服務名稱</span><span class="booking-value">｜HoHo 居家打掃</span></p>
+            <p class="booking-info-row"><span class="booking-label">服務項目</span><span class="booking-value">｜專業清潔服務 4HRS</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約日期</span><span class="booking-value">｜2026/04/20</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約戶別</span><span class="booking-value">｜A3-3</span></p>
+          </div>
+          <button class="btn-booking-detail" data-booking-id="LS20260415-001">查看詳情</button>
+        </div>
+
+        <!-- 預約紀錄卡片 2 -->
+        <div class="booking-record-card" data-booking-id="LS20260410-002">
+          <div class="booking-card-header">
+            <p class="booking-order-no">LS20260410-002</p>
+            <div class="booking-status status-completed">已完成</div>
+          </div>
+          <div class="booking-card-body">
+            <p class="booking-info-row"><span class="booking-label">服務名稱</span><span class="booking-value">｜Sparkle 汽車美容</span></p>
+            <p class="booking-info-row"><span class="booking-label">服務項目</span><span class="booking-value">｜精緻手工洗車</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約日期</span><span class="booking-value">｜2026/04/12</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約戶別</span><span class="booking-value">｜A3-3</span></p>
+          </div>
+          <button class="btn-booking-detail" data-booking-id="LS20260410-002">查看詳情</button>
+        </div>
+
+        <!-- 預約紀錄卡片 3 -->
+        <div class="booking-record-card" data-booking-id="LS20260328-003">
+          <div class="booking-card-header">
+            <p class="booking-order-no">LS20260328-003</p>
+            <div class="booking-status status-cancelled">已取消</div>
+          </div>
+          <div class="booking-card-body">
+            <p class="booking-info-row"><span class="booking-label">服務名稱</span><span class="booking-value">｜森覺鍋物 Senn shabu</span></p>
+            <p class="booking-info-row"><span class="booking-label">服務項目</span><span class="booking-value">｜雙人精緻套餐</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約日期</span><span class="booking-value">｜2026/03/30</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約戶別</span><span class="booking-value">｜A3-3</span></p>
+          </div>
+          <button class="btn-booking-detail" data-booking-id="LS20260328-003">查看詳情</button>
+        </div>
+
+        <!-- 預約紀錄卡片 4：已取消服務（後台取消） -->
+        <div class="booking-record-card" data-booking-id="LS20260405-005">
+          <div class="booking-card-header">
+            <p class="booking-order-no">LS20260405-005</p>
+            <div class="booking-status status-service-cancelled">已取消服務</div>
+          </div>
+          <div class="booking-card-body">
+            <p class="booking-info-row"><span class="booking-label">服務名稱</span><span class="booking-value">｜百香狗寵物美容</span></p>
+            <p class="booking-info-row"><span class="booking-label">服務項目</span><span class="booking-value">｜大型犬洗澡美容</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約日期</span><span class="booking-value">｜2026/04/08</span></p>
+            <p class="booking-info-row"><span class="booking-label">預約戶別</span><span class="booking-value">｜A3-3</span></p>
+          </div>
+          <button class="btn-booking-detail" data-booking-id="LS20260405-005">查看詳情</button>
+        </div>
+
+        <!-- 預約紀錄空狀態 -->
+        <div class="booking-empty-state" id="bookingEmptyState" style="display:none;">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <p class="empty-text">尚無預約紀錄</p>
+        </div>
+
+      </div>
+      <!-- /booking-record-section -->
+
+      <!-- 服務卡片網格 -->
+      <div class="life-service-grid" id="lifeServiceGrid">
+
+        <!-- HoHo 居家打掃 -->
+        <div class="life-service-card" data-category="housekeeping" data-service="hoho" data-name="HoHo 居家打掃" data-vendor="HoHo">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service5.jpg" alt="HoHo 居家打掃" loading="lazy">
+            <span class="life-service-badge">首次 85 折</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">HoHo 居家打掃</p>
+            <p class="life-service-vendor">讓家更有溫度的清潔專家</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+        <!-- 森覺鍋物 Senn shabu -->
+        <div class="life-service-card" data-category="food" data-service="senn" data-name="森覺鍋物 Senn shabu" data-vendor="森覺鍋物">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service4.jpg" alt="森覺鍋物 Senn shabu" loading="lazy">
+            <span class="life-service-badge">贈精緻肉盤</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">森覺鍋物 Senn shabu</p>
+            <p class="life-service-vendor">精緻鍋物、暖心美味</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+        <!-- THE STUDIO 藝術私廚 -->
+        <div class="life-service-card" data-category="food" data-service="studio" data-name="THE STUDIO 藝術私廚" data-vendor="THE STUDIO">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service1.jpg" alt="THE STUDIO 藝術私廚" loading="lazy">
+            <span class="life-service-badge">滿額折 $100</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">THE STUDIO 藝術私廚</p>
+            <p class="life-service-vendor">藝術與美食的完美邂逅</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+        <!-- 百香狗寵物美容 -->
+        <div class="life-service-card" data-category="life" data-service="pet" data-name="百香狗寵物美容" data-vendor="百香狗">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service2.jpg" alt="百香狗寵物美容" loading="lazy">
+            <span class="life-service-badge">滿 500 打 9 折</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">百香狗寵物美容</p>
+            <p class="life-service-vendor">毛小孩的頂級呵護專家</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+        <!-- Sparkle 汽車美容 -->
+        <div class="life-service-card" data-category="car" data-service="sparkle" data-name="Sparkle 汽車美容" data-vendor="Sparkle">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service3.jpg" alt="Sparkle 汽車美容" loading="lazy">
+            <span class="life-service-badge">免費內裝除塵</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">Sparkle 汽車美容</p>
+            <p class="life-service-vendor">愛車煥然一新</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+        <!-- 卡爾車體護理 -->
+        <div class="life-service-card" data-category="car" data-service="carshine" data-name="卡爾車體護理" data-vendor="卡爾">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service3.jpg" alt="卡爾車體護理" loading="lazy">
+            <span class="life-service-badge">到府 9 折</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">卡爾車體護理</p>
+            <p class="life-service-vendor">專業車體美容 到府服務</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+        <!-- 晨光早午餐 -->
+        <div class="life-service-card" data-category="food" data-service="brunch" data-name="晨光早午餐" data-vendor="晨光">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service1.jpg" alt="晨光早午餐" loading="lazy">
+            <span class="life-service-badge">飲品免費升級</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">晨光早午餐</p>
+            <p class="life-service-vendor">用美味喚醒每一天</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+        <!-- 靜心瑜伽工作室 -->
+        <div class="life-service-card" data-category="life" data-service="yoga" data-name="靜心瑜伽工作室" data-vendor="靜心瑜伽">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service2.jpg" alt="靜心瑜伽工作室" loading="lazy">
+            <span class="life-service-badge">首堂免費</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">靜心瑜伽工作室</p>
+            <p class="life-service-vendor">身心平衡的美好時光</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+        <!-- 速潔洗衣到府收送 -->
+        <div class="life-service-card" data-category="housekeeping" data-service="laundry" data-name="速潔洗衣到府收送" data-vendor="速潔">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service5.jpg" alt="速潔洗衣到府收送" loading="lazy">
+            <span class="life-service-badge">滿 3 件 9 折</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">速潔洗衣到府收送</p>
+            <p class="life-service-vendor">專業送洗 隔日取件</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+        <!-- 日和甜點工房 -->
+        <div class="life-service-card" data-category="food" data-service="dessert" data-name="日和甜點工房" data-vendor="日和甜點">
+          <div class="life-service-img-wrap">
+            <img class="life-service-img" src="assets/service4.jpg" alt="日和甜點工房" loading="lazy">
+            <span class="life-service-badge">免費配送到府</span>
+          </div>
+          <div class="life-service-card-body">
+            <p class="life-service-name">日和甜點工房</p>
+            <p class="life-service-vendor">手工甜點 療癒每一刻</p>
+            <button class="btn-life-book">立即預約</button>
+          </div>
+        </div>
+
+      </div>
+      <!-- /life-service-grid -->
+
+      <!-- 空狀態提示 -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+        </div>
+        <p class="empty-text">找不到符合條件的服務</p>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-life-service-list -->
+
+  <!-- 常駐底部選單 -->
+  <div id="crmBottomNav"></div>
+
+  <!-- JavaScript -->
+  <script src="js/crm-header.js"></script>
+  <script src="js/crm-life-service-list.js" defer></script>
+  <script src="js/crm-bottom-nav.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

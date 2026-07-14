@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>公告詳情</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-announcement-detail.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 公告詳情頁面容器 -->
+  <div class="crm-announcement-detail">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="公告詳情" data-back="crm-announcement-list.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="detail-content">
+
+      <div class="detail-card">
+
+        <!-- 分類標籤 + 置頂標記 -->
+        <div class="card-tags">
+          <span class="tag-pinned" id="annPinned" style="display:none;">置頂</span>
+          <span class="tag-category" id="annCategory"></span>
+        </div>
+
+        <!-- 標題 -->
+        <h1 class="announcement-title" id="annTitle"></h1>
+
+        <!-- 發布日期 -->
+        <p class="announcement-date" id="annDate"></p>
+
+        <!-- 分隔線 -->
+        <div class="card-divider">
+          <img src="assets/divider-line2.svg" alt="" loading="lazy">
+        </div>
+
+        <!-- 公告內容（由 JS 動態產生） -->
+        <div class="announcement-content" id="annContent"></div>
+
+      </div>
+      <!-- /detail-card -->
+
+    </div>
+    <!-- /detail-content -->
+
+  </div>
+  <!-- /crm-announcement-detail -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-header.js"></script>
+  <script src="js/crm-announcement-data.js"></script>
+  <script src="js/crm-announcement-detail.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

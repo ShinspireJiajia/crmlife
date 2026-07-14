@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM</title>
+  <!-- Google Fonts: Noto Sans TC + Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-repair-list.css">
+  <link rel="stylesheet" href="css/crm-bottom-nav.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 報修表單進度清單頁面容器 -->
+  <div class="crm-repair-list has-bottom-nav">
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="報修表單進度" data-back="crm-index_life.html"></div>
+
+    <!-- 頂部導覽列佔位 -->
+    <div class="header-spacer"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <!-- 搜尋列：查詢問題描述關鍵字 -->
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="搜尋問題描述關鍵字..." autocomplete="off">
+      </div>
+
+      <!-- 搜尋關鍵字提示（有套用關鍵字時顯示） -->
+      <div class="active-search-chip" id="activeSearchChip" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span id="activeSearchChipText"></span>
+        <button type="button" id="btnClearSearch" aria-label="清除搜尋">&times;</button>
+      </div>
+
+      <!-- 分類篩選標籤列 -->
+      <div class="filter-tabs" id="repairFilterTabs">
+        <button class="filter-tab active" data-filter="all">全部</button>
+        <button class="filter-tab" data-filter="green">綠海維修</button>
+        <button class="filter-tab" data-filter="case">個案單報修</button>
+      </div>
+
+      <!-- 狀態篩選標籤列 -->
+      <div class="filter-tabs" id="repairStatusTabs">
+        <button class="filter-tab active" data-status-filter="all">全部狀態</button>
+        <button class="filter-tab" data-status-filter="processing">處理中</button>
+        <button class="filter-tab" data-status-filter="done">已完成</button>
+      </div>
+
+      <!-- 報修卡片清單 -->
+      <div class="repair-order-list" id="repairOrderList">
+
+        <!-- 報修卡片 -->
+        <div class="repair-order-card" data-category="case" data-status="processing" data-description="臥室對外窗戶關閉時有異音，疑似五金鬆脫需要調整">
+          <div class="order-header">
+            <p class="order-number">20250808-004</p>
+            <div class="order-status status-processing">
+              <span>處理中</span>
+            </div>
+          </div>
+          <div class="order-info">
+            <p><span class="info-label">建　　案</span><span class="info-value">｜綠海建案 (A3-3) </span></p>
+            <p><span class="info-label">類&emsp;&emsp;型</span><span class="info-value">｜個案單報修</span></p>
+            <p><span class="info-label">問題描述</span><span class="info-value">｜臥室對外窗戶關閉時有異音...</span></p>
+          </div>
+          <button class="btn-view-order">
+            <span>內容查看</span>
+          </button>
+        </div>
+
+        <!-- 報修卡片 -->
+        <div class="repair-order-card" data-category="green" data-status="done" data-description="陽台排水孔堵塞導致積水，雨天時容易溢出">
+          <div class="order-header">
+            <p class="order-number">20250808-003</p>
+            <div class="order-status status-done">
+              <span>已完成</span>
+            </div>
+          </div>
+          <div class="order-info">
+            <p><span class="info-label">建　　案</span><span class="info-value">｜綠海建案 (A3-3) </span></p>
+            <p><span class="info-label">類&emsp;&emsp;型</span><span class="info-value">｜綠海維修</span></p>
+            <p><span class="info-label">問題描述</span><span class="info-value">｜陽台排水孔堵塞導致積水...</span></p>
+          </div>
+          <button class="btn-view-order">
+            <span>內容查看</span>
+          </button>
+        </div>
+
+        <!-- 報修卡片 -->
+        <div class="repair-order-card" data-category="case" data-status="processing" data-description="廚房水槽下方的水管有輕微滲水，需要師傅檢查接頭">
+          <div class="order-header">
+            <p class="order-number">20250808-002</p>
+            <div class="order-status status-processing">
+              <span>處理中</span>
+            </div>
+          </div>
+          <div class="order-info">
+            <p><span class="info-label">建　　案</span><span class="info-value">｜綠海建案 (A3-3) </span></p>
+            <p><span class="info-label">類&emsp;&emsp;型</span><span class="info-value">｜個案單報修</span></p>
+            <p><span class="info-label">問題描述</span><span class="info-value">｜廚房水槽下方的水管有輕微滲...</span></p>
+          </div>
+          <button class="btn-view-order">
+            <span>內容查看</span>
+          </button>
+        </div>
+
+        <!-- 報修卡片 -->
+        <div class="repair-order-card" data-category="green" data-status="done" data-description="客廳浴室的洗手台水龍頭，在使用熱水時會有滴水情況">
+          <div class="order-header">
+            <p class="order-number">20250808-001</p>
+            <div class="order-status status-done">
+              <span>已完成</span>
+            </div>
+          </div>
+          <div class="order-info">
+            <p><span class="info-label">建　　案</span><span class="info-value">｜綠海建案 (A3-3) </span></p>
+            <p><span class="info-label">類&emsp;&emsp;型</span><span class="info-value">｜綠海維修</span></p>
+            <p><span class="info-label">問題描述</span><span class="info-value">｜客廳浴室的洗手台水龍頭，在...</span></p>
+          </div>
+          <button class="btn-view-order">
+            <span>內容查看</span>
+          </button>
+        </div>
+
+      </div>
+      <!-- /repair-order-list -->
+
+      <!-- 空狀態：篩選後無資料時顯示 -->
+      <div class="empty-state" id="repairEmptyState" style="display: none;">
+        <div class="empty-icon">
+          <img src="assets/empty-record-icon.svg" alt="" loading="lazy">
+        </div>
+        <p class="empty-text">無相關報修紀錄</p>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-repair-list -->
+
+  <!-- 常駐底部選單 -->
+  <div id="crmBottomNav"></div>
+
+  <!-- JavaScript -->
+  <script src="js/crm-header.js"></script>
+  <script src="js/crm-repair-list.js" defer></script>
+  <script src="js/crm-bottom-nav.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

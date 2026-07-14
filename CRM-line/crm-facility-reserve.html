@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>公設預約</title>
+  <!-- Google Fonts: Noto Sans TC + Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-facility-reserve.css">
+  <link rel="stylesheet" href="css/crm-bottom-nav.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 公設預約頁面容器 -->
+  <div class="crm-facility-reserve has-bottom-nav">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="公設預約" data-back="crm-index_life.html" data-home="crm-index_life.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <!-- 點數餘額卡片 -->
+      <div class="points-banner">
+        <div class="points-banner-icon">🪙</div>
+        <div class="points-banner-text">
+          <span class="points-banner-label">目前可用點數</span>
+          <span class="points-banner-value"><span id="pointsBalance">320</span> 點</span>
+        </div>
+      </div>
+
+      <!-- 分類標籤切換列 -->
+      <div class="facility-tabs" id="facilityTabs">
+        <button class="facility-tab active" data-view="list">設施列表</button>
+        <button class="facility-tab" data-view="booking">📋 我的預約</button>
+      </div>
+
+      <!-- 設施列表 -->
+      <div class="facility-grid" id="facilityGrid">
+
+        <!-- 健身房 -->
+        <div class="facility-card" data-facility="gym">
+          <div class="facility-card-top">
+            <div class="facility-icon-wrap"><span class="facility-emoji">🏋️</span></div>
+            <span class="facility-status-badge status-open">開放中</span>
+          </div>
+          <p class="facility-name">健身房</p>
+          <div class="facility-meta-row">
+            <img class="facility-meta-icon" src="assets/calendar-icon.svg" alt="" loading="lazy">
+            <span>06:00 - 22:00</span>
+          </div>
+          <div class="facility-meta-row">
+            <span class="facility-point-icon">🪙</span>
+            <span>10 點 / 小時</span>
+          </div>
+          <button class="btn-facility-book">立即預約</button>
+        </div>
+
+        <!-- KTV 包廂 -->
+        <div class="facility-card" data-facility="ktv">
+          <div class="facility-card-top">
+            <div class="facility-icon-wrap"><span class="facility-emoji">🎤</span></div>
+            <span class="facility-status-badge status-open">開放中</span>
+          </div>
+          <p class="facility-name">KTV 包廂</p>
+          <div class="facility-meta-row">
+            <img class="facility-meta-icon" src="assets/calendar-icon.svg" alt="" loading="lazy">
+            <span>10:00 - 24:00</span>
+          </div>
+          <div class="facility-meta-row">
+            <span class="facility-point-icon">🪙</span>
+            <span>20 點 / 小時</span>
+          </div>
+          <button class="btn-facility-book">立即預約</button>
+        </div>
+
+        <!-- 會議室 -->
+        <div class="facility-card" data-facility="meeting">
+          <div class="facility-card-top">
+            <div class="facility-icon-wrap"><span class="facility-emoji">💼</span></div>
+            <span class="facility-status-badge status-open">開放中</span>
+          </div>
+          <p class="facility-name">會議室</p>
+          <div class="facility-meta-row">
+            <img class="facility-meta-icon" src="assets/calendar-icon.svg" alt="" loading="lazy">
+            <span>08:00 - 21:00</span>
+          </div>
+          <div class="facility-meta-row">
+            <span class="facility-point-icon">🪙</span>
+            <span>15 點 / 小時</span>
+          </div>
+          <button class="btn-facility-book">立即預約</button>
+        </div>
+
+        <!-- 游泳池 -->
+        <div class="facility-card" data-facility="pool">
+          <div class="facility-card-top">
+            <div class="facility-icon-wrap"><span class="facility-emoji">🏊</span></div>
+            <span class="facility-status-badge status-maintenance">12-13時維護</span>
+          </div>
+          <p class="facility-name">游泳池</p>
+          <div class="facility-meta-row">
+            <img class="facility-meta-icon" src="assets/calendar-icon.svg" alt="" loading="lazy">
+            <span>07:00 - 21:00</span>
+          </div>
+          <div class="facility-meta-row">
+            <span class="facility-point-icon">🪙</span>
+            <span>5 點 / 小時</span>
+          </div>
+          <button class="btn-facility-book">立即預約</button>
+        </div>
+
+      </div>
+      <!-- /facility-grid -->
+
+      <!-- 我的預約列表（預設隱藏） -->
+      <div class="booking-list" id="bookingList" style="display:none;">
+        <!-- 由 JS 動態產生預約卡片 -->
+      </div>
+
+      <!-- 我的預約：空狀態 -->
+      <div class="empty-state" id="bookingEmptyState" style="display:none;">
+        <div class="empty-icon">
+          <img src="assets/empty-record-icon.svg" alt="" loading="lazy">
+        </div>
+        <p class="empty-text">尚無公設預約紀錄</p>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-facility-reserve -->
+
+  <!-- 預約表單 Modal -->
+  <div class="facility-modal-overlay" id="facilityModalOverlay">
+    <div class="facility-modal-sheet">
+
+      <div class="facility-modal-header">
+        <div class="facility-modal-title-group">
+          <span class="facility-modal-emoji" id="modalFacilityEmoji"></span>
+          <div>
+            <h2 class="facility-modal-title" id="modalFacilityName"></h2>
+            <p class="facility-modal-location" id="modalFacilityLocation"></p>
+          </div>
+        </div>
+        <button class="facility-modal-close" id="facilityModalClose" aria-label="關閉">&times;</button>
+      </div>
+
+      <div class="facility-modal-body">
+
+        <p class="facility-modal-notice" id="modalFacilityNotice"></p>
+
+        <form id="facilityBookForm">
+
+          <div class="form-group">
+            <label class="form-label">預約日期<span class="required">＊</span></label>
+            <input type="date" class="form-input" id="bookDate" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">選擇時段<span class="required">＊</span></label>
+            <div class="slot-grid" id="slotGrid"></div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">使用人數<span class="required">＊</span></label>
+            <div class="select-wrapper">
+              <select class="form-select" id="bookPeople"></select>
+              <img class="select-arrow" src="assets/select-arrow.svg" alt="">
+            </div>
+          </div>
+
+        </form>
+
+        <div class="facility-summary">
+          <div class="summary-row">
+            <span>單價</span>
+            <span id="summaryUnitPoints">- 點 / 小時</span>
+          </div>
+          <div class="summary-row">
+            <span>預約時數</span>
+            <span id="summaryHours">-</span>
+          </div>
+          <div class="summary-row summary-row-total">
+            <span>共計扣除點數</span>
+            <span id="summaryTotalPoints">-</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-row">
+            <span>目前可用點數</span>
+            <span id="summaryBalanceBefore">-</span>
+          </div>
+          <div class="summary-row">
+            <span>預約後剩餘點數</span>
+            <span id="summaryBalanceAfter">-</span>
+          </div>
+        </div>
+
+        <p class="facility-insufficient-msg" id="insufficientMsg" style="display:none;">點數不足，請洽社區管理中心加值後再預約。</p>
+
+      </div>
+
+      <div class="facility-modal-footer">
+        <button type="button" class="btn-submit" id="btnFacilitySubmit" disabled>確認預約並扣點</button>
+      </div>
+
+    </div>
+  </div>
+  <!-- /預約表單 Modal -->
+
+  <!-- 預約成功／憑證 Modal -->
+  <div class="success-modal-overlay" id="successModalOverlay">
+    <div class="success-modal-sheet">
+
+      <button class="success-modal-close" id="successModalClose" aria-label="關閉">&times;</button>
+
+      <img class="success-icon" src="assets/icon-result-success.svg" alt="" loading="lazy">
+      <p class="success-title" id="successTitle">預約成功</p>
+      <p class="success-order-no" id="successOrderNo"></p>
+
+      <div class="qr-wrap" id="qrWrap">
+        <div class="qr-grid" id="qrGrid"></div>
+        <div class="qr-finder tl"></div>
+        <div class="qr-finder tr"></div>
+        <div class="qr-finder bl"></div>
+      </div>
+      <p class="qr-hint">請於預約時段出示此畫面，或持社區門禁卡 / 手機 QR Code 至設施入口感應進場</p>
+
+      <div class="success-detail">
+        <div class="detail-row"><span class="detail-label">設施</span><span class="detail-value" id="successFacility"></span></div>
+        <div class="detail-row"><span class="detail-label">日期</span><span class="detail-value" id="successDate"></span></div>
+        <div class="detail-row"><span class="detail-label">時段</span><span class="detail-value" id="successSlot"></span></div>
+        <div class="detail-row"><span class="detail-label">人數</span><span class="detail-value" id="successPeople"></span></div>
+        <div class="detail-row"><span class="detail-label">扣除點數</span><span class="detail-value" id="successPoints"></span></div>
+      </div>
+
+      <button class="btn-submit" id="btnSuccessConfirm">完成</button>
+
+    </div>
+  </div>
+  <!-- /預約成功 Modal -->
+
+  <!-- 常駐底部選單 -->
+  <div id="crmBottomNav"></div>
+
+  <!-- JavaScript -->
+  <script src="js/crm-header.js" defer></script>
+  <script src="js/crm-facility-reserve.js" defer></script>
+  <script src="js/crm-bottom-nav.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

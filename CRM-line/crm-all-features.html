@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>更多功能</title>
+  <!-- Google Fonts: Noto Sans TC + Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-index.css">
+  <link rel="stylesheet" href="css/crm-all-features.css">
+  <link rel="stylesheet" href="css/crm-bottom-nav.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 更多功能頁面容器 -->
+  <div class="crm-all-features has-bottom-nav">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件，回上一頁與首頁皆導向生活版首頁） -->
+    <div id="crmHeader" data-title="更多功能" data-back="crm-index_life.html" data-home="crm-index_life.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <!-- 常用服務 -->
+      <div class="feat-group">
+        <p class="feat-group-title">常用服務</p>
+        <div class="feat-list">
+
+          <div class="feat-row" id="btnRepair">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-gear-repair.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">我要報修</p>
+              <p class="feat-desc">設備故障，線上申請維修人員到府服務</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnPackage">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon icon-sm" src="assets/icon-member-center.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">我的包裹</p>
+              <p class="feat-desc">查詢包裹到貨與領取紀錄</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnVisitor">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-green-care.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">訪客登記</p>
+              <p class="feat-desc">親友來訪，事先線上登記通行</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnAnnouncement">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon" src="assets/icon-announcement.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">社區公告<span class="feat-badge-count" id="announcementBadge">0</span></p>
+              <p class="feat-desc">查看社區最新公告與活動訊息</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+        </div>
+      </div>
+      <!-- /feat-group：常用服務 -->
+
+      <!-- 成家進度 -->
+      <div class="feat-group">
+        <p class="feat-group-title">成家進度</p>
+        <div class="feat-list">
+
+          <div class="feat-row" id="btnPayment">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-payment-info.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">款項資訊<span class="feat-badge-count" id="paymentBadge">21</span></p>
+              <p class="feat-desc">查看繳款進度與付款明細</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnUnit">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon" src="assets/icon-unit-info.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">戶別資訊</p>
+              <p class="feat-desc">查看您的房屋坪數與格局資料</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnCustom">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-custom-service.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">客變服務<span class="feat-tag-reservable" id="tagCustom">可預約</span></p>
+              <p class="feat-desc">申請客製化裝潢變更服務</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnHandover">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon" src="assets/icon-handover-service.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">交屋服務<span class="feat-tag-reservable" id="tagHandover">可預約</span></p>
+              <p class="feat-desc">預約辦理交屋手續</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnGuarantee">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-guarantee-service.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">對保服務<span class="feat-tag-reservable" id="tagGuarantee">可預約</span></p>
+              <p class="feat-desc">預約辦理貸款對保作業</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnInspection">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon" src="assets/icon-inspection-service.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">驗屋服務<span class="feat-tag-reservable" id="tagInspection">可預約</span></p>
+              <p class="feat-desc">預約安排新屋驗收服務</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+        </div>
+      </div>
+      <!-- /feat-group：成家進度 -->
+
+      <!-- 社區生活 -->
+      <div class="feat-group">
+        <p class="feat-group-title">社區生活</p>
+        <div class="feat-list">
+
+          <div class="feat-row" id="btnNearby">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-forest.png" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">周邊資訊</p>
+              <p class="feat-desc">查看社區周邊生活周邊資訊與交通資訊</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnLifeZone">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon" src="assets/icon-house-checkup.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">生活服務</p>
+              <p class="feat-desc">查詢社區生活服務與優惠合作店家</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnPaymentLife">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-payment-info.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">款項資訊<span class="feat-badge-count" id="paymentBadgeLife">21</span></p>
+              <p class="feat-desc">查看繳款進度與付款明細</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnUnitLife">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon" src="assets/icon-unit-info.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">戶別資訊</p>
+              <p class="feat-desc">查看您的房屋坪數與格局資料</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnCheckup">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-house-checkup.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">房屋健檢<span class="feat-tag-reservable" id="tagCheckup">可預約</span></p>
+              <p class="feat-desc">預約專人到府健檢房屋狀況</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnGas">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon" src="assets/icon-gas-meter.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">超瓦斯表</p>
+              <p class="feat-desc">查詢住家瓦斯用量與繳費紀錄</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnFacility">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-facility.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">公設預約<span class="feat-tag-reservable" id="tagFacility">可預約</span></p>
+              <p class="feat-desc">線上預約健身房、KTV、會議室、游泳池等社區公共設施</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnGreenCare">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-green-care.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">綠海養護<span class="feat-tag-brand">陸府建設專屬</span></p>
+              <p class="feat-desc">查詢社區園藝環境的養護紀錄與服務</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnForest">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon" src="assets/icon-forest.png" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">森林聚落<span class="feat-tag-brand">陸府建設專屬</span></p>
+              <p class="feat-desc">查看森林聚落生態環境與社區活動資訊</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+        </div>
+      </div>
+      <!-- /feat-group：社區生活 -->
+
+      <!-- 帳號管理 -->
+      <div class="feat-group">
+        <p class="feat-group-title">帳號管理</p>
+        <div class="feat-list">
+
+          <div class="feat-row" id="btnBind">
+            <div class="feat-icon-wrap bg-muted">
+              <img class="feat-icon" src="assets/icon-bind-identity.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">身份綁定</p>
+              <p class="feat-desc">綁定其他戶別身份，方便切換管理</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+          <div class="feat-row" id="btnMemberProfile">
+            <div class="feat-icon-wrap bg-light">
+              <img class="feat-icon icon-sm" src="assets/icon-member-center.svg" alt="" loading="lazy">
+            </div>
+            <div class="feat-text">
+              <p class="feat-title">會員資料編輯</p>
+              <p class="feat-desc">修改姓名、電話等會員基本資料</p>
+            </div>
+            <img class="feat-chevron" src="assets/chevron-right-gold.svg" alt="" loading="lazy">
+          </div>
+
+        </div>
+      </div>
+      <!-- /feat-group：帳號管理 -->
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-all-features -->
+
+  <!-- 常駐底部選單 -->
+  <div id="crmBottomNav"></div>
+
+  <!-- JavaScript -->
+  <script src="js/crm-header.js" defer></script>
+  <script src="js/crm-index.js" defer></script>
+  <script src="js/crm-bottom-nav.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+
+  <!-- 訪客登記、社區公告、周邊資訊、會員資料編輯入口（此頁專屬：固定導向生活版功能頁面，與所在來源頁面無關） -->
+  <script src="js/crm-announcement-data.js"></script>
+  <script>
+    (function () {
+      var btnVisitor = document.getElementById('btnVisitor');
+      if (btnVisitor) {
+        btnVisitor.addEventListener('click', function () {
+          window.location.href = 'crm-visitor-register.html';
+        });
+      }
+
+      var btnNearby = document.getElementById('btnNearby');
+      if (btnNearby) {
+        btnNearby.addEventListener('click', function () {
+          window.location.href = 'crm-nearby-list.html';
+        });
+      }
+
+      var btnMemberProfile = document.getElementById('btnMemberProfile');
+      if (btnMemberProfile) {
+        btnMemberProfile.addEventListener('click', function () {
+          window.location.href = 'crm-member-profile.html';
+        });
+      }
+
+      var btnAnnouncement = document.getElementById('btnAnnouncement');
+      if (btnAnnouncement) {
+        btnAnnouncement.addEventListener('click', function () {
+          window.location.href = 'crm-announcement-list.html';
+        });
+      }
+
+      // 依已讀狀態顯示未讀公告數量
+      var badge = document.getElementById('announcementBadge');
+      if (badge && window.CrmAnnouncement) {
+        var unread = window.CrmAnnouncement.getUnreadCount();
+        badge.textContent = unread;
+        if (unread === 0) badge.style.display = 'none';
+      }
+    })();
+  </script>
+</body>
+</html>
