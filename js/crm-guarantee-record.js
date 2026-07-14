@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (btnHome) {
     btnHome.addEventListener('click', function (e) {
       e.preventDefault();
-      window.location.href = 'crm-index.html';
+      window.location.href = 'crm-index_life.html';
     });
   }
 

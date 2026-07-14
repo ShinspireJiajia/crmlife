@@ -18,9 +18,9 @@
     // 取得頁面標題（來自 data-title 屬性）
     var pageTitle = headerEl.getAttribute('data-title') || '';
     // 取得返回目標頁面（來自 data-back 屬性，預設為首頁）
-    var backUrl = headerEl.getAttribute('data-back') || 'crm-index.html';
-    // 取得首頁按鈕目標頁面（來自 data-home 屬性，預設維持原本的建案版首頁）
-    var homeUrl = headerEl.getAttribute('data-home') || 'crm-index.html';
+    var backUrl = headerEl.getAttribute('data-back') || 'crm-index_life.html';
+    // 取得首頁按鈕目標頁面（來自 data-home 屬性，預設為首頁）
+    var homeUrl = headerEl.getAttribute('data-home') || 'crm-index_life.html';
 
     // 產生共用 header HTML
     headerEl.className = 'top-bar';

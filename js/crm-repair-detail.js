@@ -632,7 +632,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        window.location.href = 'crm-index.html';
+        window.location.href = 'crm-index_life.html';
       }
     });
   }

@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        window.location.href = 'crm-index.html';
+        window.location.href = 'crm-index_life.html';
       }
     });
   }
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        window.location.href = 'crm-index.html';
+        window.location.href = 'crm-index_life.html';
       }
     });
   }
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var btnConfirmHome = document.getElementById('btnConfirmHome');
   if (btnConfirmHome) {
     btnConfirmHome.addEventListener('click', function () {
-      window.location.href = 'crm-index.html';
+      window.location.href = 'crm-index_life.html';
     });
   }
 
