@@ -1,0 +1,1365 @@
+/* ============================================
+   CRM 首頁樣式
+   根據 Figma 設計稿 (node-id: 1:2610)
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-white: #ffffff;
+  --color-badge-red: #e06060;
+  --color-muted-bg: rgba(179, 176, 158, 0.12);
+  --color-light-bg: #f6f6f3;
+  --color-shortcut-bg: rgba(179, 176, 158, 0.16);
+  --color-status-done-bg: #dcf1eb;
+  --color-status-processing-bg: #dce6f1;
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+  --font-family-roboto: "Roboto", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面整體 --- */
+.crm-index {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部標題列 --- */
+.top-bar {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 8px;
+  background-color: var(--color-page-bg);
+}
+
+/* 通知功能位置：右上角鈴鐺按鈕 */
+.btn-notify {
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--color-shortcut-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.notify-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.notify-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background-color: var(--color-badge-red);
+  color: var(--color-white);
+  font-family: var(--font-family-roboto);
+  font-weight: 500;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+.notify-badge:empty,
+.notify-badge[data-count="0"] {
+  display: none;
+}
+
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.title-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
+}
+
+/* --- 主要內容區域 --- */
+.main-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  padding: 8px 20px 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ======================================
+   快捷功能區
+   ====================================== */
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- 我要報修卡片 --- */
+.repair-card {
+  background-color: var(--color-text-dark);
+  border-radius: 12px;
+  padding: 20px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.repair-icon-wrap {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.repair-gear-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.repair-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-white);
+  text-align: center;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+/* --- 三個快捷入口 --- */
+.shortcut-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.shortcut-card {
+  flex: 1;
+  background-color: var(--color-shortcut-bg);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.shortcut-icon-wrap {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shortcut-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+/* 會員中心圖示為 24x24，需居中於 40x40 容器內 */
+.shortcut-icon.icon-sm {
+  width: 24px;
+  height: 24px;
+}
+
+.shortcut-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+/* --- 森林聚落 + 生活服務專區 並排容器 --- */
+.feature-card-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- 森林聚落卡片 --- */
+.forest-card {
+  background-color: var(--color-shortcut-bg);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+.forest-icon-wrap {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forest-icon {
+  width: 40px;
+  height: 28px;
+  object-fit: cover;
+}
+
+.forest-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+/* --- 生活服務專區卡片 --- */
+.life-zone-card {
+  background-color: var(--color-shortcut-bg);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+.life-zone-icon-wrap {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.life-zone-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.life-zone-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+/* ======================================
+   服務九宮格卡片
+   ====================================== */
+.service-grid-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 16px;
+  padding-top: 28px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* 分組卡片標題（例如：成家進度、社區生活） */
+.service-group-title {
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: left;
+  line-height: normal;
+  margin-bottom: 16px;
+}
+
+.service-grid-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+
+/* 收合狀態下只顯示兩列高度（含標籤溢出空間） */
+.service-grid-inner.collapsed {
+  max-height: 155px;
+}
+
+/* 展開狀態 */
+.service-grid-inner.expanded {
+  max-height: 500px;
+}
+
+.service-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.service-row.row-hidden {
+  /* 由 JS 控制 display */
+}
+
+.service-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.service-item.placeholder {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.service-icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+}
+
+.service-icon-circle.bg-muted {
+  background-color: var(--color-muted-bg);
+}
+
+.service-icon-circle.bg-light {
+  background-color: var(--color-light-bg);
+}
+
+.service-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+/* 通知徽章 */
+.badge {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: var(--color-badge-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge span {
+  font-family: var(--font-family-roboto);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-white);
+  text-align: center;
+  line-height: normal;
+}
+
+.service-label {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  width: 72px;
+  line-height: normal;
+}
+
+/* 可預約標籤 */
+.tag-reservable {
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 12px;
+  background-color: var(--color-status-done-bg);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* 當建案條件符合時，由 JS 加上 active 以顯示標籤 */
+.tag-reservable.active {
+  display: flex;
+}
+
+.tag-reservable span {
+  font-family: var(--font-family-roboto), var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-text-dark);
+  text-align: center;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+/* --- 查看更多 / 收合 按鈕 --- */
+.btn-expand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* 漸層遮罩效果（收合時） */
+.btn-expand.has-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    var(--color-white) 80%
+  );
+  padding-top: 24px;
+  margin-top: -24px;
+  position: relative;
+  z-index: 2;
+}
+
+.expand-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-gold);
+  text-align: center;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+.expand-arrow {
+  width: 16px;
+  height: 9px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.expand-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* ======================================
+   報修表單進度區
+   ====================================== */
+.repair-progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- 區段標題 --- */
+.section-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.section-icon-group {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-icon-main {
+  width: 15.6px;
+  height: 18px;
+  position: absolute;
+  left: 4px;
+  top: 2.5px;
+}
+
+.section-icon-gears {
+  position: absolute;
+  left: 12px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.gear-small,
+.gear-large {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.section-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 報修卡片清單 --- */
+.repair-order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- 報修卡片 --- */
+.repair-order-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.order-number {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-gold);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.order-status {
+  padding: 4px 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-status span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.status-done {
+  background-color: var(--color-status-done-bg);
+}
+
+.status-processing {
+  background-color: var(--color-status-processing-bg);
+}
+
+/* 訂單資訊 */
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.order-info p {
+  margin: 0;
+}
+
+.info-label {
+  font-weight: 500;
+}
+
+.info-value {
+  font-weight: 400;
+}
+
+/* 內容查看按鈕 */
+.btn-view-order {
+  width: 100%;
+  background-color: var(--color-gold);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-view-order span {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-white);
+  text-align: center;
+  line-height: normal;
+}
+
+.btn-view-order:hover {
+  opacity: 0.9;
+}
+
+.btn-view-order:active {
+  opacity: 0.8;
+}
+
+/* 付款操作按鈕樣式：前往付款 */
+.btn-view-order.btn-pay {
+  background-color: #e06060;
+}
+
+/* --- 報修表單進度：區段標題列「看更多」連結 --- */
+.repair-progress-section .section-header {
+  justify-content: space-between;
+}
+
+.section-header-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-more-link {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-gold);
+  line-height: normal;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.section-more-link:hover {
+  opacity: 0.75;
+}
+
+.section-more-arrow {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+/* --- 報修卡片：報價/付款提示列 --- */
+.order-payment-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: var(--color-text-dark);
+}
+
+.order-payment-hint .hint-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.order-payment-hint .hint-text {
+  font-weight: 500;
+  flex: 1;
+}
+
+.order-payment-hint .hint-amount {
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+/* 待確認報價提示 */
+.hint-pending {
+  background-color: #fff8e1;
+  border: 1px solid #ffe082;
+}
+.hint-pending .hint-amount {
+  color: #e6a817;
+}
+
+/* 待付款提示 */
+.hint-confirmed {
+  background-color: #fef3e8;
+  border: 1px solid #ffcc80;
+}
+.hint-confirmed .hint-amount {
+  color: #e06060;
+}
+
+/* 已付款提示 */
+.hint-paid {
+  background-color: #e8f5e9;
+  border: 1px solid #a5d6a7;
+}
+.hint-paid .hint-amount {
+  color: #27ae60;
+}
+
+/* ======================================
+   鄰里生活服務專區
+   ====================================== */
+.life-service-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* --- 區段標題列 --- */
+.life-service-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.life-service-title {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--color-text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: normal;
+}
+
+.life-service-title-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.life-service-subtitle {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-gold);
+  line-height: normal;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.life-service-subtitle:hover {
+  opacity: 0.75;
+}
+
+.life-service-subtitle-arrow {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+/* --- 分類標籤切換列 --- */
+.life-service-tabs {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  align-items: center;
+}
+
+.life-service-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.life-tab {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 24px;
+  border: none;
+  background-color: #ffffff;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(58, 66, 70, 0.8);
+  white-space: nowrap;
+  cursor: pointer;
+  line-height: normal;
+  transition: all 0.15s ease;
+}
+
+.life-tab.active {
+  background-color: rgba(184, 166, 118, 0.2);
+  border: 1px solid var(--color-gold);
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+.life-tab:not(.active) {
+  background-color: #ffffff;
+  color: rgba(58, 66, 70, 0.8);
+}
+
+/* --- 服務卡片網格 --- */
+.life-service-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.life-service-card {
+  background-color: var(--color-white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 卡片圖片外層（含優惠標籤定位） */
+.life-service-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.life-service-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 左上角優惠標籤 */
+.life-service-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #e85d75;
+  color: #fff;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* 標籤前方小圖示（以偽元素實現） */
+.life-service-badge::before {
+  content: '◎';
+  font-size: 11px;
+}
+
+.life-service-name {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-text-dark);
+  line-height: 1.4;
+  margin: 12px 12px 0;
+  text-align: center;
+  word-break: break-word;
+  /* 最多兩行，超出以 ... 呈現 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: calc(2 * 1.4em); /* 固定佔兩行高度 */
+}
+
+/* 立即預約按鈕 */
+.btn-life-book {
+  display: block;
+  width: calc(100% - 24px);
+  margin: auto 12px 14px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background-color: #b8a676;
+  color: #fff;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: opacity 0.2s ease;
+}
+
+.btn-life-book:hover {
+  opacity: 0.88;
+}
+
+.btn-life-book:active {
+  opacity: 0.72;
+}
+
+/* --- 收合 / 展開按鈕 --- */
+.life-service-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.life-service-toggle .toggle-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-gold);
+  line-height: normal;
+}
+
+.life-service-toggle .toggle-arrow {
+  width: 14px;
+  height: 8px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.life-service-toggle .toggle-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+
+/* ============================================
+   預約申請 Modal 樣式
+   ============================================ */
+
+/* 遮罩背景 */
+.book-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.book-modal-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal 容器（從底部滑入） */
+.book-modal-container {
+  width: 100%;
+  max-width: 430px;
+  max-height: 92vh;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.book-modal-overlay.is-active .book-modal-container {
+  transform: translateY(0);
+}
+
+/* 標頭 */
+.book-modal-header {
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.book-modal-header h2 {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.book-modal-close {
+  font-size: 26px;
+  color: #ccc;
+  cursor: pointer;
+  border: none;
+  background: none;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.book-modal-close:hover {
+  color: #999;
+}
+
+/* 內容區（可捲動） */
+.book-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 商家資訊 */
+.book-merchant-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+}
+
+.book-merchant-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid #f0f0f0;
+  background: #eee;
+}
+
+.book-merchant-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.book-merchant-name {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-text-dark);
+}
+
+.book-merchant-tagline {
+  font-family: var(--font-family);
+  font-size: 13px;
+  color: var(--color-gold);
+  font-weight: 500;
+}
+
+/* 優惠提示框 */
+.book-promo-box {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 20px;
+}
+
+.book-promo-title {
+  color: #d97706;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.book-promo-desc {
+  font-size: 12.5px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* 區段標題 */
+.book-section-title {
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 20px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.book-section-title::before {
+  content: "";
+  width: 4px;
+  height: 15px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* 服務項目選擇 */
+.book-service-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.book-service-option {
+  display: flex;
+  align-items: center;
+  padding: 11px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.book-service-option:hover {
+  border-color: var(--color-gold);
+  background-color: #fdfbf7;
+}
+
+.book-service-option input[type="radio"] {
+  margin-right: 12px;
+  accent-color: var(--color-gold);
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.book-service-label {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--color-text-dark);
+}
+
+.book-service-price {
+  font-weight: 700;
+  color: var(--color-gold);
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+/* 表單 */
+.book-form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.book-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.book-form-group label {
+  font-size: 12.5px;
+  color: #666;
+  font-weight: 500;
+}
+
+.book-form-group label .required {
+  color: #ef4444;
+}
+
+.book-input {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: var(--font-family);
+  color: var(--color-text-dark);
+  outline: none;
+  background: #fff;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.book-input:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(184, 166, 118, 0.12);
+}
+
+.book-input.readonly {
+  background-color: #f5f5f5;
+  cursor: default;
+}
+
+textarea.book-input {
+  resize: vertical;
+  min-height: 72px;
+}
+
+/* 同意勾選 */
+.book-checkbox-group {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+  align-items: flex-start;
+}
+
+.book-checkbox-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--color-gold);
+}
+
+.book-checkbox-group label {
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+}
+
+/* 送出按鈕 */
+.book-submit-btn {
+  width: 100%;
+  background-color: var(--color-gold);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+.book-submit-btn:hover {
+  opacity: 0.92;
+}
+
+.book-submit-btn:active {
+  transform: scale(0.98);
+  opacity: 0.88;
+}

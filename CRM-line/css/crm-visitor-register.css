@@ -1,0 +1,689 @@
+/* ============================================
+   訪客登記頁面樣式
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-gold-light: rgba(184, 166, 118, 0.2);
+  --color-white: #ffffff;
+  --color-text-dark: #3a4246;
+  --color-text-dimmed: rgba(58, 66, 70, 0.8);
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-status-pending-bg: rgba(232, 177, 95, 0.15);
+  --color-status-pending-text: #c58b36;
+  --color-status-arrived-bg: #dcf1eb;
+  --color-status-arrived-text: #325148;
+  --color-status-cancelled-bg: rgba(58, 66, 70, 0.08);
+  --color-status-cancelled-text: #8a8a8a;
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-page-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 頁面整體容器 --- */
+.crm-visitor {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 主要內容區域 --- */
+.visitor-content {
+  position: relative;
+  z-index: 1;
+  padding: 96px 20px 32px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- 說明橫幅 + 新增入口 --- */
+.btn-add-visitor {
+  width: 100%;
+  background-color: var(--color-gold);
+  border: none;
+  border-radius: 10px;
+  padding: 13px 0;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-add-visitor:active {
+  opacity: 0.88;
+}
+
+.btn-add-icon {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* --- 篩選標籤列 --- */
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+  margin-top: 20px;
+}
+
+.filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-tab {
+  flex-shrink: 0;
+  background: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--color-text-dimmed);
+  line-height: normal;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-tab.active {
+  background-color: var(--color-gold-light);
+  border: 1px solid var(--color-gold);
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+/* --- 訪客通行證清單 --- */
+.visitor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.visitor-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.visitor-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.visitor-card-name {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-gold);
+  line-height: normal;
+}
+
+.visitor-card-status {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visitor-card-status span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.status-pending {
+  background-color: var(--color-status-pending-bg);
+}
+.status-pending span {
+  color: var(--color-status-pending-text);
+}
+
+.status-arrived {
+  background-color: var(--color-status-arrived-bg);
+}
+.status-arrived span {
+  color: var(--color-status-arrived-text);
+}
+
+.status-cancelled {
+  background-color: var(--color-status-cancelled-bg);
+}
+.status-cancelled span {
+  color: var(--color-status-cancelled-text);
+}
+
+.visitor-card[data-status="cancelled"] {
+  opacity: 0.6;
+}
+
+.visitor-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: 15px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.visitor-card-info p {
+  margin: 0;
+  display: flex;
+}
+
+.info-label {
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 68px;
+  color: var(--color-text-dimmed);
+}
+
+.info-value {
+  font-weight: 400;
+}
+
+.btn-view-pass {
+  width: 100%;
+  background-color: var(--color-gold);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--color-white);
+  text-align: center;
+  line-height: normal;
+}
+
+.btn-view-pass.btn-secondary {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-light);
+  color: var(--color-text-dark);
+}
+
+/* --- 空狀態 --- */
+.empty-state {
+  margin-top: 16px;
+}
+
+/* ============================================
+   Modal 共用（新增登記 / 通行證詳情）
+   ============================================ */
+
+.visitor-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.visitor-modal-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.visitor-modal-container {
+  width: 100%;
+  max-width: 430px;
+  max-height: 92vh;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.visitor-modal-overlay.is-active .visitor-modal-container {
+  transform: translateY(0);
+}
+
+.visitor-modal-header {
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.visitor-modal-header h2 {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.visitor-modal-close {
+  font-size: 26px;
+  color: #ccc;
+  cursor: pointer;
+  border: none;
+  background: none;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.visitor-modal-close:hover {
+  color: #999;
+}
+
+.visitor-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- 新增登記表單 --- */
+.visitor-form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.visitor-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.visitor-form-group label {
+  font-size: 12.5px;
+  color: #666;
+  font-weight: 500;
+}
+
+.visitor-form-group label .required {
+  color: #ef4444;
+}
+
+.visitor-input {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: var(--font-family);
+  color: var(--color-text-dark);
+  outline: none;
+  background: #fff;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.visitor-input:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(184, 166, 118, 0.12);
+}
+
+.visitor-input.readonly {
+  background-color: #f5f5f5;
+  cursor: default;
+}
+
+textarea.visitor-input {
+  resize: vertical;
+  min-height: 64px;
+}
+
+.visitor-privacy-note {
+  font-size: 12px;
+  color: #999;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.visitor-submit-btn {
+  width: 100%;
+  background-color: var(--color-gold);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+.visitor-submit-btn:hover {
+  opacity: 0.92;
+}
+
+.visitor-submit-btn:active {
+  transform: scale(0.98);
+  opacity: 0.88;
+}
+
+/* --- 通行證詳情 Modal --- */
+.pass-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 16px;
+}
+
+.pass-name {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--color-gold);
+}
+
+.pass-status {
+  flex-shrink: 0;
+  padding: 4px 14px;
+  border-radius: 4px;
+}
+
+.pass-status span {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.pass-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pass-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  font-family: var(--font-family);
+  font-size: 15px;
+  color: var(--color-text-dark);
+}
+
+.pass-info-row .pass-info-label {
+  font-weight: 400;
+  color: var(--color-text-dimmed);
+  flex-shrink: 0;
+}
+
+.pass-info-row .pass-info-value {
+  font-weight: 500;
+  text-align: right;
+}
+
+.modal-section-title {
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-section-title::before {
+  content: "";
+  width: 4px;
+  height: 15px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* --- QR Code + 通行密碼 --- */
+.pass-qr-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.pass-qr-visual {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  gap: 2px;
+  width: 148px;
+  height: 148px;
+  margin: 0 auto;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.pass-qr-visual .qr-cell {
+  background: #2a2a2a;
+  border-radius: 1px;
+}
+
+.pass-qr-visual .qr-cell.qr-empty {
+  background: transparent;
+}
+
+.pass-code {
+  font-family: var(--font-family-roboto, var(--font-family));
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: var(--color-text-dark);
+  text-align: center;
+  margin-top: 12px;
+}
+
+.pass-qr-hint {
+  font-size: 12px;
+  color: #999;
+  margin-top: 8px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.btn-pass-share {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  border-radius: 8px;
+  padding: 11px 0;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14.5px;
+  cursor: pointer;
+  margin-top: 14px;
+}
+
+.btn-pass-share:active {
+  opacity: 0.85;
+}
+
+/* --- 已到訪備註 --- */
+.pass-arrived-note {
+  margin-top: 20px;
+  padding: 14px;
+  background: var(--color-status-arrived-bg);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--color-status-arrived-text);
+  line-height: 1.6;
+}
+
+.pass-cancelled-note {
+  margin-top: 20px;
+  padding: 14px;
+  background: var(--color-status-cancelled-bg);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--color-status-cancelled-text);
+  line-height: 1.6;
+}
+
+/* --- 操作按鈕列 --- */
+.pass-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-pass-cancel {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e06060;
+  color: #c0392b;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14.5px;
+  cursor: pointer;
+}
+
+.btn-pass-cancel:active {
+  opacity: 0.85;
+}
+
+.btn-pass-demo-arrive {
+  width: 100%;
+  background: #fff;
+  border: 1px dashed var(--color-border-light);
+  color: #999;
+  border-radius: 8px;
+  padding: 10px 0;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.btn-pass-demo-arrive:active {
+  opacity: 0.8;
+}
+
+/* ============================================
+   即時通知 Toast（模擬推播）
+   ============================================ */
+.visitor-toast {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(-100% - 20px));
+  width: calc(100% - 32px);
+  max-width: 398px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  z-index: 20000;
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.visitor-toast.is-active {
+  transform: translateX(-50%) translateY(0);
+}
+
+.visitor-toast-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.visitor-toast-title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--color-text-dark);
+  margin-bottom: 2px;
+}
+
+.visitor-toast-desc {
+  font-family: var(--font-family);
+  font-size: 13px;
+  color: var(--color-text-dimmed);
+  line-height: 1.5;
+}
