@@ -1,0 +1,562 @@
+/* ============================================
+   我的包裹頁面樣式
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-gold-light: rgba(184, 166, 118, 0.2);
+  --color-white: #ffffff;
+  --color-text-dark: #3a4246;
+  --color-text-dimmed: rgba(58, 66, 70, 0.8);
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-status-pending-bg: rgba(232, 177, 95, 0.15);
+  --color-status-pending-text: #c58b36;
+  --color-status-picked-bg: #dcf1eb;
+  --color-status-picked-text: #325148;
+  --color-status-urging-bg: rgba(224, 96, 96, 0.14);
+  --color-status-urging-text: #c0392b;
+  --color-urging-border: #e06060;
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-page-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 頁面整體容器 --- */
+.crm-package {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 主要內容區域 --- */
+.package-content {
+  position: relative;
+  z-index: 1;
+  padding: 96px 20px 32px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- 篩選標籤列 --- */
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-tab {
+  flex-shrink: 0;
+  background: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--color-text-dimmed);
+  line-height: normal;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-tab.active {
+  background-color: var(--color-gold-light);
+  border: 1px solid var(--color-gold);
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+/* --- 頁面提醒文字 --- */
+.package-page-notice {
+  font-family: var(--font-family);
+  font-size: 12.5px;
+  color: var(--color-text-dimmed);
+  line-height: 1.5;
+  margin-top: 12px;
+}
+
+/* --- 包裹卡片清單 --- */
+.package-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* --- 包裹卡片 --- */
+.package-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.package-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.package-number {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-gold);
+  line-height: normal;
+}
+
+.package-status {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.package-status span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.status-pending {
+  background-color: var(--color-status-pending-bg);
+}
+.status-pending span {
+  color: var(--color-status-pending-text);
+}
+
+.status-picked {
+  background-color: var(--color-status-picked-bg);
+}
+.status-picked span {
+  color: var(--color-status-picked-text);
+}
+
+.status-urging {
+  background-color: var(--color-status-urging-bg);
+}
+.status-urging span {
+  color: var(--color-status-urging-text);
+}
+
+/* 催收中卡片：左側警示色邊框強調 */
+.package-card[data-status="urging"] {
+  border: 1px solid var(--color-urging-border);
+  box-shadow: inset 3px 0 0 var(--color-urging-border);
+}
+
+.package-urging-note {
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-status-urging-text);
+  margin: -4px 0 0;
+}
+
+/* 包裹資訊 */
+.package-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.package-info p {
+  margin: 0;
+  display: flex;
+}
+
+.info-label {
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 68px;
+}
+
+.info-value {
+  font-weight: 400;
+}
+
+/* 操作按鈕 */
+.btn-package-action {
+  width: 100%;
+  background-color: var(--color-gold);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-white);
+  text-align: center;
+  line-height: normal;
+}
+
+.btn-package-action:active {
+  opacity: 0.85;
+}
+
+.btn-package-action.btn-secondary {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-light);
+  color: var(--color-text-dark);
+}
+
+/* --- 空狀態 --- */
+.empty-state {
+  margin-top: 16px;
+}
+
+/* ============================================
+   包裹詳情 / 確認領取 Modal
+   ============================================ */
+
+.package-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.package-modal-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.package-modal-container {
+  width: 100%;
+  max-width: 430px;
+  max-height: 88vh;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.package-modal-overlay.is-active .package-modal-container {
+  transform: translateY(0);
+}
+
+.package-modal-header {
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.package-modal-header h2 {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.package-modal-close {
+  font-size: 26px;
+  color: #ccc;
+  cursor: pointer;
+  border: none;
+  background: none;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.package-modal-close:hover {
+  color: #999;
+}
+
+.package-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-package-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 16px;
+}
+
+.modal-package-number {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--color-gold);
+}
+
+.modal-package-status {
+  flex-shrink: 0;
+  padding: 4px 14px;
+  border-radius: 4px;
+}
+
+.modal-package-status span {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.modal-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  font-family: var(--font-family);
+  font-size: 15px;
+  color: var(--color-text-dark);
+}
+
+.modal-info-row .modal-info-label {
+  font-weight: 400;
+  color: var(--color-text-dimmed);
+  flex-shrink: 0;
+}
+
+.modal-info-row .modal-info-value {
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Modal 內區段標題（共用） */
+.modal-section-title {
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-section-title::before {
+  content: "";
+  width: 4px;
+  height: 15px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* --- 包裹照片（管理室維護，僅供住戶檢視） --- */
+.modal-photo-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.modal-photo-grid {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px;
+}
+
+.modal-photo-thumb {
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  cursor: pointer;
+  padding: 0;
+  background: #f6f6f3;
+}
+
+.modal-photo-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-photo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 72px;
+  border: 1px dashed #d8d5cd;
+  border-radius: 10px;
+  font-family: var(--font-family);
+  font-size: 13px;
+  color: #999;
+}
+
+/* --- 住戶收件條碼 --- */
+.barcode-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.barcode-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  height: 64px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 8px 12px;
+  overflow: hidden;
+}
+
+.barcode-visual .bar {
+  display: inline-block;
+  height: 100%;
+  background: #2a2a2a;
+  flex-shrink: 0;
+}
+
+.barcode-code {
+  font-family: var(--font-family-roboto, var(--font-family));
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--color-text-dark);
+  text-align: center;
+  margin-top: 8px;
+}
+
+.barcode-hint {
+  font-size: 12px;
+  color: #999;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* ============================================
+   照片放大檢視 Lightbox
+   ============================================ */
+.photo-lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 10100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.photo-lightbox-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.photo-lightbox-img {
+  max-width: 88vw;
+  max-height: 80vh;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.photo-lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  font-size: 32px;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 10px;
+}

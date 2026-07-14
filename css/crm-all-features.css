@@ -1,0 +1,189 @@
+/* ============================================
+   更多功能頁面樣式
+   設計原則：服務對象以年長者為主，採「文字為主、圖像為輔」呈現
+   → 單欄清單取代小圖示九宮格，加大文字與可點擊範圍，並輔以簡短說明文字
+   ============================================ */
+
+/* --- 頁面整體 --- */
+.crm-all-features {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 主要內容區域（頂部留白直接補償固定導覽列高度） --- */
+.main-content {
+  padding-top: 80px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ============================================
+   功能分組卡片
+   ============================================ */
+.feat-group {
+  background-color: var(--color-white);
+  border-radius: 16px;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.feat-group-title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-text-dark);
+  padding: 12px 4px 4px;
+}
+
+.feat-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 單一功能項目（文字為主，圖示為輔） --- */
+.feat-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 4px;
+  min-height: 64px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-border-light, rgba(179, 176, 158, 0.2));
+  transition: background-color 0.15s ease;
+}
+
+.feat-list .feat-row:last-child {
+  border-bottom: none;
+}
+
+.feat-row:active {
+  background-color: rgba(179, 176, 158, 0.08);
+  border-radius: 8px;
+}
+
+/* 左側圖示（僅作為輔助辨識，非主要資訊） */
+.feat-icon-wrap {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feat-icon-wrap.bg-muted {
+  background-color: var(--color-muted-bg);
+}
+
+.feat-icon-wrap.bg-light {
+  background-color: var(--color-light-bg);
+}
+
+.feat-icon {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.feat-icon.icon-sm {
+  width: 22px;
+  height: 22px;
+}
+
+/* 主要文字內容 */
+.feat-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.feat-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--color-text-dark);
+  line-height: 1.4;
+}
+
+.feat-desc {
+  margin-top: 4px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 15px;
+  color: rgba(58, 66, 70, 0.65);
+  line-height: 1.5;
+}
+
+/* 數量徽章（例如：款項筆數、未讀公告數） */
+.feat-badge-count {
+  flex-shrink: 0;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 7px;
+  border-radius: 12px;
+  background-color: var(--color-badge-red);
+  color: var(--color-white);
+  font-family: var(--font-family-roboto), var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+/* 可預約標籤 */
+.feat-tag-reservable {
+  display: none;
+  flex-shrink: 0;
+  padding: 3px 12px;
+  border-radius: 12px;
+  background-color: var(--color-status-done-bg);
+  color: var(--color-text-dark);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* 當建案條件符合時，由 JS 加上 active 以顯示標籤 */
+.feat-tag-reservable.active {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 建商專屬標籤（標示該功能為陸府建設專屬服務，非通用社區功能） */
+.feat-tag-brand {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background-color: rgba(184, 166, 118, 0.16);
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* 右側箭頭（輔助提示可點擊，非主要資訊） */
+.feat-chevron {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}

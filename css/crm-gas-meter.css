@@ -1,0 +1,332 @@
+/* ============================================
+   超瓦斯表頁面樣式
+   ============================================ */
+
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-white: #ffffff;
+  --color-muted-bg: rgba(179, 176, 158, 0.12);
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.crm-gas-meter {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 100px 20px 40px;
+  width: 100%;
+}
+
+/* --- 本期度數摘要卡 --- */
+.meter-summary-card {
+  background-color: var(--color-gold);
+  border-radius: 12px;
+  padding: 20px;
+  color: var(--color-white);
+}
+
+.meter-summary-label {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+
+.meter-summary-value {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.meter-summary-value span {
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.meter-summary-date {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.meter-summary-updater {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* --- 抄表紀錄列表 --- */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.btn-add-manual {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--color-gold);
+  background-color: var(--color-white);
+  color: var(--color-gold);
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-add-manual:hover {
+  opacity: 0.85;
+}
+
+.btn-add-manual:active {
+  transform: scale(0.96);
+}
+
+.btn-add-icon {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.meter-record-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.meter-record-item {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meter-record-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.meter-record-date {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  font-weight: 500;
+}
+
+.meter-record-usage {
+  font-size: 14px;
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.meter-record-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #8a8478;
+}
+
+.meter-record-badge {
+  background-color: rgba(184, 166, 118, 0.14);
+  color: var(--color-gold);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 2px 8px;
+}
+
+/* ======================================
+   手動新增抄表紀錄 Modal
+   ====================================== */
+
+.gas-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.gas-modal-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gas-modal-container {
+  width: 100%;
+  max-width: 430px;
+  max-height: 88vh;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.gas-modal-overlay.is-active .gas-modal-container {
+  transform: translateY(0);
+}
+
+.gas-modal-header {
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.gas-modal-header h2 {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.gas-modal-close {
+  font-size: 26px;
+  color: #ccc;
+  cursor: pointer;
+  border: none;
+  background: none;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.gas-modal-close:hover {
+  color: #999;
+}
+
+.gas-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gas-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.gas-form-group label {
+  font-size: 12.5px;
+  color: #666;
+  font-weight: 500;
+}
+
+.gas-form-group label .required {
+  color: #ef4444;
+}
+
+.gas-input {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: var(--font-family);
+  color: var(--color-text-dark);
+  outline: none;
+  background: #fff;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.gas-input:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(184, 166, 118, 0.12);
+}
+
+.gas-input.readonly {
+  background-color: #f5f5f5;
+  cursor: default;
+}
+
+.gas-submit-btn {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-gold);
+  color: #fff;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 13px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.gas-submit-btn:hover {
+  opacity: 0.92;
+}
+
+.gas-submit-btn:active {
+  transform: scale(0.98);
+  opacity: 0.88;
+}
