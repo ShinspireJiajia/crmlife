@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>報修付款 - 線上支付</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-repair-payment.css">
+
+  <!-- Loading 遮罩 inline 樣式 -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 報修付款頁面容器 -->
+  <div class="crm-repair-payment">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="線上支付" data-back="javascript:history.back()"></div>
+
+    <!-- 付款摘要區域 -->
+    <div class="payment-summary">
+      <div class="summary-card">
+        <p class="summary-label">應付金額</p>
+        <p class="summary-amount" id="displayAmount">NT$ 15,750</p>
+        <div class="summary-detail">
+          <p class="summary-row">
+            <span class="summary-key">報價單號</span>
+            <span class="summary-value" id="displayQuotationNo">GC-20251204-0001-Q1</span>
+          </p>
+          <p class="summary-row">
+            <span class="summary-key">個案單號</span>
+            <span class="summary-value" id="displayCaseNo">GC-20251204-0001</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 發票開立方式選擇區域 -->
+    <div class="invoice-section">
+
+      <!-- 區塊標題 -->
+      <div class="section-header">
+        <span class="section-icon-emoji">🧾</span>
+        <span>發票開立方式</span>
+      </div>
+
+      <!-- 手機條碼載具（預設選取） -->
+      <label class="invoice-option selected">
+        <div class="option-left">
+          <input type="radio" name="invoiceType" value="mobile-barcode" checked>
+          <span class="radio-custom"></span>
+          <span class="option-label">手機條碼載具</span>
+        </div>
+      </label>
+      <!-- 手機條碼輸入區 -->
+      <div class="invoice-detail-area" id="mobileArea">
+        <div class="invoice-input-group">
+          <label class="invoice-input-label" for="mobileBarcode">載具條碼</label>
+          <input type="text" class="invoice-input" id="mobileBarcode" placeholder="/ 開頭共 8 碼，例如：/ABC1234" maxlength="8">
+          <p class="invoice-input-hint">＊請輸入手機條碼載具編號（斜線 + 7 碼大寫英數字）</p>
+        </div>
+      </div>
+
+      <!-- 捐贈發票 -->
+      <label class="invoice-option">
+        <div class="option-left">
+          <input type="radio" name="invoiceType" value="donate">
+          <span class="radio-custom"></span>
+          <span class="option-label">捐贈發票</span>
+        </div>
+      </label>
+
+      <!-- 三聯式發票（公司戶） -->
+      <label class="invoice-option">
+        <div class="option-left">
+          <input type="radio" name="invoiceType" value="triple">
+          <span class="radio-custom"></span>
+          <span class="option-label">三聯式發票（公司戶）</span>
+        </div>
+      </label>
+      <!-- 三聯式發票資訊輸入區 -->
+      <div class="invoice-detail-area" id="tripleArea" style="display:none;">
+        <div class="invoice-input-group">
+          <label class="invoice-input-label" for="companyTaxId">統一編號</label>
+          <input type="text" class="invoice-input" id="companyTaxId" placeholder="請輸入 8 碼統一編號" maxlength="8">
+        </div>
+        <div class="invoice-input-group">
+          <label class="invoice-input-label" for="companyName">公司抬頭</label>
+          <input type="text" class="invoice-input" id="companyName" placeholder="請輸入公司名稱">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 支付方式選擇區域 -->
+    <div class="payment-section">
+
+      <!-- 區塊標題 -->
+      <div class="section-header">
+        <img class="section-icon" src="assets/payment-icon.svg" alt="" loading="lazy">
+        <span>請選擇支付方式</span>
+      </div>
+
+      <!-- 信用卡選項（預設選取） -->
+      <label class="payment-option selected">
+        <div class="option-left">
+          <input type="radio" name="paymentMethod" value="credit-card" checked>
+          <span class="radio-custom"></span>
+          <span class="option-label">信用卡</span>
+        </div>
+        <div class="option-right">
+          <img class="brand-logo brand-visa" src="assets/visa-logo.png" alt="VISA" loading="lazy">
+          <img class="brand-logo brand-mastercard" src="assets/mastercard-logo.png" alt="Mastercard" loading="lazy">
+        </div>
+      </label>
+
+      <!-- LINE PAY 選項 -->
+      <label class="payment-option">
+        <div class="option-left">
+          <input type="radio" name="paymentMethod" value="line-pay">
+          <span class="radio-custom"></span>
+          <span class="option-label">LINE PAY</span>
+        </div>
+        <div class="option-right">
+          <img class="brand-logo brand-linepay" src="assets/linepay-logo.png" alt="LINE Pay" loading="lazy">
+        </div>
+      </label>
+
+      <!-- ATM 虛擬帳號轉帳選項 -->
+      <label class="payment-option">
+        <div class="option-left">
+          <input type="radio" name="paymentMethod" value="atm">
+          <span class="radio-custom"></span>
+          <span class="option-label">ATM 虛擬帳號轉帳</span>
+        </div>
+      </label>
+
+    </div>
+
+    <!-- 底部按鈕區域 -->
+    <div class="payment-footer">
+      <button class="btn-confirm" id="btnConfirm">確認付款</button>
+      <button class="btn-cancel" id="btnCancel">取消</button>
+    </div>
+
+  </div>
+
+  <!-- 共用頂部導覽列元件 -->
+  <script src="js/crm-header.js" defer></script>
+  <script src="js/crm-repair-payment.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

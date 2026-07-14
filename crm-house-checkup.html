@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>房屋健檢</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-house-checkup.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 房屋健檢頁面容器 -->
+  <div class="crm-house-checkup" data-node-id="248:1986">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="248:1987">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="房屋健檢"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" data-node-id="248:1988">
+
+      <!-- 卡片列表 -->
+      <div class="card-list" data-node-id="248:1990">
+
+        <!-- 活動公告卡片：可線上預約 -->
+        <div class="activity-card" data-node-id="248:1991">
+          <p class="card-title" data-node-id="248:1992">一年一度壁癌健檢，立即報名！</p>
+          <div class="card-desc" data-node-id="248:1993">
+            <span class="desc-label">報名期間</span>
+            <span class="desc-value">2025/09/15 14:00 ~ 2025/09/30 12:00 止</span>
+          </div>
+          <div data-node-id="248:1994">
+            <button class="btn-reserve" id="btnReserve" data-node-id="248:1996">線上預約</button>
+          </div>
+        </div>
+
+        <!-- 服務卡片：處理中 -->
+        <div class="service-card" data-sort-date="2026-05-10 10:00" data-status="處理中" data-node-id="248:1998">
+          <p class="card-title" data-node-id="248:1999">一年一度壁癌健檢，立即報名！</p>
+          <!-- 案件編號與狀態 -->
+          <div class="card-header" data-node-id="294:4068">
+            <span class="card-number" data-node-id="294:4069">20260510-003</span>
+            <span class="status-badge status-processing" data-node-id="294:4070">處理中</span>
+          </div>
+          <!-- 案件資訊 -->
+          <div class="card-info">
+            <p data-node-id="294:4073">
+              <span class="label">建　　案</span>｜綠海建案(A3-3)
+            </p>
+            <p data-node-id="248:2000">
+              <span class="label">預約日期</span>｜2026/5/10 10:00
+            </p>
+          </div>
+          <!-- 操作按鈕 -->
+          <div class="card-actions" data-node-id="248:2001">
+            <button class="btn btn-outline" data-action="view-record" data-node-id="294:4040">檢視記錄</button>
+          </div>
+        </div>
+
+        <!-- 服務卡片：已完成 -->
+        <div class="service-card" data-sort-date="2025-04-08 13:00" data-status="已完成" data-node-id="248:2016">
+          <p class="card-title" data-node-id="248:2017">您的房屋需要健檢嗎？免費壁癌檢測預約中！</p>
+          <!-- 案件編號與狀態 -->
+          <div class="card-header" data-node-id="294:4063">
+            <span class="card-number" data-node-id="294:4064">20250408-025</span>
+            <span class="status-badge status-completed" data-node-id="294:4065">已完成</span>
+          </div>
+          <!-- 案件資訊 -->
+          <div class="card-info">
+            <p data-node-id="248:2018">
+              <span class="label">建　　案</span>｜綠海建案(A3-3)
+            </p>
+            <p data-node-id="294:4075">
+              <span class="label">預約日期</span>｜2025/4/8 13:00
+            </p>
+          </div>
+          <!-- 操作按鈕 -->
+          <div class="card-actions" data-node-id="294:4057">
+            <button class="btn btn-outline" data-action="view-record" data-node-id="294:4058">檢視記錄</button>
+          </div>
+        </div>
+
+      </div>
+      <!-- /card-list -->
+
+      <!-- 空狀態：無資料時顯示 -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-icon">
+          <img src="assets/empty-record-icon.svg" alt="" loading="lazy">
+        </div>
+        <p class="empty-text">無相關紀錄</p>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-house-checkup -->
+
+  <!-- 共用頂部導覽列元件 -->
+
+
+  <script src="js/crm-header.js" defer></script>
+
+
+  <!-- JavaScript -->
+  <script src="js/crm-house-checkup.js" defer></script>
+
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

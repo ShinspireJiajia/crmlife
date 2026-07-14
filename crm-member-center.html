@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員中心</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-member-center.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 會員中心頁面容器 -->
+  <div class="crm-member-center">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="會員中心"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <!-- 會員資訊項目 -->
+      <div class="menu-item" id="btnMemberInfo">
+        <div class="menu-item-left">
+          <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#3a4246"/>
+          </svg>
+        </div>
+        <span class="menu-item-text">會員資訊</span>
+        <svg class="menu-chevron" width="8" height="14" viewBox="0 0 8 14" fill="none">
+          <path d="M1 1L7 7L1 13" stroke="#3a4246" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- 密碼管理區塊 -->
+      <div class="menu-group">
+        <!-- 變更屋主密碼 -->
+        <div class="menu-item" id="btnChangeOwnerPwd">
+          <div class="menu-item-left">
+            <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17ZM15.1 8H8.9V6C8.9 4.29 10.29 2.9 12 2.9C13.71 2.9 15.1 4.29 15.1 6V8Z" fill="#3a4246"/>
+            </svg>
+          </div>
+          <span class="menu-item-text">變更屋主密碼</span>
+          <svg class="menu-chevron" width="8" height="14" viewBox="0 0 8 14" fill="none">
+            <path d="M1 1L7 7L1 13" stroke="#3a4246" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <!-- 變更戶別密碼 -->
+        <div class="menu-item" id="btnChangeUnitPwd">
+          <div class="menu-item-left">
+            <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17ZM15.1 8H8.9V6C8.9 4.29 10.29 2.9 12 2.9C13.71 2.9 15.1 4.29 15.1 6V8Z" fill="#3a4246"/>
+            </svg>
+          </div>
+          <span class="menu-item-text">變更戶別密碼</span>
+          <svg class="menu-chevron" width="8" height="14" viewBox="0 0 8 14" fill="none">
+            <path d="M1 1L7 7L1 13" stroke="#3a4246" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <!-- 查詢密碼 -->
+        <div class="menu-item" id="btnQueryPwd">
+          <div class="menu-item-left">
+            <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z" fill="#3a4246"/>
+            </svg>
+          </div>
+          <span class="menu-item-text">查詢密碼</span>
+          <svg class="menu-chevron" width="8" height="14" viewBox="0 0 8 14" fill="none">
+            <path d="M1 1L7 7L1 13" stroke="#3a4246" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 發票資訊區塊 -->
+      <div class="invoice-section">
+        <!-- 區塊標題 -->
+        <div class="invoice-header">
+          <svg class="invoice-title-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2ZM16 18H8V16H16V18ZM16 14H8V12H16V14ZM13 9V3.5L18.5 9H13Z" fill="#3a4246"/>
+          </svg>
+          <span class="invoice-title-text">發票資訊</span>
+        </div>
+
+        <!-- 發票資訊卡片 -->
+        <div class="invoice-card" id="invoiceCard">
+          <div class="invoice-display" id="invoiceDisplay">
+            <span class="invoice-type-label">手機條碼</span>
+            <span class="invoice-value">/1234ABC</span>
+          </div>
+          <button class="btn-change-setting" id="btnChangeSetting" type="button">更改設定</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-member-center -->
+
+  <!-- 底部選單：發票類型選擇 Action Sheet -->
+  <div class="action-sheet-overlay" id="invoiceTypeOverlay">
+    <div class="action-sheet" id="invoiceTypeSheet">
+      <div class="action-sheet-option" data-type="email">
+        <span>電子信箱</span>
+      </div>
+      <div class="action-sheet-divider"></div>
+      <div class="action-sheet-option" data-type="barcode">
+        <span>手機條碼</span>
+      </div>
+      <div class="action-sheet-divider"></div>
+      <div class="action-sheet-option" data-type="triple">
+        <span>三聯式發票</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 發票設定彈窗 -->
+  <div class="invoice-modal-overlay" id="invoiceModalOverlay">
+    <div class="invoice-modal" id="invoiceModal">
+      <!-- 標題列 -->
+      <div class="invoice-modal-header">
+        <svg class="invoice-modal-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2ZM16 18H8V16H16V18ZM16 14H8V12H16V14ZM13 9V3.5L18.5 9H13Z" fill="#3a4246"/>
+        </svg>
+        <span class="invoice-modal-title">發票設定</span>
+      </div>
+
+      <!-- 發票類型選擇 -->
+      <div class="invoice-form-group">
+        <label class="invoice-form-label">發票類型</label>
+        <div class="invoice-select-wrap">
+          <select class="invoice-select" id="invoiceTypeSelect">
+            <option value="email">電子信箱</option>
+            <option value="barcode">手機條碼</option>
+            <option value="triple">三聯式發票</option>
+          </select>
+          <svg class="select-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1L5 5L9 1" stroke="#3a4246" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 電子信箱輸入欄位 -->
+      <div class="invoice-field-group" id="fieldEmail">
+        <label class="invoice-form-label">電子信箱</label>
+        <input type="email" class="invoice-input" id="inputEmail" placeholder="請輸入電子信箱">
+        <p class="invoice-hint">電子發票將寄至上述您輸入的E-mail</p>
+      </div>
+
+      <!-- 手機條碼輸入欄位 -->
+      <div class="invoice-field-group hidden" id="fieldBarcode">
+        <label class="invoice-form-label">手機條碼</label>
+        <input type="text" class="invoice-input" id="inputBarcode" placeholder="請輸入手機條碼" maxlength="8">
+        <p class="invoice-hint">請先至財政部電子發票整合服務平台申請手機條碼，請輸入條碼下方「符號及大寫英文數字」共8碼。範例：/1234ABC</p>
+      </div>
+
+      <!-- 三聯式發票輸入欄位 -->
+      <div class="invoice-field-group hidden" id="fieldTriple">
+        <label class="invoice-form-label">公司名稱</label>
+        <input type="text" class="invoice-input" id="inputCompany" placeholder="請輸入公司名稱">
+        <div class="invoice-field-spacer"></div>
+        <label class="invoice-form-label">統一編號</label>
+        <input type="text" class="invoice-input" id="inputTaxId" placeholder="請輸入統一編號" maxlength="8">
+      </div>
+
+      <!-- 按鈕區 -->
+      <div class="invoice-modal-buttons">
+        <button type="button" class="btn-modal-cancel" id="btnModalCancel">取消</button>
+        <button type="button" class="btn-modal-confirm" id="btnModalConfirm">更改設定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 共用頂部導覽列元件 -->
+  <script src="js/crm-header.js" defer></script>
+
+  <!-- JavaScript -->
+  <script src="js/crm-member-center.js" defer></script>
+
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

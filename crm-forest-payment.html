@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>森林聚落 - 線上支付</title>
+  <!-- Google Fonts: Noto Sans TC & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-forest-payment.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 線上支付頁面容器 -->
+  <div class="crm-forest-payment" data-node-id="1:4668">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="線上支付" data-back="crm-forest-reserve.html"></div>
+
+    <!-- 支付方式選擇區域 -->
+    <div class="payment-section" data-node-id="1:4670">
+
+      <!-- 區塊標題 -->
+      <div class="section-header" data-node-id="1:4671">
+        <img class="section-icon" src="assets/payment-icon.svg" alt="" data-node-id="1:4672" loading="lazy">
+        <span data-node-id="1:4676">請選擇支付方式</span>
+      </div>
+
+      <!-- 信用卡選項（預設選取） -->
+      <label class="payment-option" data-node-id="1:4677">
+        <div class="option-left">
+          <input type="radio" name="paymentMethod" value="credit-card" checked>
+          <span class="radio-custom"></span>
+          <span class="option-label" data-node-id="1:4680">信用卡</span>
+        </div>
+        <div class="option-right" data-node-id="1:4681">
+          <img class="brand-logo brand-visa" src="assets/visa-logo.png" alt="VISA" loading="lazy">
+          <img class="brand-logo brand-mastercard" src="assets/mastercard-logo.png" alt="Mastercard" loading="lazy">
+        </div>
+      </label>
+
+      <!-- LINE PAY 選項 -->
+      <label class="payment-option" data-node-id="196:1746">
+        <div class="option-left">
+          <input type="radio" name="paymentMethod" value="line-pay">
+          <span class="radio-custom"></span>
+          <span class="option-label" data-node-id="196:1763">LINE PAY</span>
+        </div>
+        <div class="option-right" data-node-id="196:1750">
+          <img class="brand-logo brand-linepay" src="assets/linepay-logo.png" alt="LINE Pay" data-node-id="196:1759" loading="lazy">
+        </div>
+      </label>
+
+      <!-- ATM 虛擬帳號轉帳選項 -->
+      <label class="payment-option" data-node-id="196:1739">
+        <div class="option-left">
+          <input type="radio" name="paymentMethod" value="atm">
+          <span class="radio-custom"></span>
+          <span class="option-label" data-node-id="196:1742">ATM 虛擬帳號轉帳</span>
+        </div>
+      </label>
+
+    </div>
+
+    <!-- 底部按鈕區域 -->
+    <div class="payment-footer" data-node-id="1:4693">
+      <button class="btn-confirm" id="btnConfirm" data-node-id="1:4694">確認</button>
+      <button class="btn-cancel" id="btnCancel" data-node-id="1:4696">取消</button>
+    </div>
+
+  </div>
+
+  <!-- 頁面互動邏輯 -->
+  <!-- 共用頂部導覽列元件 -->
+
+  <script src="js/crm-header.js" defer></script>
+
+  <script src="js/crm-forest-payment.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

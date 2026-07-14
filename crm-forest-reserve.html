@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>森林聚落 - 報名預約</title>
+  <!-- Google Fonts: Noto Sans TC & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-forest-reserve.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 森林聚落報名預約頁面容器 -->
+  <div class="crm-forest-reserve" data-node-id="1:4606">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="森林聚落" data-back="crm-forest-detail.html"></div>
+
+    <!-- 主要內容區域（可捲動） -->
+    <div class="reserve-content">
+
+      <!-- 活動資訊卡片 -->
+      <div class="reserve-card">
+
+        <!-- 活動圖片 -->
+        <div class="reserve-image">
+          <img id="reserveImage" src="assets/event-image-forest.png" alt="活動圖片" loading="lazy">
+        </div>
+
+        <!-- 卡片內容區 -->
+        <div class="reserve-card-body">
+
+          <!-- 狀態標籤與活動名稱 -->
+          <div class="reserve-event-header">
+            <span class="status-badge status-available">可預約</span>
+            <h2 class="reserve-event-title" id="reserveTitle">打開植深館｜Into the Forest Living</h2>
+          </div>
+
+          <!-- 活動詳細資訊（日期、地點、費用） -->
+          <div class="reserve-meta">
+            <div class="meta-row">
+              <img class="meta-icon" src="assets/calendar-icon.svg" alt="" loading="lazy">
+              <span id="reserveDate">2025/12/05 - 2026/03/31</span>
+            </div>
+            <div class="meta-row">
+              <img class="meta-icon meta-icon-location" src="assets/location-icon.svg" alt="" loading="lazy">
+              <span id="reserveLocation">陸府植深館1</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-price-symbol">$</span>
+              <span id="reservePrice">＄600元 / 人</span>
+            </div>
+          </div>
+
+          <!-- 限制提示 -->
+          <div class="reserve-notice" id="reserveNotice">
+            一戶僅可報名 2 位
+          </div>
+
+          <!-- 報名人數 -->
+          <div class="form-group">
+            <label class="form-label">
+              報名人數<span class="required">＊</span>
+            </label>
+            <div class="select-wrapper">
+              <select class="form-select" id="reserveCount">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+              </select>
+              <img class="select-arrow" src="assets/select-arrow.svg" alt="">
+            </div>
+          </div>
+
+          <!-- 是否索取收據（僅付費活動顯示） -->
+          <div class="form-group" id="receiptGroup">
+            <label class="form-label">是否索取收據</label>
+            <div class="radio-group">
+              <label class="radio-item">
+                <input type="radio" name="receipt" value="yes" class="radio-input" checked>
+                <span class="radio-circle">
+                  <img class="radio-dot" src="assets/radio-dot.svg" alt="" loading="lazy">
+                </span>
+                <span class="radio-text">是</span>
+              </label>
+              <label class="radio-item">
+                <input type="radio" name="receipt" value="no" class="radio-input">
+                <span class="radio-circle">
+                  <img class="radio-dot" src="assets/radio-dot.svg" alt="" loading="lazy">
+                </span>
+                <span class="radio-text">否</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 分隔線 -->
+        <div class="reserve-divider"></div>
+
+        <!-- 費用摘要 -->
+        <div class="reserve-summary">
+          <div class="summary-row">
+            <span>報名費用</span>
+            <span id="summaryUnitPrice">＄600元 / 人</span>
+          </div>
+          <!-- 共計（僅付費活動顯示） -->
+          <div class="summary-row" id="summaryTotalRow">
+            <span>共計</span>
+            <span id="summaryTotal">＄1200 元</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 底部操作按鈕（固定在底部） -->
+    <div class="reserve-footer">
+      <button class="btn-submit" id="btnSubmit">
+        確認提交預約
+      </button>
+    </div>
+
+  </div>
+
+  <!-- 場次選擇 Overlay -->
+  <div class="session-picker-overlay" id="sessionPickerOverlay">
+    <div class="session-picker-sheet">
+      <div class="session-picker-header">
+        <span class="session-picker-title">選擇場次</span>
+        <button class="session-picker-close" id="sessionPickerClose" aria-label="關閉">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M1 1l16 16M17 1L1 17" stroke="#3a4246" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="session-picker-notice">＊顯示依據最終結果為主</p>
+      <div class="session-picker-list" id="sessionPickerList"></div>
+      <div class="session-picker-error" id="sessionPickerError"></div>
+      <div class="session-picker-footer">
+        <button class="btn-submit session-confirm-btn" id="sessionPickerConfirm" disabled>確認場次</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 頁面互動邏輯 -->
+  <!-- 共用頂部導覽列元件 -->
+
+  <script src="js/crm-header.js" defer></script>
+
+  <script src="js/crm-forest-reserve.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

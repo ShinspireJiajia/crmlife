@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>綠海養護 - 繳費資訊</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-green-care-payment.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 繳費資訊頁面容器 -->
+  <div class="crm-green-payment" data-node-id="1:3567">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="1:3568">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="A 棟 3F-1" data-back="crm-green-care.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" data-node-id="1:3569">
+
+      <!-- 合約基本資訊 -->
+      <div class="contract-meta" data-node-id="274:2988">
+        <p data-node-id="274:2989">
+          <span class="meta-label">合約代碼</span><span class="meta-value">｜GS-2026-001</span>
+        </p>
+        <p data-node-id="274:2990">
+          <span class="meta-label">合約期間</span><span class="meta-value">｜2026/01/01-2026/12/31</span>
+        </p>
+        <p data-node-id="274:2991">
+          <span class="meta-label">剩餘次數</span><span class="meta-value">｜5次</span>
+        </p>
+      </div>
+
+      <!-- 繳費資訊標題 -->
+      <div class="section-header" data-node-id="1:3570">
+        <img class="section-icon" src="assets/icon-payment-info.svg" alt="" data-node-id="1:3572" loading="lazy">
+        <span class="section-title" data-node-id="1:3576">繳費資訊</span>
+      </div>
+
+      <!-- 繳費卡片列表 -->
+
+      <!-- 第一季（已付款） -->
+      <div class="payment-card" data-node-id="1:3581">
+        <div class="card-header" data-node-id="1:3582">
+          <div class="card-title-wrap" data-node-id="1:3583">
+            <p class="card-title" data-node-id="1:3584">001 / 第一季</p>
+          </div>
+          <img class="chevron-icon" src="assets/chevron-right-gold.svg" alt="" data-node-id="1:3585" loading="lazy">
+        </div>
+        <div class="card-body" data-node-id="1:3586">
+          <div class="amount-row" data-node-id="1:3587">
+            <span class="amount-label" data-node-id="1:3588">應繳金額</span>
+            <span class="amount-value" data-node-id="1:3589">＄50,000</span>
+          </div>
+          <div class="date-row" data-node-id="1:3590">
+            <span class="date-label" data-node-id="1:3591">繳款日期 2025/01/06</span>
+            <span class="status-badge status-paid" data-node-id="1:3592">
+              <span data-node-id="1:3593">已付款</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二季（已付款） -->
+      <div class="payment-card" data-node-id="1:3594">
+        <div class="card-header" data-node-id="1:3595">
+          <div class="card-title-wrap" data-node-id="1:3596">
+            <p class="card-title" data-node-id="1:3597">002 / 第二季</p>
+          </div>
+          <img class="chevron-icon" src="assets/chevron-right-gold.svg" alt="" data-node-id="1:3598" loading="lazy">
+        </div>
+        <div class="card-body" data-node-id="1:3599">
+          <div class="amount-row" data-node-id="1:3600">
+            <span class="amount-label" data-node-id="1:3601">應繳金額</span>
+            <span class="amount-value" data-node-id="1:3602">＄50,000</span>
+          </div>
+          <div class="date-row" data-node-id="1:3603">
+            <span class="date-label" data-node-id="1:3604">繳款日期 2025/04/06</span>
+            <span class="status-badge status-paid" data-node-id="1:3605">
+              <span data-node-id="1:3606">已付款</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第三季（未繳款 - 紅色） -->
+      <div class="payment-card" data-node-id="1:3607">
+        <div class="card-header" data-node-id="1:3608">
+          <div class="card-title-wrap" data-node-id="1:3609">
+            <p class="card-title" data-node-id="1:3610">003 / 第三季</p>
+          </div>
+          <img class="chevron-icon" src="assets/chevron-right-gold.svg" alt="" data-node-id="1:3611" loading="lazy">
+        </div>
+        <div class="card-body" data-node-id="1:3612">
+          <div class="amount-row" data-node-id="1:3613">
+            <span class="amount-label" data-node-id="1:3614">應繳金額</span>
+            <span class="amount-value" data-node-id="1:3615">＄50,000</span>
+          </div>
+          <div class="date-row" data-node-id="1:3616">
+            <span class="date-label" data-node-id="1:3617">繳款日期 2024/07/06</span>
+            <span class="status-badge status-unpaid-overdue" data-node-id="1:3618">
+              <span data-node-id="1:3619">未繳款</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第四季（未繳款 - 橘色） -->
+      <div class="payment-card" data-node-id="1:3620">
+        <div class="card-header" data-node-id="1:3621">
+          <div class="card-title-wrap" data-node-id="1:3622">
+            <p class="card-title" data-node-id="1:3623">004 / 第四季</p>
+          </div>
+          <img class="chevron-icon" src="assets/chevron-right-gold.svg" alt="" data-node-id="1:3624" loading="lazy">
+        </div>
+        <div class="card-body" data-node-id="1:3625">
+          <div class="amount-row" data-node-id="1:3626">
+            <span class="amount-label" data-node-id="1:3627">應繳金額</span>
+            <span class="amount-value" data-node-id="1:3628">＄50,000</span>
+          </div>
+          <div class="date-row" data-node-id="1:3629">
+            <span class="date-label" data-node-id="1:3630">繳款日期 2024/07/06</span>
+            <span class="status-badge status-unpaid" data-node-id="1:3631">
+              <span data-node-id="1:3632">未繳款</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-green-payment -->
+
+  <!-- 頁面互動邏輯 -->
+  <!-- 共用頂部導覽列元件 -->
+
+  <script src="js/crm-header.js" defer></script>
+
+  <script src="js/crm-green-care-payment.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

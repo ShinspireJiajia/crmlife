@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>森林聚落 - 基金會活動</title>
+  <!-- Google Fonts: Noto Sans TC & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-forest-foundation-detail.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 基金會活動內頁容器 -->
+  <div class="crm-foundation-detail">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="美學活動" data-back="crm-forest-list.html"></div>
+
+    <!-- 主要內容區域（可捲動） -->
+    <div class="detail-content" id="detailContent">
+
+      <!-- 活動橫幅圖片（手機版 800x450） -->
+      <div class="detail-banner">
+        <div class="detail-banner-img" id="detailBannerImg">
+          <img src="assets/event-image-forest.png" alt="活動圖片" loading="lazy">
+        </div>
+      </div>
+
+      <!-- 活動標題區 -->
+      <div class="detail-header">
+        <!-- 分類標籤 -->
+        <div class="detail-badges">
+          <span class="category-badge category-foundation">陸府基金會</span>
+        </div>
+        <!-- 活動標題 -->
+        <h1 class="detail-title" id="detailTitle">聆聽寂靜：追尋自然聲景</h1>
+        <!-- 副標題 -->
+        <p class="detail-subtitle" id="detailSubtitle">台灣聲景協會 創辦人．范欽慧</p>
+      </div>
+
+      <!-- 活動資訊卡片 -->
+      <div class="detail-info-card">
+        <!-- 活動地點 -->
+        <div class="info-item">
+          <div class="info-icon">
+            <img src="assets/location-icon.svg" alt="" loading="lazy">
+          </div>
+          <div class="info-content">
+            <span class="info-label" id="detailLocationName">植深館</span>
+            <span class="info-value" id="detailLocationAddr">臺中市南屯區公益路二段789號</span>
+          </div>
+          <a class="info-map-link" id="detailMapLink" href="#" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 6.667C14 11.333 8 15.333 8 15.333S2 11.333 2 6.667a6 6 0 1 1 12 0Z" stroke="#b8a676" stroke-width="1.2"/><circle cx="8" cy="6.667" r="2" stroke="#b8a676" stroke-width="1.2"/></svg>
+            <span>地圖</span>
+          </a>
+        </div>
+        <!-- 活動費用 -->
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3.5" width="11" height="7" rx="1" stroke="#3a4246" stroke-width="1.2"/><circle cx="7" cy="7" r="1.5" stroke="#3a4246" stroke-width="1.2"/></svg>
+          </div>
+          <div class="info-content">
+            <span class="info-label">活動費用</span>
+            <span class="info-value info-value-price" id="detailFee">200元/位</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 活動內容描述 -->
+      <div class="detail-description" id="detailDescription">
+        <p>晨曦逐漸照亮原野，鐵杉林上，顴胸鶇簡輕聲嘶啞，冠羽畫眉喋喋咕咕，聆聽自然聲景，是一位野地錄音師的日常體會。</p>
+        <p>&nbsp;</p>
+        <p>活動邀請促成臺灣與國際接軌，成功爭取宜蘭翠峰湖環山步道成為全球第一條寂靜山徑的野地錄音師．范欽慧，分享如何打開感官聆聽自然和鳴中的「寂靜」，在高度視覺化時代裡，創造身體與聲音的互動連結，探索聲景文化，感受聲命力。</p>
+      </div>
+
+      <!-- 內容圖片 gallery -->
+      <div class="detail-gallery" id="detailGallery">
+        <div class="gallery-item">
+          <img src="assets/event-image-forest.png" alt="活動照片" loading="lazy">
+          <p class="gallery-caption">圖片說明</p>
+        </div>
+        <div class="gallery-item gallery-item-video">
+          <img src="assets/event-image-nature.png" alt="影片預覽" loading="lazy">
+          <div class="gallery-play-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" fill="rgba(0,0,0,0.4)"/><path d="M12 9l12 7-12 7V9z" fill="#fff"/></svg>
+          </div>
+          <p class="gallery-caption">影片示範</p>
+        </div>
+      </div>
+
+      <!-- YouTube 影片嵌入 -->
+      <div class="detail-video" id="detailVideo" style="display: none;">
+        <div class="video-wrapper">
+          <iframe id="detailVideoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- 注意事項 -->
+      <div class="detail-section" id="detailNoticeSection">
+        <h3 class="section-title">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#3a4246" stroke-width="1.2"/><path d="M7 4.5v3M7 9.5h.007" stroke="#3a4246" stroke-width="1.2" stroke-linecap="round"/></svg>
+          注意事項
+        </h3>
+        <div class="section-content" id="detailNotice">
+          <ul>
+            <li>完成報名繳費後請恕無法取消報名</li>
+            <li>每場次開放報名至額滿截止</li>
+            <li>主辦單位將視疫情，保留調整活動舉辦方式之彈性</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 圖片燈箱 -->
+    <div class="gallery-lightbox" id="galleryLightbox">
+      <div class="lightbox-overlay" id="lightboxOverlay"></div>
+      <button class="lightbox-close" id="lightboxClose" aria-label="關閉">&#215;</button>
+      <div class="lightbox-container">
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <button class="lightbox-btn lightbox-prev" id="lightboxPrev">&#8249;</button>
+        <button class="lightbox-btn lightbox-next" id="lightboxNext">&#8250;</button>
+      </div>
+      <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+
+    <!-- 底部操作按鈕（固定在底部） -->
+    <div class="detail-footer">
+      <button class="btn-action btn-action-available" id="btnAction">
+        活動報名
+      </button>
+    </div>
+
+  </div>
+
+  <!-- 頁面互動邏輯 -->
+  <!-- 共用頂部導覽列元件 -->
+  <script src="js/crm-header.js" defer></script>
+  <script src="js/crm-forest-foundation-detail.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>服務預約</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-life-service-booking.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 服務預約頁面容器 -->
+  <div class="crm-life-service-booking">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="服務預約" data-back="crm-life-service-list.html"></div>
+
+    <!-- 頂部導覽列佔位 -->
+    <div class="header-spacer"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="booking-main-content">
+
+      <!-- 商家資訊區塊 -->
+      <div class="merchant-hero">
+        <div class="merchant-hero-img-wrap">
+          <img class="merchant-hero-img" id="merchantHeroImg" src="" alt="">
+          <span class="merchant-hero-badge" id="merchantHeroBadge"></span>
+        </div>
+        <div class="merchant-hero-info">
+          <h2 class="merchant-hero-name" id="merchantHeroName"></h2>
+          <p class="merchant-hero-tagline" id="merchantHeroTagline"></p>
+        </div>
+      </div>
+
+      <!-- 優惠提示框 -->
+      <div class="book-promo-box">
+        <div class="book-promo-title">🎁 社區住戶專屬優惠</div>
+        <div class="book-promo-desc" id="bookPromoDesc"></div>
+      </div>
+
+      <!-- 服務內容說明區塊 -->
+      <div class="service-detail-section">
+        <div class="section-title">服務內容說明</div>
+        <div class="service-detail-body" id="serviceDetailBody">
+          <!-- 服務說明文字 -->
+          <div class="service-detail-desc" id="serviceDetailDesc"></div>
+          <!-- 服務亮點 -->
+          <div class="service-highlights" id="serviceHighlights"></div>
+        </div>
+      </div>
+
+      <!-- 服務項目與價格 -->
+      <div class="service-pricing-section">
+        <div class="section-title">服務項目與價格</div>
+        <div class="book-service-selection" id="bookServiceSelection">
+          <!-- 由 JS 動態產生 -->
+        </div>
+      </div>
+
+      <!-- 底部按鈕佔位（避免內容被常駐列遮擋） -->
+      <div class="bottom-bar-spacer"></div>
+
+    </div>
+    <!-- /booking-main-content -->
+
+    <!-- 底部常駐「立即預約」列 -->
+    <div class="sticky-book-bar" id="stickyBookBar">
+      <div class="sticky-bar-inner">
+        <div class="sticky-bar-info">
+          <span class="sticky-bar-hint" id="stickyBarHint">請選擇服務項目</span>
+          <span class="sticky-bar-selected" id="stickyBarSelected" style="display:none;">
+            <span class="sticky-selected-name" id="stickySelectedName"></span>
+            <span class="sticky-selected-price" id="stickySelectedPrice"></span>
+          </span>
+        </div>
+        <button class="sticky-book-btn" id="stickyBookBtn" disabled>立即預約</button>
+      </div>
+    </div>
+
+  </div>
+  <!-- /crm-life-service-booking -->
+
+  <!-- 預約申請 Modal 遮罩 -->
+  <div class="book-modal-overlay" id="bookModalOverlay">
+    <div class="book-modal-container">
+
+      <!-- 標頭 -->
+      <div class="book-modal-header">
+        <h2>預約申請</h2>
+        <button class="book-modal-close" id="bookModalClose">&times;</button>
+      </div>
+
+      <!-- 內容區（可捲動） -->
+      <div class="book-modal-body">
+
+        <!-- 已選服務項目摘要 -->
+        <div class="modal-service-summary" id="modalServiceSummary">
+          <div class="modal-summary-label">預約服務項目</div>
+          <div class="modal-summary-row">
+            <span class="modal-summary-name" id="modalSummaryName"></span>
+            <span class="modal-summary-price" id="modalSummaryPrice"></span>
+          </div>
+        </div>
+
+        <!-- 表單 -->
+        <form id="bookForm">
+
+          <!-- 預約基本資訊 -->
+          <div class="book-form-row">
+            <div class="book-form-group">
+              <label>戶 別 <span class="required">*</span></label>
+              <input type="text" value="A3-3" readonly class="book-input readonly">
+            </div>
+            <div class="book-form-group">
+              <label>姓 名 <span class="required">*</span></label>
+              <input type="text" placeholder="王小明" required class="book-input">
+            </div>
+          </div>
+
+          <div class="book-form-group" style="margin-bottom: 12px;">
+            <label>聯絡電話 <span class="required">*</span></label>
+            <input type="tel" placeholder="0912-345-678" required class="book-input">
+          </div>
+
+          <div class="book-form-row">
+            <div class="book-form-group">
+              <label>預計預約日期 <span class="required">*</span></label>
+              <input type="date" required class="book-input">
+            </div>
+            <div class="book-form-group">
+              <label>聯絡時段 <span class="required">*</span></label>
+              <select required class="book-input">
+                <option value="">請選擇</option>
+                <option value="morning">上午 (09:00 - 12:00)</option>
+                <option value="afternoon">下午 (13:30 - 17:30)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="book-form-group">
+            <label>備註</label>
+            <textarea class="book-input" id="bookTextarea" placeholder="請輸入備註事項..."></textarea>
+          </div>
+
+          <div class="book-checkbox-group">
+            <input type="checkbox" id="bookAgree" required>
+            <label for="bookAgree">我同意提供上述資料進行預約申請。我明白實際服務項目與細節，將以雙方後續聯繫確認的內容為準。</label>
+          </div>
+
+          <button type="submit" class="book-submit-btn">立即送出預約</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <!-- /預約申請 Modal -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-header.js"></script>
+  <script src="js/crm-life-service-booking.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

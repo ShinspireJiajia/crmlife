@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>預約綠海養護</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-green-care-reserve.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 預約綠海養護頁面容器 -->
+  <div class="crm-green-reserve" data-node-id="1:3339">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="1:3340">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="預約綠海養護" data-back="crm-green-care.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="form-content" data-node-id="1:3341">
+
+      <!-- 合約摘要資訊區 -->
+      <div class="contract-summary" data-node-id="1:3342">
+        <div class="summary-info" data-node-id="1:3343">
+          <p data-node-id="1:3344">
+            <span class="info-label">合約代碼</span><span class="info-value">｜GS-2024-001</span>
+          </p>
+          <p data-node-id="1:3345">
+            <span class="info-label">合約期間</span><span class="info-value">｜2024/01/01-2024/12/31</span>
+          </p>
+          <p data-node-id="1:3346">
+            <span class="info-label">剩餘次數</span><span class="info-value">｜5次</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- 表單欄位 -->
+      <form class="form-fields" id="reserveForm" data-node-id="1:3347">
+
+        <!-- 建案 -->
+        <div class="form-group" data-node-id="1:3348">
+          <p class="form-label" data-node-id="1:3349">
+            建案<span class="required">＊</span>
+          </p>
+          <div class="form-select-wrapper">
+            <select class="form-select" id="project" name="project" required data-node-id="1:3350">
+              <option value="">請選擇建案</option>
+              <option value="greenocean" selected>綠海建案</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 戶別 -->
+        <div class="form-group" data-node-id="1:3351">
+          <p class="form-label" data-node-id="1:3352">
+            戶別 <span class="required">＊</span>
+          </p>
+          <div class="form-select-wrapper">
+            <select class="form-select" id="unit" name="unit" required data-node-id="1:3353">
+              <option value="">請選擇戶別</option>
+              <option value="B1" selected>B1</option>
+              <option value="B2">B2</option>
+              <option value="B3">B3</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 日期 -->
+        <div class="form-group" data-node-id="1:3357">
+          <p class="form-label" data-node-id="1:3358">
+            日期 <span class="required">＊</span>
+          </p>
+          <div class="form-date-wrapper">
+            <input type="date" class="form-date" id="reserveDate" name="reserveDate" required placeholder="年/月/日" data-node-id="1:3359">
+            <img class="calendar-icon" src="assets/calendar-icon.svg" alt="" data-node-id="1:3361" loading="lazy">
+          </div>
+        </div>
+
+        <!-- 時段 -->
+        <div class="form-group" data-node-id="1:3368">
+          <p class="form-label" data-node-id="1:3369">
+            時段 <span class="required">＊</span>
+          </p>
+          <div class="form-select-wrapper">
+            <select class="form-select" id="timeSlot" name="timeSlot" required data-node-id="1:3370">
+              <option value="">請選擇時段</option>
+              <option value="morning">上午 09:00-12:00</option>
+              <option value="afternoon">下午 13:00-17:00</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 備註事項 -->
+        <div class="form-group" data-node-id="1:3371">
+          <p class="form-label" data-node-id="1:3372">
+            備註事項
+          </p>
+          <textarea class="form-textarea" id="remark" name="remark" placeholder="請輸入其他備註事項" data-node-id="1:3373"></textarea>
+        </div>
+
+      </form>
+
+      <!-- 底部按鈕區 -->
+      <div class="form-actions" data-node-id="1:3374">
+        <button class="btn btn-leave" id="btnLeave" data-node-id="1:3375">
+          離開
+        </button>
+        <button class="btn btn-confirm" id="btnConfirm" data-node-id="1:3377">
+          確認建立
+        </button>
+      </div>
+
+    </div>
+    <!-- /form-content -->
+
+  </div>
+  <!-- /crm-green-reserve -->
+
+  <!-- 頁面互動邏輯 -->
+  <!-- 共用頂部導覽列元件 -->
+
+  <script src="js/crm-header.js" defer></script>
+
+  <script src="js/crm-green-care-reserve.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

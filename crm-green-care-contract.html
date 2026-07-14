@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>綠海養護 - 合約資訊</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/signature-pad.css">
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-green-care-contract.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 綠海養護合約資訊頁面容器 -->
+  <div class="crm-green-contract" data-node-id="1:3164">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="1:3165">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="檢視紀錄" data-back="crm-green-care.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" data-node-id="1:3166">
+
+      <!-- ====== 合約資訊分頁內容 ====== -->
+      <div class="tab-content active" id="tabContractInfo">
+        <div class="contract-info-card" data-node-id="1:3168">
+
+          <!-- 合約基本資訊 -->
+          <div class="contract-meta" data-node-id="1:3169">
+            <p data-node-id="1:3170">
+              <span class="meta-label">合約主旨</span><span class="meta-value">｜2025年度養護合約</span>
+            </p>
+            <p data-node-id="1:3171">
+              <span class="meta-label">合約代碼</span><span class="meta-value">｜GS-2026-001</span>
+            </p>
+            <p data-node-id="1:3172">
+              <span class="meta-label">合約期間</span><span class="meta-value">｜2026/01/01~2026/12/31</span>
+            </p>
+            <p data-node-id="1:3173">
+              <span class="meta-label">維護次數</span><span class="meta-value">｜12次</span>
+            </p>
+          </div>
+
+          <!-- 下載合約按鈕 -->
+          <button class="btn-download" id="btnDownload" data-node-id="123:205">
+            下載合約
+          </button>
+
+          <!-- 分隔線 -->
+          <div class="divider" data-node-id="1:3174"></div>
+
+          <!-- 合約文件預覽區（可滾動） -->
+          <div class="contract-document-wrap" data-node-id="1:3175">
+            <div class="contract-document-scroll">
+              <img class="contract-document-img" src="assets/contract-document.png" alt="合約文件" loading="lazy">
+            </div>
+            <!-- 自訂捲軸指示器 -->
+            <div class="scroll-track" data-node-id="1:3179">
+              <div class="scroll-thumb" id="scrollThumb" data-node-id="1:3181"></div>
+            </div>
+          </div>
+
+          <!-- 簽名區塊（由共用元件動態產生） -->
+          <div id="signatureMount"></div>
+
+        </div>
+      </div>
+
+      <!-- ====== 房屋資訊分頁內容（佔位） ====== -->
+      <div class="tab-content" id="tabHouseInfo">
+        <div class="tab-placeholder">
+          <p>房屋資訊內容</p>
+        </div>
+      </div>
+
+      <!-- ====== 合約紀錄分頁內容（佔位） ====== -->
+      <div class="tab-content" id="tabContractRecord">
+        <div class="tab-placeholder">
+          <p>合約紀錄內容</p>
+        </div>
+      </div>
+
+      <!-- ====== 履約款項分頁內容（佔位） ====== -->
+      <div class="tab-content" id="tabPayment">
+        <div class="tab-placeholder">
+          <p>履約款項內容</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-green-contract -->
+
+  <!-- 頁面互動邏輯 -->
+  <script src="js/signature-pad.js" defer></script>
+  <!-- 共用頂部導覽列元件 -->
+
+  <script src="js/crm-header.js" defer></script>
+
+  <script src="js/crm-green-care-contract.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

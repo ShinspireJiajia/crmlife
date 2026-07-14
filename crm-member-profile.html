@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員資料</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-member-profile.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 會員資料頁面容器 -->
+  <div class="crm-member-profile" data-node-id="288:274">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="會員資料" data-back="crm-member-center.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <!-- 表單區域 -->
+      <form class="profile-form" id="profileForm" novalidate>
+
+        <!-- 會員姓名 -->
+        <div class="form-group">
+          <label class="form-label">會員姓名</label>
+          <div class="form-field">
+            <input type="text" class="form-input" id="memberName" value="liu jiayun" readonly>
+          </div>
+        </div>
+
+        <!-- 身分證字號 -->
+        <div class="form-group">
+          <label class="form-label">身分證字號</label>
+          <div class="form-field">
+            <input type="text" class="form-input" id="memberId" value="F＊＊＊＊＊＊＊＊＊" readonly>
+          </div>
+        </div>
+
+        <!-- 性別 -->
+        <div class="form-group">
+          <label class="form-label">性別</label>
+          <div class="radio-group" id="genderGroup">
+            <label class="radio-item">
+              <input type="radio" name="gender" value="male" disabled>
+              <span class="radio-circle"></span>
+              <span class="radio-text">男</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="gender" value="female" checked disabled>
+              <span class="radio-circle"></span>
+              <span class="radio-text">女</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 生日 -->
+        <div class="form-group">
+          <label class="form-label">生日</label>
+          <div class="form-field field-with-icon">
+            <input type="text" class="form-input" id="memberBirthday" placeholder="年/月/日" readonly>
+            <img class="field-icon" src="assets/calendar-icon.svg" alt="選擇日期" loading="lazy">
+            <!-- 隱藏的 date input，供編輯模式使用 -->
+            <input type="date" class="date-picker-hidden" id="memberBirthdayPicker" tabindex="-1">
+          </div>
+        </div>
+
+        <!-- 電話(住) -->
+        <div class="form-group">
+          <label class="form-label">電話(住)</label>
+          <div class="form-field">
+            <input type="tel" class="form-input" id="memberPhoneHome" placeholder="請輸入住家電話" readonly>
+          </div>
+        </div>
+
+        <!-- 電話(辦) -->
+        <div class="form-group">
+          <label class="form-label">電話(辦)</label>
+          <div class="form-field">
+            <input type="tel" class="form-input" id="memberPhoneOffice" placeholder="請輸入辦公電話" readonly>
+          </div>
+        </div>
+
+        <!-- 其他電話 -->
+        <div class="form-group">
+          <label class="form-label">其他電話</label>
+          <div class="form-field">
+            <input type="tel" class="form-input" id="memberPhoneOther" placeholder="請輸入其他電話" readonly>
+          </div>
+        </div>
+
+        <!-- 行動電話 -->
+        <div class="form-group">
+          <label class="form-label">行動電話</label>
+          <div class="form-field">
+            <input type="tel" class="form-input" id="memberMobile" value="0989025370" readonly>
+          </div>
+        </div>
+
+        <!-- 電子郵件(住) -->
+        <div class="form-group">
+          <label class="form-label">電子郵件(住)</label>
+          <div class="form-field">
+            <input type="email" class="form-input" id="memberEmail" value="jia.liu@shinda.com.tw" readonly>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- 按鈕區域：檢視模式 -->
+      <div class="btn-area" id="viewModeButtons">
+        <button type="button" class="btn-edit" id="btnEdit">修改</button>
+      </div>
+
+      <!-- 按鈕區域：編輯模式（初始隱藏） -->
+      <div class="btn-area btn-area-edit hidden" id="editModeButtons">
+        <button type="button" class="btn-cancel" id="btnCancel">離開</button>
+        <button type="button" class="btn-confirm" id="btnConfirm">確認變更</button>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-member-profile -->
+
+  <!-- 共用頂部導覽列元件 -->
+
+
+  <script src="js/crm-header.js" defer></script>
+
+
+  <!-- JavaScript -->
+  <script src="js/crm-member-profile.js" defer></script>
+
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

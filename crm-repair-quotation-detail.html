@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>報價單內容</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-repair-quotation-detail.css">
+
+  <!-- Loading 遮罩 inline 樣式 -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 報價單內容頁面容器 -->
+  <div class="crm-quotation-detail">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="報價單內容" data-back="javascript:history.back()"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="quotation-content">
+
+      <!-- 報價單標題卡片 -->
+      <div class="quotation-header-card">
+        <div class="quotation-title-row">
+          <h2 class="quotation-title">報 價 單</h2>
+          <div class="quotation-badge" id="quotationStatusBadge">
+            <span>待確認</span>
+          </div>
+        </div>
+        <p class="quotation-no-row">
+          <span class="q-label">報價單號</span>
+          <span class="q-value" id="displayQuotationNo">GC-20251204-0001-Q1</span>
+        </p>
+      </div>
+
+      <!-- 基本資訊卡片 -->
+      <div class="info-card">
+        <p class="card-section-title">基本資訊</p>
+        <div class="info-rows">
+          <p class="info-row">
+            <span class="info-label">客戶名稱</span>
+            <span class="info-value" id="infoCustomer">王大明</span>
+          </p>
+          <p class="info-row">
+            <span class="info-label">建案名稱</span>
+            <span class="info-value" id="infoProject">綠海建案</span>
+          </p>
+          <p class="info-row">
+            <span class="info-label">戶　　別</span>
+            <span class="info-value" id="infoUnit">A3-3</span>
+          </p>
+          <p class="info-row">
+            <span class="info-label">報價日期</span>
+            <span class="info-value" id="infoDate">2025/12/04</span>
+          </p>
+          <p class="info-row">
+            <span class="info-label">有效期限</span>
+            <span class="info-value" id="infoValidDate">2026/01/03</span>
+          </p>
+          <p class="info-row">
+            <span class="info-label">關聯個案</span>
+            <span class="info-value" id="infoCaseNo">GC-20251204-0001</span>
+          </p>
+        </div>
+        <div class="info-desc">
+          <p class="desc-label">報價單說明</p>
+          <p class="desc-value" id="infoDescription">客廳浴室的洗手台水龍頭止水墊片老化更換，含工資與材料費。</p>
+        </div>
+      </div>
+
+      <!-- 報價明細卡片 -->
+      <div class="detail-card">
+        <p class="card-section-title">報價明細</p>
+        <div class="detail-table-wrap">
+          <table class="quotation-table">
+            <thead>
+              <tr>
+                <th class="th-no">項次</th>
+                <th class="th-item">品名規格</th>
+                <th class="th-qty">數量</th>
+                <th class="th-amount">金額</th>
+              </tr>
+            </thead>
+            <tbody id="quotationDetailBody">
+              <!-- 由 JS 動態產生 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 金額匯總卡片 -->
+      <div class="summary-card">
+        <div class="summary-row">
+          <span class="summary-label">小計</span>
+          <span class="summary-value" id="summarySubtotal">NT$ 15,000</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">稅金 (5%)</span>
+          <span class="summary-value" id="summaryTax">NT$ 750</span>
+        </div>
+        <div class="summary-row total-row">
+          <span class="summary-label">合計金額</span>
+          <span class="summary-value" id="summaryTotal">NT$ 15,750</span>
+        </div>
+      </div>
+
+      <!-- 備註卡片 -->
+      <div class="remark-card">
+        <p class="card-section-title">備註事項</p>
+        <ul class="remark-list">
+          <li>本報價單有效期限為 30 天。</li>
+          <li>施工期間如遇額外損壞需另行報價。</li>
+          <li>材料保固一年，工資保固三個月。</li>
+          <li>付款方式：線上刷卡 / LINE Pay / ATM 轉帳。</li>
+        </ul>
+      </div>
+
+      <!-- 底部返回按鈕 -->
+      <button class="btn-back-to-detail" id="btnBackToDetail">返回報修單</button>
+
+    </div>
+    <!-- /quotation-content -->
+
+  </div>
+  <!-- /crm-quotation-detail -->
+
+  <!-- 共用頂部導覽列元件 -->
+  <script src="js/crm-header.js" defer></script>
+  <script src="js/crm-repair-quotation-detail.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

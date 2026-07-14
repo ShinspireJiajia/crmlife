@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>檢視紀錄</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 共用簽名元件樣式 -->
+  <link rel="stylesheet" href="css/signature-pad.css">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-house-checkup-record.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 房屋健診檢視紀錄頁面容器 -->
+  <div class="crm-house-checkup-record" data-node-id="248:1811">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="248:1812">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="檢視紀錄" data-back="crm-house-checkup.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="record-content" data-node-id="248:1813">
+
+      <!-- 預約詳情卡片 -->
+      <div class="detail-card" data-node-id="248:1815">
+        <!-- 案件編號與狀態 -->
+        <div class="card-header" data-node-id="297:97">
+          <span class="card-number" data-node-id="297:98">20250808-001</span>
+          <span class="status-badge status-completed" data-node-id="297:99">已完成</span>
+        </div>
+        <!-- 活動說明區塊（由後端動態載入 HTML 內容） -->
+        <div class="activity-description" id="activityDescription">
+          <div class="activity-description-header">
+            <p class="activity-description-title">活動說明</p>
+          </div>
+          <div class="activity-description-body" id="activityDescriptionBody">
+            <!-- 此區塊內容由後端 API 提供，可包含任意 HTML -->
+            <p>一年一度壁癌健檢活動，由專業技師到府檢測，檢查項目包含：</p>
+            <ul>
+              <li>外牆滲漏檢測</li>
+              <li>室內壁癌評估</li>
+              <li>浴室防水狀態確認</li>
+              <li>窗框密封性檢查</li>
+            </ul>
+            <p>活動期間：2025/09/15 ~ 2025/09/30<br>服務時段：每日 09:00–17:00</p>
+          </div>
+        </div>
+
+        <!-- 案件資訊 -->
+        <div class="detail-list" data-node-id="248:1816">
+          <p class="detail-row" data-node-id="248:1817">
+            <span class="detail-label">建案</span>｜綠海建案(B1)
+          </p>
+
+          <p class="detail-row" data-node-id="248:1820">
+            <span class="detail-label">日期</span>｜2025/08/21
+          </p>
+          <p class="detail-row" data-node-id="248:1821">
+            <span class="detail-label">時段</span>｜10:00
+          </p>
+          <p class="detail-row" data-node-id="248:1822">
+            <span class="detail-label">姓名</span>｜林木木
+          </p>
+          <p class="detail-row" data-node-id="248:1823">
+            <span class="detail-label">手機</span>｜0988220229
+          </p>
+        </div>
+
+        <!-- 分隔線 -->
+        <div class="card-divider" data-node-id="248:1824">
+          <img src="assets/divider-line2.svg" alt="" loading="lazy">
+        </div>
+
+        <!-- 完工資訊 -->
+        <div class="completion-info" data-node-id="248:1825">
+          <p class="detail-row" data-node-id="248:1826">
+            <span class="detail-label">健檢完工日期</span>｜2025/08/22
+          </p>
+          <div class="note-content" data-node-id="248:1827">
+            <p class="note-title" data-node-id="248:1828">健檢完工說明</p>
+            <p class="note-text" data-node-id="248:1829">您的房屋健檢報告已完成，這份報告詳細記錄了您愛屋的各項檢查結果。</p>
+          </div>
+        </div>
+
+        <!-- 住戶簽名確認（由共用元件動態產生） -->
+        <div id="signatureMount" data-node-id="248:1830"></div>
+
+        <!-- 滿意度問卷按鈕 -->
+        <div class="survey-btn-wrapper" data-node-id="297:82">
+          <button class="btn-survey" id="btnSurvey" data-node-id="297:83">
+            <img class="star-icon" id="starIcon" src="assets/star-outline-icon.svg" alt="" data-node-id="297:84" loading="lazy">
+            <span data-node-id="297:85">請填寫滿意度問卷，謝謝</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 文件記錄下載區 -->
+      <div class="download-section" data-node-id="248:1840">
+        <div class="section-header" data-node-id="248:1841">
+          <img class="section-icon" src="assets/download-icon.svg" alt="" data-node-id="248:1842" loading="lazy">
+          <p class="section-title" data-node-id="248:1847">文件記錄下載區</p>
+        </div>
+        <div class="attachment-item" data-node-id="248:1848">
+          <p class="file-name" data-node-id="248:1849">房屋健檢報告.pdf</p>
+          <button class="download-btn" data-action="download" data-file="house-checkup-report.pdf" data-node-id="248:1850">
+            <img src="assets/download-btn.svg" alt="下載" loading="lazy">
+          </button>
+        </div>
+      </div>
+
+      <!-- 聯絡專員區 -->
+      <div class="chat-section" data-node-id="248:1852">
+        <div class="section-header" data-node-id="248:1853">
+          <img class="section-icon" src="assets/chat-icon.svg" alt="" data-node-id="248:1854" loading="lazy">
+          <p class="section-title" data-node-id="248:1859">聯絡專員</p>
+        </div>
+        <div class="chat-area" data-node-id="248:1860">
+          <div class="chat-messages" data-node-id="248:1861">
+            <!-- 第1則：使用者訊息 -->
+            <div class="chat-msg-user" data-node-id="248:1862">
+              <div class="msg-bubble" data-node-id="248:1863">請問大約什麼時候可以維修？</div>
+              <p class="msg-time" data-node-id="248:1865">2025/08/05 10:30 AM</p>
+            </div>
+            <!-- 第2則：專員回覆 -->
+            <div class="chat-msg-agent" data-node-id="248:1867">
+              <div class="msg-bubble" data-node-id="248:1868">您好，約下午會派維修人員過去</div>
+              <div class="attachment-item" data-node-id="248:1870">
+                <p class="file-name" data-node-id="248:1871">聯絡資訊.jpg</p>
+                <button class="download-btn" data-action="download" data-file="contact.jpg" data-node-id="248:1872">
+                  <img src="assets/download-btn2.svg" alt="下載" loading="lazy">
+                </button>
+              </div>
+              <p class="msg-sender" data-node-id="248:1874">王曉明 2025/08/05 10:30AM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /record-content -->
+
+  </div>
+  <!-- /crm-house-checkup-record -->
+
+  <!-- 共用簽名元件 -->
+  <script src="js/signature-pad.js" defer></script>
+  <!-- 共用頂部導覽列元件 -->
+
+  <script src="js/crm-header.js" defer></script>
+
+  <!-- JavaScript -->
+  <script src="js/crm-house-checkup-record.js" defer></script>
+
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

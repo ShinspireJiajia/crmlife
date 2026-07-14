@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>綁定身份</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-bind-identity.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 綁定身份頁面容器 -->
+  <div class="crm-bind-identity" data-node-id="1:2798">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="1:2799">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="綁定身份"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" data-node-id="1:2800">
+
+      <!-- 分類標籤列 -->
+      <div class="tab-bar" data-node-id="1:2819">
+        <button class="tab-item active" data-tab="register" data-node-id="1:2820">
+          <span data-node-id="1:2821">註冊戶別</span>
+        </button>
+        <button class="tab-item" data-tab="property" data-node-id="1:2822">
+          <span data-node-id="1:2823">物業人員管理</span>
+        </button>
+      </div>
+
+      <!-- 註冊戶別內容 -->
+      <div class="tab-content" id="tabRegister" data-node-id="1:2801">
+        <div class="menu-list">
+
+          <!-- 屋主註冊 -->
+          <div class="menu-item" id="btnOwnerRegister" data-node-id="1:2802">
+            <p class="menu-item-text" data-node-id="1:2803">屋主註冊</p>
+            <img class="menu-item-arrow" src="assets/chevron-right-gold.svg" alt="" data-node-id="1:2804" loading="lazy">
+          </div>
+
+          <!-- 分隔線 -->
+          <div class="menu-divider" data-node-id="1:2805"></div>
+
+          <!-- 住戶註冊 -->
+          <div class="menu-item" id="btnResidentRegister" data-node-id="1:2806">
+            <p class="menu-item-text" data-node-id="1:2807">住戶註冊</p>
+            <img class="menu-item-arrow" src="assets/chevron-right-gold.svg" alt="" data-node-id="1:2808" loading="lazy">
+          </div>
+
+          <!-- 分隔線 -->
+          <div class="menu-divider" data-node-id="1:2809"></div>
+
+          <!-- 物業人員註冊 -->
+          <div class="menu-item" id="btnPropertyRegister" data-node-id="1:2814">
+            <p class="menu-item-text" data-node-id="1:2815">物業人員註冊</p>
+            <img class="menu-item-arrow" src="assets/chevron-right-gold.svg" alt="" data-node-id="1:2816" loading="lazy">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 物業人員管理內容（預留） -->
+      <div class="tab-content hidden" id="tabProperty">
+        <div class="menu-list">
+          <div class="empty-state">
+            <div class="empty-icon">
+              <img src="assets/empty-record-icon.svg" alt="" loading="lazy">
+            </div>
+            <p class="empty-text">尚無資料</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-bind-identity -->
+
+  <!-- 共用頂部導覽列元件 -->
+
+
+  <script src="js/crm-header.js" defer></script>
+
+
+  <!-- JavaScript -->
+  <script src="js/crm-bind-identity.js" defer></script>
+
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

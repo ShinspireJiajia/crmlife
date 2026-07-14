@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>綠海養護 - 款項明細</title>
+  <!-- Google Fonts: Noto Sans TC & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-green-care-payment-detail.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 款項明細頁面容器 -->
+  <div class="crm-payment-detail" data-node-id="1:3651">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="款項明細" data-back="crm-green-care-payment.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <!-- ========== 已繳款時顯示：銀行帳號區塊 ========== -->
+      <div class="bank-account-card hidden" id="bankAccountCard" data-node-id="1:4060">
+        <div class="bank-label-wrap" data-node-id="1:4061">
+          <!-- 銀行卡圖示 -->
+          <div class="bank-icon" data-node-id="1:4062">
+            <div class="bank-icon-card"></div>
+            <div class="bank-icon-line"></div>
+            <span class="bank-icon-text">BANK</span>
+          </div>
+          <span class="bank-label" data-node-id="1:4066">帳號</span>
+        </div>
+        <span class="bank-account-number" id="bankAccountNumber" data-node-id="1:4067">7109-4521-3258</span>
+      </div>
+
+      <!-- ========== 款項資訊卡片 ========== -->
+      <div class="payment-info-card" data-node-id="1:3654">
+        <!-- 卡片標題列：期數 / 季 -->
+        <div class="card-header" data-node-id="1:3655">
+          <div class="card-title-wrap" data-node-id="1:3656">
+            <p class="card-title" id="paymentPeriod" data-node-id="1:3657">003 / 第三季</p>
+          </div>
+          <!-- 已付款標籤（已繳款時隱藏，因下方也有） -->
+          <div class="status-badge status-paid-header hidden" id="statusPaidHeader" data-node-id="1:3658">
+            <span>已付款</span>
+          </div>
+        </div>
+
+        <!-- 應繳金額列 -->
+        <div class="amount-row" data-node-id="1:3660">
+          <span class="amount-label" data-node-id="1:3661">應繳金額</span>
+          <span class="amount-value" id="amountValue" data-node-id="1:3662">＄50,000</span>
+        </div>
+
+        <!-- 繳款日期 + 狀態列 -->
+        <div class="date-row" data-node-id="1:3663">
+          <span class="date-label" id="paymentDate" data-node-id="1:3664">繳款日期 2025/07/06</span>
+          <!-- 未繳款狀態標籤 -->
+          <span class="status-badge status-unpaid" id="statusUnpaid" data-node-id="1:3665">
+            <span data-node-id="1:3666">未繳款</span>
+          </span>
+          <!-- 已付款狀態標籤（預設隱藏） -->
+          <span class="status-badge status-paid hidden" id="statusPaid" data-node-id="1:4079">
+            <span>已付款</span>
+          </span>
+          <!-- 對帳中狀態標籤（預設隱藏） -->
+          <span class="status-badge status-checking hidden" id="statusChecking">
+            <span>對帳中</span>
+          </span>
+        </div>
+
+        <!-- ========== 已繳款時顯示：發票資訊 ========== -->
+        <div class="invoice-detail hidden" id="invoiceDetail" data-node-id="1:4081">
+          <div class="invoice-detail-inner" data-node-id="1:4082">
+            <div class="invoice-row" data-node-id="1:4083">
+              <span class="invoice-label" data-node-id="1:4084">發票開立日期</span>
+              <span class="invoice-value" id="invoiceDate" data-node-id="1:4085">114年01-02月</span>
+            </div>
+            <div class="invoice-row" data-node-id="1:4086">
+              <span class="invoice-label" data-node-id="1:4087">發票號碼</span>
+              <span class="invoice-value" id="invoiceNumber" data-node-id="1:4088">TN 61433573</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== 未繳款時顯示：發票開立方式選擇區塊 ========== -->
+      <div class="invoice-section" id="invoiceSection">
+
+        <!-- 區塊標題 -->
+        <div class="section-header">
+          <span class="section-icon-emoji">🧾</span>
+          <span class="section-title">發票開立方式</span>
+        </div>
+
+        <!-- 手機條碼載具（預設選取） -->
+        <label class="invoice-option selected">
+          <div class="option-left">
+            <input type="radio" name="invoiceType" value="mobile-barcode" checked>
+            <span class="radio-custom"></span>
+            <span class="option-label">手機條碼載具</span>
+          </div>
+        </label>
+        <!-- 手機條碼輸入區 -->
+        <div class="invoice-detail-area" id="mobileArea">
+          <div class="invoice-input-group">
+            <label class="invoice-input-label" for="mobileBarcode">載具條碼</label>
+            <input type="text" class="invoice-input" id="mobileBarcode" placeholder="/ 開頭共 8 碼，例如：/ABC1234" maxlength="8">
+            <p class="invoice-input-hint">＊請輸入手機條碼載具編號（斜線 + 7 碼大寫英數字）</p>
+          </div>
+        </div>
+
+        <!-- 捐贈發票 -->
+        <label class="invoice-option">
+          <div class="option-left">
+            <input type="radio" name="invoiceType" value="donate">
+            <span class="radio-custom"></span>
+            <span class="option-label">捐贈發票</span>
+          </div>
+        </label>
+
+        <!-- 三聯式發票（公司戶） -->
+        <label class="invoice-option">
+          <div class="option-left">
+            <input type="radio" name="invoiceType" value="triple">
+            <span class="radio-custom"></span>
+            <span class="option-label">三聯式發票（公司戶）</span>
+          </div>
+        </label>
+        <!-- 三聯式發票資訊輸入區 -->
+        <div class="invoice-detail-area" id="tripleArea" style="display:none;">
+          <div class="invoice-input-group">
+            <label class="invoice-input-label" for="companyTaxId">統一編號</label>
+            <input type="text" class="invoice-input" id="companyTaxId" placeholder="請輸入 8 碼統一編號" maxlength="8">
+          </div>
+          <div class="invoice-input-group">
+            <label class="invoice-input-label" for="companyName">公司抬頭</label>
+            <input type="text" class="invoice-input" id="companyName" placeholder="請輸入公司名稱">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ========== 未繳款時顯示：專屬轉帳帳戶資訊 ========== -->
+      <div class="transfer-account-section" id="transferAccountSection">
+
+        <!-- 區塊標題 -->
+        <div class="section-header">
+          <span class="section-icon-emoji">🏦</span>
+          <span class="section-title">專屬轉帳帳戶</span>
+        </div>
+
+        <!-- 帳戶資訊卡片 -->
+        <div class="transfer-account-card">
+          <div class="transfer-row">
+            <span class="transfer-label">銀行名稱</span>
+            <span class="transfer-value">國泰世華銀行（013）</span>
+          </div>
+          <div class="transfer-row">
+            <span class="transfer-label">分行名稱</span>
+            <span class="transfer-value">台中分行</span>
+          </div>
+          <div class="transfer-row">
+            <span class="transfer-label">帳號</span>
+            <span class="transfer-value transfer-account-num" id="transferAccountNum">7109-4521-3258-001</span>
+          </div>
+          <div class="transfer-row">
+            <span class="transfer-label">戶名</span>
+            <span class="transfer-value">陸府建設股份有限公司</span>
+          </div>
+        </div>
+
+        <!-- 備註提醒 -->
+        <p class="transfer-notice">＊此為您的專屬虛擬帳號，請勿提供他人使用</p>
+
+      </div>
+
+      <!-- ========== 未繳款時顯示：轉帳後五碼備註 ========== -->
+      <div class="transfer-remark-section" id="transferRemarkSection">
+        <div class="invoice-input-group">
+          <label class="invoice-input-label" for="transferRemark">轉帳備註</label>
+          <input type="text" class="invoice-input" id="transferRemark" placeholder="請輸入轉帳後五碼" maxlength="5">
+          <p class="invoice-input-hint">＊請輸入您轉帳帳號末五碼，以利對帳作業</p>
+        </div>
+      </div>
+
+      <!-- 底部按鈕區域 -->
+      <div class="payment-footer" id="paymentFooter">
+        <button class="btn-confirm" id="btnTransferDone">我已轉帳完成</button>
+        <button class="btn-cancel" id="btnCancel">確認離開</button>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-payment-detail -->
+
+  <!-- 頁面互動邏輯 -->
+  <!-- 共用頂部導覽列元件 -->
+
+  <script src="js/crm-header.js" defer></script>
+
+  <script src="js/crm-green-care-payment-detail.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>
