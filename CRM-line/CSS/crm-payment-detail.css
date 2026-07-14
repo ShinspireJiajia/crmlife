@@ -1,0 +1,367 @@
+/* ============================================
+   款項明細頁面樣式
+   已付款 / 未繳款 兩種狀態
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-field-bg: rgba(179, 176, 158, 0.16);
+  --color-detail-bg: rgba(179, 176, 158, 0.12);
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面整體 --- */
+.crm-payment-detail {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部導覽列（凍結固定） --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px 8px;
+  background-color: var(--color-page-bg);
+}
+
+/* 返回按鈕 */
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 2px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.btn-back img {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-back .arrow-icon {
+  width: 16px;
+  height: 15.7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 頁面標題 */
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+}
+
+/* 首頁按鈕 */
+.btn-home {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.btn-home .home-icon {
+  width: 21px;
+  height: 21px;
+  display: block;
+}
+
+.btn-home span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(58, 66, 70, 0.8);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 主要內容區域 --- */
+.main-content {
+  position: relative;
+  z-index: 1;
+  padding: 73px 20px 40px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ======================================
+   帳號資訊卡片
+   ====================================== */
+.bank-info-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bank-label-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bank-icon {
+  flex-shrink: 0;
+}
+
+.bank-label {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.bank-value {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* ======================================
+   款項明細主卡片
+   ====================================== */
+.detail-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 款項標題列 */
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.detail-title {
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* 金額列 */
+.detail-amount-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.detail-amount-label {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.detail-amount-value {
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  text-align: right;
+}
+
+/* 繳款日期列 */
+.detail-date-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 4px;
+}
+
+.detail-date-text {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+/* 繳費狀態標籤 */
+.detail-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.detail-status.status-paid {
+  background-color: #dcf1eb;
+  color: #325148;
+}
+
+.detail-status.status-unpaid {
+  background-color: rgba(232, 177, 95, 0.12);
+  color: #c58b36;
+}
+
+/* 發票資訊區塊 */
+.invoice-info {
+  margin: 4px 16px 8px;
+  background-color: var(--color-detail-bg);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.invoice-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 23px;
+}
+
+.invoice-row-label {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.invoice-row-value {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* ======================================
+   發票方式區塊
+   ====================================== */
+.invoice-method-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.invoice-method-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.invoice-method-title .section-icon {
+  flex-shrink: 0;
+}
+
+.invoice-method-title span {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.invoice-method-card {
+  background-color: var(--color-field-bg);
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+}
+
+.invoice-method-text {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.invoice-method-text .barcode-value {
+  display: block;
+  font-weight: 500;
+  margin-top: 2px;
+}
+

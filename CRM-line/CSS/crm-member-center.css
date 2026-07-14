@@ -1,0 +1,491 @@
+/* ============================================
+   會員中心頁面樣式
+   根據 Figma 設計稿 (node-id: 326:1721)
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  /* 主要色彩 */
+  --color-page-bg: #f8f7f5;
+  --color-text-dark: #3a4246;
+  --color-text-placeholder: rgba(58, 66, 70, 0.6);
+  --color-border: #b3b09e;
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-gold: #b8a676;
+  --color-white: #ffffff;
+
+  /* 字型 */
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面整體 --- */
+.crm-member-center {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 主要內容區域 --- */
+.main-content {
+  position: relative;
+  z-index: 1;
+  padding: 81px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ============================================
+   選單項目樣式
+   ============================================ */
+
+/* 單一選單項目 */
+.menu-item {
+  display: flex;
+  align-items: center;
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  min-height: 48px;
+}
+
+.menu-item:active {
+  background-color: rgba(179, 176, 158, 0.1);
+}
+
+/* 左側圖示 */
+.menu-item-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* 選單文字 */
+.menu-item-text {
+  flex: 1;
+  text-align: right;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: var(--color-text-dark);
+}
+
+/* 右側箭頭 */
+.menu-chevron {
+  flex-shrink: 0;
+  margin-left: 8px;
+  opacity: 0.4;
+}
+
+/* ============================================
+   選單群組（帶分隔線的多項目卡片）
+   ============================================ */
+.menu-group {
+  background: var(--color-white);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.menu-group .menu-item {
+  border-radius: 0;
+  padding: 16px;
+  min-height: 56px;
+}
+
+.menu-group .menu-item:first-child {
+  border-radius: 12px 12px 0 0;
+}
+
+.menu-group .menu-item:last-child {
+  border-radius: 0 0 12px 12px;
+}
+
+/* 分隔線 */
+.menu-divider {
+  height: 1px;
+  background-color: var(--color-border-light);
+  margin: 0;
+}
+
+/* ============================================
+   發票資訊區塊
+   ============================================ */
+.invoice-section {
+  margin-top: 0;
+}
+
+/* 區塊標題 */
+.invoice-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0 8px;
+}
+
+.invoice-title-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.invoice-title-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 23px;
+  color: var(--color-text-dark);
+}
+
+/* 發票資訊卡片 */
+.invoice-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 78px;
+}
+
+/* 發票顯示資訊 */
+.invoice-display {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.invoice-type-label {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 23px;
+  color: var(--color-text-dark);
+}
+
+.invoice-value {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: var(--color-text-dark);
+}
+
+/* 更改設定按鈕 */
+.btn-change-setting {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-change-setting:active {
+  background-color: rgba(179, 176, 158, 0.1);
+}
+
+/* ============================================
+   Action Sheet（底部選單）
+   ============================================ */
+.action-sheet-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.action-sheet-overlay.active {
+  display: flex;
+}
+
+.action-sheet {
+  width: 100%;
+  max-width: 430px;
+  background: var(--color-white);
+  border-radius: 16px 16px 0 0;
+  padding: 12px 0;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* 選項 */
+.action-sheet-option {
+  padding: 14px 16px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.action-sheet-option:active {
+  background-color: rgba(179, 176, 158, 0.1);
+}
+
+/* 分隔線 */
+.action-sheet-divider {
+  height: 1px;
+  background-color: var(--color-border-light);
+  margin: 0;
+}
+
+/* ============================================
+   發票設定彈窗
+   ============================================ */
+.invoice-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.invoice-modal-overlay.active {
+  display: flex;
+}
+
+.invoice-modal {
+  width: calc(100% - 40px);
+  max-width: 355px;
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 16px;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 彈窗標題 */
+.invoice-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.invoice-modal-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.invoice-modal-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 23px;
+  color: var(--color-text-dark);
+}
+
+/* 表單群組 */
+.invoice-form-group {
+  margin-bottom: 8px;
+}
+
+.invoice-form-label {
+  display: block;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: var(--color-text-placeholder);
+  margin-bottom: 4px;
+}
+
+/* 下拉選單 */
+.invoice-select-wrap {
+  position: relative;
+}
+
+.invoice-select {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  padding: 0 32px 0 12px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  background: var(--color-white);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.invoice-select:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* 欄位群組 */
+.invoice-field-group {
+  margin-top: 8px;
+}
+
+.invoice-field-group.hidden {
+  display: none;
+}
+
+/* 輸入框 */
+.invoice-input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  padding: 0 12px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  background: var(--color-white);
+}
+
+.invoice-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.invoice-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* 欄位間距 */
+.invoice-field-spacer {
+  height: 8px;
+}
+
+/* 提示文字 */
+.invoice-hint {
+  margin-top: 8px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-placeholder);
+}
+
+/* 按鈕區 */
+.invoice-modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 8px;
+}
+
+.btn-modal-cancel,
+.btn-modal-confirm {
+  flex: 1;
+  height: 47px;
+  border-radius: 24px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 23px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  border: none;
+}
+
+.btn-modal-cancel {
+  background: rgba(179, 176, 158, 0.2);
+  color: var(--color-text-dark);
+}
+
+.btn-modal-confirm {
+  background: var(--color-gold);
+  color: var(--color-white);
+}
+
+.btn-modal-cancel:active,
+.btn-modal-confirm:active {
+  opacity: 0.8;
+}
