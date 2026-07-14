@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>超瓦斯表</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-gas-meter.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 超瓦斯表頁面容器 -->
+  <div class="crm-gas-meter">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="超瓦斯表" data-back="crm-index_life.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <!-- 本期用量摘要 -->
+      <div class="meter-summary-card">
+        <p class="meter-summary-label">本期瓦斯用量</p>
+        <p class="meter-summary-value" id="meterSummaryValue">18.6<span>度</span></p>
+        <p class="meter-summary-date" id="meterSummaryDate">上次抄表日期｜2026-06-28</p>
+        <p class="meter-summary-updater" id="meterSummaryUpdater" hidden>最後留存人員｜<span id="meterSummaryUpdaterName"></span></p>
+      </div>
+
+      <!-- 抄表紀錄 -->
+      <div class="section-header">
+        <p class="section-title">抄表紀錄</p>
+        <button type="button" class="btn-add-manual" id="btnAddManual">
+          <span class="btn-add-icon">+</span>手動新增
+        </button>
+      </div>
+      <div class="meter-record-list" id="meterRecordList">
+        <div class="meter-record-item">
+          <div class="meter-record-main">
+            <span class="meter-record-date">2026-06-28</span>
+            <span class="meter-record-usage">18.6 度</span>
+          </div>
+        </div>
+        <div class="meter-record-item">
+          <div class="meter-record-main">
+            <span class="meter-record-date">2026-05-28</span>
+            <span class="meter-record-usage">16.2 度</span>
+          </div>
+        </div>
+        <div class="meter-record-item">
+          <div class="meter-record-main">
+            <span class="meter-record-date">2026-04-28</span>
+            <span class="meter-record-usage">17.4 度</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-gas-meter -->
+
+  <!-- 手動新增抄表紀錄 Modal 遮罩 -->
+  <div class="gas-modal-overlay" id="gasModalOverlay">
+    <div class="gas-modal-container">
+
+      <!-- 標頭 -->
+      <div class="gas-modal-header">
+        <h2>手動新增抄表紀錄</h2>
+        <button type="button" class="gas-modal-close" id="gasModalClose">&times;</button>
+      </div>
+
+      <!-- 內容區 -->
+      <div class="gas-modal-body">
+        <form id="gasAddForm">
+
+          <div class="gas-form-group">
+            <label>抄表日期 <span class="required">*</span></label>
+            <input type="date" class="gas-input" id="gasInputDate" required>
+          </div>
+
+          <div class="gas-form-group">
+            <label>用量（度） <span class="required">*</span></label>
+            <input type="number" class="gas-input" id="gasInputUsage" placeholder="請輸入本次用量" min="0" step="0.1" required>
+          </div>
+
+          <div class="gas-form-group">
+            <label>留存人員</label>
+            <input type="text" class="gas-input readonly" id="gasInputName" readonly>
+          </div>
+
+          <button type="submit" class="gas-submit-btn">確認新增</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- /手動新增抄表紀錄 Modal -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-header.js" defer></script>
+  <script src="js/crm-gas-meter.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

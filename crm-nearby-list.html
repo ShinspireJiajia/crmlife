@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>周邊資訊</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-nearby-list.css">
+  <link rel="stylesheet" href="css/crm-bottom-nav.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 周邊資訊頁面容器 -->
+  <div class="crm-nearby-list has-bottom-nav">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="周邊資訊" data-back="crm-index_life.html"></div>
+
+    <!-- 頂部導覽列佔位 -->
+    <div class="header-spacer"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <!-- 我的收藏店家 + 搜尋 -->
+      <div class="top-actions-row">
+        <div class="primary-action-card" id="btnFavToggle">
+          <div class="action-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6 6.6.7-4.9 4.5 1.4 6.5L12 16.9l-5.9 3.3 1.4-6.5-4.9-4.5 6.6-.7L12 2.5Z"></path></svg>
+          </div>
+          <span id="btnFavToggleText">我的收藏店家</span>
+        </div>
+        <button class="btn-search-toggle" id="btnSearchToggle" aria-label="搜尋店家">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 搜尋關鍵字提示（有套用關鍵字時顯示） -->
+      <div class="active-search-chip" id="activeSearchChip" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span id="activeSearchChipText"></span>
+        <button type="button" id="btnClearSearch" aria-label="清除搜尋">&times;</button>
+      </div>
+
+      <!-- 範圍設定 -->
+      <div class="filter-section">
+        <h2>探索周邊</h2>
+        <select class="range-select" id="rangeSelect">
+          <option value="500">範圍：500m</option>
+          <option value="1000" selected>範圍：1km</option>
+          <option value="3000">範圍：3km</option>
+        </select>
+      </div>
+
+      <!-- 8 大分類 -->
+      <div class="category-grid" id="categoryGrid">
+        <div class="category-item" data-category="bank">
+          <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 10 12 4 21 10"></polyline><line x1="4" y1="10" x2="20" y2="10"></line><line x1="4" y1="20" x2="20" y2="20"></line><line x1="6" y1="10" x2="6" y2="20"></line><line x1="10" y1="10" x2="10" y2="20"></line><line x1="14" y1="10" x2="14" y2="20"></line><line x1="18" y1="10" x2="18" y2="20"></line></svg></div>
+          <span>銀行</span>
+        </div>
+        <div class="category-item" data-category="medical">
+          <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg></div>
+          <span>醫療</span>
+        </div>
+        <div class="category-item" data-category="food">
+          <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="2" x2="7" y2="22"></line><path d="M4 2v6a3 3 0 0 0 6 0V2"></path><path d="M17 2c-2 0-3 2.2-3 5.5S15 13 17 13v9"></path></svg></div>
+          <span>餐廳</span>
+        </div>
+        <div class="category-item" data-category="drink">
+          <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1.4 12.2a2 2 0 0 1-2 1.8h-5.2a2 2 0 0 1-2-1.8L6 8Z"></path><line x1="9" y1="2" x2="9" y2="8"></line><line x1="15" y1="2" x2="15" y2="8"></line><line x1="6.6" y1="12" x2="17.4" y2="12"></line></svg></div>
+          <span>飲料</span>
+        </div>
+        <div class="category-item" data-category="fruit">
+          <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.2 0-7.5-3.4-7.5-7.6 0-3 2.1-5.4 4.3-5.4 1 0 1.9.5 3.2.5s2.2-.5 3.2-.5c2.2 0 4.3 2.4 4.3 5.4 0 4.2-3.3 7.6-7.5 7.6Z"></path><path d="M12 8c0-2 1-3.3 2.4-4.3"></path></svg></div>
+          <span>水果店</span>
+        </div>
+        <div class="category-item" data-category="market">
+          <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.1"></circle><circle cx="18" cy="20" r="1.1"></circle><path d="M2.5 4h2.3l2.3 12a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21.5 8H6"></path></svg></div>
+          <span>超市</span>
+        </div>
+        <div class="category-item" data-category="convenience">
+          <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 4 4h16l1 5.5"></path><path d="M3 9.5V19a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5"></path><path d="M9 20v-6h6v6"></path></svg></div>
+          <span>超商</span>
+        </div>
+        <div class="category-item" data-category="family">
+          <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5.5" r="2.3"></circle><path d="M4 20c0-3.6 2.2-6.2 5-6.2s5 2.6 5 6.2"></path><circle cx="18" cy="9.5" r="1.7"></circle><path d="M15 20c0-2.6 1.4-4.5 3-4.5s3 1.9 3 4.5"></path></svg></div>
+          <span>親子</span>
+        </div>
+      </div>
+
+      <!-- 區塊標題 -->
+      <div class="section-title">
+        <div class="title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h3Z"></path><path d="M7 11l4.2-7.4a1.6 1.6 0 0 1 2.8.8V9h4.8a2 2 0 0 1 2 2.4l-1.6 7.4A2 2 0 0 1 17.2 20H10a3 3 0 0 1-3-3Z"></path></svg></div>
+        <span>社區周邊資訊</span>
+        <span class="result-count" id="resultCount"></span>
+      </div>
+
+      <!-- 店家清單 -->
+      <div class="store-list" id="storeList">
+
+        <!-- 快樂小兒科診所 -->
+        <div class="store-card" data-category="medical" data-distance="350" data-name="快樂小兒科診所" data-fav="true">
+          <div class="store-header">
+            <div class="store-info">
+              <h3>快樂小兒科診所 <span class="tag featured">社區特約</span></h3>
+              <div class="store-meta">
+                <span class="meta-item"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg></span>醫療</span>
+                <span class="meta-item"><span class="meta-icon"><img src="assets/location-icon.svg" alt=""></span>350m</span>
+                <span class="meta-item rating-star"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6 6.6.7-4.9 4.5 1.4 6.5L12 16.9l-5.9 3.3 1.4-6.5-4.9-4.5 6.6-.7L12 2.5Z"></path></svg></span><span class="rating-text">4.7 (3則評論)</span></span>
+              </div>
+            </div>
+          </div>
+          <p class="store-desc">社區住戶憑磁扣免掛號費！專業親切的兒科醫師駐診。</p>
+          <div class="store-actions">
+            <button class="action-btn fav active" data-name="快樂小兒科診所">
+              <span class="btn-icon icon-fav"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.7 2 5 5.6 5c2 0 3.4 1.1 4.4 2.6C11 6.1 12.4 5 14.4 5 18 5 19.4 8.7 22 11.7 19.5 16.4 12 21 12 21Z" fill="currentColor" fill-opacity="0"></path></svg></span>
+              <span class="btn-text">已收藏</span>
+            </button>
+            <button class="action-btn comment-btn" data-name="快樂小兒科診所">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4.5 4V16H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1Z"></path></svg></span>評論
+            </button>
+            <button class="action-btn share-btn" data-name="快樂小兒科診所">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.4"></circle><circle cx="6" cy="12" r="2.4"></circle><circle cx="18" cy="19" r="2.4"></circle><line x1="8.2" y1="10.8" x2="15.8" y2="6.2"></line><line x1="8.2" y1="13.2" x2="15.8" y2="17.8"></line></svg></span>分享
+            </button>
+          </div>
+        </div>
+
+        <!-- 鮮果園 水果量販 -->
+        <div class="store-card" data-category="fruit" data-distance="480" data-name="鮮果園 水果量販" data-fav="false">
+          <div class="store-header">
+            <div class="store-info">
+              <h3>鮮果園 水果量販 <span class="tag">新開幕</span></h3>
+              <div class="store-meta">
+                <span class="meta-item"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.2 0-7.5-3.4-7.5-7.6 0-3 2.1-5.4 4.3-5.4 1 0 1.9.5 3.2.5s2.2-.5 3.2-.5c2.2 0 4.3 2.4 4.3 5.4 0 4.2-3.3 7.6-7.5 7.6Z"></path><path d="M12 8c0-2 1-3.3 2.4-4.3"></path></svg></span>水果店</span>
+                <span class="meta-item"><span class="meta-icon"><img src="assets/location-icon.svg" alt=""></span>480m</span>
+                <span class="meta-item rating-star"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6 6.6.7-4.9 4.5 1.4 6.5L12 16.9l-5.9 3.3 1.4-6.5-4.9-4.5 6.6-.7L12 2.5Z"></path></svg></span><span class="rating-text">4.5 (2則評論)</span></span>
+              </div>
+            </div>
+          </div>
+          <p class="store-desc">每日產地直送新鮮水果，提供切片與果汁服務。</p>
+          <div class="store-actions">
+            <button class="action-btn fav" data-name="鮮果園 水果量販">
+              <span class="btn-icon icon-fav"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.7 2 5 5.6 5c2 0 3.4 1.1 4.4 2.6C11 6.1 12.4 5 14.4 5 18 5 19.4 8.7 22 11.7 19.5 16.4 12 21 12 21Z" fill="currentColor" fill-opacity="0"></path></svg></span>
+              <span class="btn-text">收藏</span>
+            </button>
+            <button class="action-btn comment-btn" data-name="鮮果園 水果量販">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4.5 4V16H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1Z"></path></svg></span>評論
+            </button>
+            <button class="action-btn share-btn" data-name="鮮果園 水果量販">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.4"></circle><circle cx="6" cy="12" r="2.4"></circle><circle cx="18" cy="19" r="2.4"></circle><line x1="8.2" y1="10.8" x2="15.8" y2="6.2"></line><line x1="8.2" y1="13.2" x2="15.8" y2="17.8"></line></svg></span>分享
+            </button>
+          </div>
+        </div>
+
+        <!-- 暖食堂 家常料理 -->
+        <div class="store-card" data-category="food" data-distance="620" data-name="暖食堂 家常料理" data-fav="false">
+          <div class="store-header">
+            <div class="store-info">
+              <h3>暖食堂 家常料理</h3>
+              <div class="store-meta">
+                <span class="meta-item"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="2" x2="7" y2="22"></line><path d="M4 2v6a3 3 0 0 0 6 0V2"></path><path d="M17 2c-2 0-3 2.2-3 5.5S15 13 17 13v9"></path></svg></span>餐廳</span>
+                <span class="meta-item"><span class="meta-icon"><img src="assets/location-icon.svg" alt=""></span>620m</span>
+                <span class="meta-item rating-star"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6 6.6.7-4.9 4.5 1.4 6.5L12 16.9l-5.9 3.3 1.4-6.5-4.9-4.5 6.6-.7L12 2.5Z"></path></svg></span><span class="rating-text">4.5 (2則評論)</span></span>
+              </div>
+            </div>
+          </div>
+          <p class="store-desc">家常小炒與定食，住戶憑房卡加送每日例湯一份。</p>
+          <div class="store-actions">
+            <button class="action-btn fav" data-name="暖食堂 家常料理">
+              <span class="btn-icon icon-fav"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.7 2 5 5.6 5c2 0 3.4 1.1 4.4 2.6C11 6.1 12.4 5 14.4 5 18 5 19.4 8.7 22 11.7 19.5 16.4 12 21 12 21Z" fill="currentColor" fill-opacity="0"></path></svg></span>
+              <span class="btn-text">收藏</span>
+            </button>
+            <button class="action-btn comment-btn" data-name="暖食堂 家常料理">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4.5 4V16H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1Z"></path></svg></span>評論
+            </button>
+            <button class="action-btn share-btn" data-name="暖食堂 家常料理">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.4"></circle><circle cx="6" cy="12" r="2.4"></circle><circle cx="18" cy="19" r="2.4"></circle><line x1="8.2" y1="10.8" x2="15.8" y2="6.2"></line><line x1="8.2" y1="13.2" x2="15.8" y2="17.8"></line></svg></span>分享
+            </button>
+          </div>
+        </div>
+
+        <!-- 晨露茶飲 -->
+        <div class="store-card" data-category="drink" data-distance="210" data-name="晨露茶飲" data-fav="false">
+          <div class="store-header">
+            <div class="store-info">
+              <h3>晨露茶飲 <span class="tag">新開幕</span></h3>
+              <div class="store-meta">
+                <span class="meta-item"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1.4 12.2a2 2 0 0 1-2 1.8h-5.2a2 2 0 0 1-2-1.8L6 8Z"></path><line x1="9" y1="2" x2="9" y2="8"></line><line x1="15" y1="2" x2="15" y2="8"></line><line x1="6.6" y1="12" x2="17.4" y2="12"></line></svg></span>飲料</span>
+                <span class="meta-item"><span class="meta-icon"><img src="assets/location-icon.svg" alt=""></span>210m</span>
+                <span class="meta-item rating-star"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6 6.6.7-4.9 4.5 1.4 6.5L12 16.9l-5.9 3.3 1.4-6.5-4.9-4.5 6.6-.7L12 2.5Z"></path></svg></span><span class="rating-text">4.0 (1則評論)</span></span>
+              </div>
+            </div>
+          </div>
+          <p class="store-desc">手搖飲品，住戶出示房卡享第二杯半價（每日限量）。</p>
+          <div class="store-actions">
+            <button class="action-btn fav" data-name="晨露茶飲">
+              <span class="btn-icon icon-fav"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.7 2 5 5.6 5c2 0 3.4 1.1 4.4 2.6C11 6.1 12.4 5 14.4 5 18 5 19.4 8.7 22 11.7 19.5 16.4 12 21 12 21Z" fill="currentColor" fill-opacity="0"></path></svg></span>
+              <span class="btn-text">收藏</span>
+            </button>
+            <button class="action-btn comment-btn" data-name="晨露茶飲">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4.5 4V16H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1Z"></path></svg></span>評論
+            </button>
+            <button class="action-btn share-btn" data-name="晨露茶飲">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.4"></circle><circle cx="6" cy="12" r="2.4"></circle><circle cx="18" cy="19" r="2.4"></circle><line x1="8.2" y1="10.8" x2="15.8" y2="6.2"></line><line x1="8.2" y1="13.2" x2="15.8" y2="17.8"></line></svg></span>分享
+            </button>
+          </div>
+        </div>
+
+        <!-- 好鄰全聯超市 -->
+        <div class="store-card" data-category="market" data-distance="550" data-name="好鄰超市" data-fav="false">
+          <div class="store-header">
+            <div class="store-info">
+              <h3>好鄰超市</h3>
+              <div class="store-meta">
+                <span class="meta-item"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.1"></circle><circle cx="18" cy="20" r="1.1"></circle><path d="M2.5 4h2.3l2.3 12a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21.5 8H6"></path></svg></span>超市</span>
+                <span class="meta-item"><span class="meta-icon"><img src="assets/location-icon.svg" alt=""></span>550m</span>
+                <span class="meta-item rating-star"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6 6.6.7-4.9 4.5 1.4 6.5L12 16.9l-5.9 3.3 1.4-6.5-4.9-4.5 6.6-.7L12 2.5Z"></path></svg></span><span class="rating-text">4.7 (3則評論)</span></span>
+              </div>
+            </div>
+          </div>
+          <p class="store-desc">生鮮蔬果、日用品一應俱全，晚間七點後生鮮特價。</p>
+          <div class="store-actions">
+            <button class="action-btn fav" data-name="好鄰超市">
+              <span class="btn-icon icon-fav"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.7 2 5 5.6 5c2 0 3.4 1.1 4.4 2.6C11 6.1 12.4 5 14.4 5 18 5 19.4 8.7 22 11.7 19.5 16.4 12 21 12 21Z" fill="currentColor" fill-opacity="0"></path></svg></span>
+              <span class="btn-text">收藏</span>
+            </button>
+            <button class="action-btn comment-btn" data-name="好鄰超市">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4.5 4V16H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1Z"></path></svg></span>評論
+            </button>
+            <button class="action-btn share-btn" data-name="好鄰超市">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.4"></circle><circle cx="6" cy="12" r="2.4"></circle><circle cx="18" cy="19" r="2.4"></circle><line x1="8.2" y1="10.8" x2="15.8" y2="6.2"></line><line x1="8.2" y1="13.2" x2="15.8" y2="17.8"></line></svg></span>分享
+            </button>
+          </div>
+        </div>
+
+        <!-- 巷口超商 -->
+        <div class="store-card" data-category="convenience" data-distance="150" data-name="巷口超商" data-fav="false">
+          <div class="store-header">
+            <div class="store-info">
+              <h3>巷口超商</h3>
+              <div class="store-meta">
+                <span class="meta-item"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 4 4h16l1 5.5"></path><path d="M3 9.5V19a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5"></path><path d="M9 20v-6h6v6"></path></svg></span>超商</span>
+                <span class="meta-item"><span class="meta-icon"><img src="assets/location-icon.svg" alt=""></span>150m</span>
+                <span class="meta-item rating-star"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6 6.6.7-4.9 4.5 1.4 6.5L12 16.9l-5.9 3.3 1.4-6.5-4.9-4.5 6.6-.7L12 2.5Z"></path></svg></span><span class="rating-text">尚無評論</span></span>
+              </div>
+            </div>
+          </div>
+          <p class="store-desc">24 小時營業，可代收包裹、繳費及影印服務。</p>
+          <div class="store-actions">
+            <button class="action-btn fav" data-name="巷口超商">
+              <span class="btn-icon icon-fav"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.7 2 5 5.6 5c2 0 3.4 1.1 4.4 2.6C11 6.1 12.4 5 14.4 5 18 5 19.4 8.7 22 11.7 19.5 16.4 12 21 12 21Z" fill="currentColor" fill-opacity="0"></path></svg></span>
+              <span class="btn-text">收藏</span>
+            </button>
+            <button class="action-btn comment-btn" data-name="巷口超商">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4.5 4V16H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1Z"></path></svg></span>評論
+            </button>
+            <button class="action-btn share-btn" data-name="巷口超商">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.4"></circle><circle cx="6" cy="12" r="2.4"></circle><circle cx="18" cy="19" r="2.4"></circle><line x1="8.2" y1="10.8" x2="15.8" y2="6.2"></line><line x1="8.2" y1="13.2" x2="15.8" y2="17.8"></line></svg></span>分享
+            </button>
+          </div>
+        </div>
+
+        <!-- 陽信銀行 社區分行 -->
+        <div class="store-card" data-category="bank" data-distance="780" data-name="陽信銀行 社區分行" data-fav="false">
+          <div class="store-header">
+            <div class="store-info">
+              <h3>陽信銀行 社區分行</h3>
+              <div class="store-meta">
+                <span class="meta-item"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 10 12 4 21 10"></polyline><line x1="4" y1="10" x2="20" y2="10"></line><line x1="4" y1="20" x2="20" y2="20"></line><line x1="6" y1="10" x2="6" y2="20"></line><line x1="10" y1="10" x2="10" y2="20"></line><line x1="14" y1="10" x2="14" y2="20"></line><line x1="18" y1="10" x2="18" y2="20"></line></svg></span>銀行</span>
+                <span class="meta-item"><span class="meta-icon"><img src="assets/location-icon.svg" alt=""></span>780m</span>
+                <span class="meta-item rating-star"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6 6.6.7-4.9 4.5 1.4 6.5L12 16.9l-5.9 3.3 1.4-6.5-4.9-4.5 6.6-.7L12 2.5Z"></path></svg></span><span class="rating-text">尚無評論</span></span>
+              </div>
+            </div>
+          </div>
+          <p class="store-desc">提供開戶、貸款諮詢服務，社區住戶享優先叫號。</p>
+          <div class="store-actions">
+            <button class="action-btn fav" data-name="陽信銀行 社區分行">
+              <span class="btn-icon icon-fav"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.7 2 5 5.6 5c2 0 3.4 1.1 4.4 2.6C11 6.1 12.4 5 14.4 5 18 5 19.4 8.7 22 11.7 19.5 16.4 12 21 12 21Z" fill="currentColor" fill-opacity="0"></path></svg></span>
+              <span class="btn-text">收藏</span>
+            </button>
+            <button class="action-btn comment-btn" data-name="陽信銀行 社區分行">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4.5 4V16H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1Z"></path></svg></span>評論
+            </button>
+            <button class="action-btn share-btn" data-name="陽信銀行 社區分行">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.4"></circle><circle cx="6" cy="12" r="2.4"></circle><circle cx="18" cy="19" r="2.4"></circle><line x1="8.2" y1="10.8" x2="15.8" y2="6.2"></line><line x1="8.2" y1="13.2" x2="15.8" y2="17.8"></line></svg></span>分享
+            </button>
+          </div>
+        </div>
+
+        <!-- 童樂繪本親子館 -->
+        <div class="store-card" data-category="family" data-distance="430" data-name="童樂繪本親子館" data-fav="false">
+          <div class="store-header">
+            <div class="store-info">
+              <h3>童樂繪本親子館 <span class="tag featured">社區特約</span></h3>
+              <div class="store-meta">
+                <span class="meta-item"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5.5" r="2.3"></circle><path d="M4 20c0-3.6 2.2-6.2 5-6.2s5 2.6 5 6.2"></path><circle cx="18" cy="9.5" r="1.7"></circle><path d="M15 20c0-2.6 1.4-4.5 3-4.5s3 1.9 3 4.5"></path></svg></span>親子</span>
+                <span class="meta-item"><span class="meta-icon"><img src="assets/location-icon.svg" alt=""></span>430m</span>
+                <span class="meta-item rating-star"><span class="meta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6 6.6.7-4.9 4.5 1.4 6.5L12 16.9l-5.9 3.3 1.4-6.5-4.9-4.5 6.6-.7L12 2.5Z"></path></svg></span><span class="rating-text">5.0 (1則評論)</span></span>
+              </div>
+            </div>
+          </div>
+          <p class="store-desc">繪本借閱、親子共讀活動，住戶憑房卡入館免費。</p>
+          <div class="store-actions">
+            <button class="action-btn fav" data-name="童樂繪本親子館">
+              <span class="btn-icon icon-fav"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.7 2 5 5.6 5c2 0 3.4 1.1 4.4 2.6C11 6.1 12.4 5 14.4 5 18 5 19.4 8.7 22 11.7 19.5 16.4 12 21 12 21Z" fill="currentColor" fill-opacity="0"></path></svg></span>
+              <span class="btn-text">收藏</span>
+            </button>
+            <button class="action-btn comment-btn" data-name="童樂繪本親子館">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4.5 4V16H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1Z"></path></svg></span>評論
+            </button>
+            <button class="action-btn share-btn" data-name="童樂繪本親子館">
+              <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.4"></circle><circle cx="6" cy="12" r="2.4"></circle><circle cx="18" cy="19" r="2.4"></circle><line x1="8.2" y1="10.8" x2="15.8" y2="6.2"></line><line x1="8.2" y1="13.2" x2="15.8" y2="17.8"></line></svg></span>分享
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!-- /store-list -->
+
+      <!-- 空狀態提示 -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+        </div>
+        <p class="empty-text">找不到符合條件的周邊店家</p>
+      </div>
+
+      <!-- 新增店家（一般按鈕，非主要功能） -->
+      <button type="button" class="btn-add-store-inline" id="btnAddStore">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        新增周邊店家
+      </button>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-nearby-list -->
+
+  <!-- 搜尋 Modal -->
+  <div class="sheet-modal-overlay" id="searchModalOverlay">
+    <div class="sheet-modal-container">
+      <div class="sheet-modal-header">
+        <h2>搜尋店家</h2>
+        <button class="sheet-modal-close" id="searchModalClose" aria-label="關閉">&times;</button>
+      </div>
+      <div class="sheet-modal-body">
+        <div class="search-modal-input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchModalInput" placeholder="輸入店家名稱或關鍵字..." autocomplete="off">
+        </div>
+        <button class="search-modal-submit" id="searchModalSubmit">搜尋</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 店家評論 Modal -->
+  <div class="sheet-modal-overlay" id="commentModalOverlay">
+    <div class="sheet-modal-container">
+      <div class="sheet-modal-header">
+        <h2 id="commentModalTitle">店家評論</h2>
+        <button class="sheet-modal-close" id="commentModalClose" aria-label="關閉">&times;</button>
+      </div>
+      <div class="sheet-modal-body">
+        <div class="comment-summary">
+          <span class="comment-summary-score" id="commentSummaryScore">—</span>
+          <div class="comment-summary-stars" id="commentSummaryStars"></div>
+          <span class="comment-summary-count" id="commentSummaryCount">0 則評論</span>
+        </div>
+        <div class="comment-list" id="commentList"></div>
+        <div class="comment-form">
+          <p class="comment-form-label">留下您的評論</p>
+          <div class="comment-form-rating" id="commentFormRating"></div>
+          <textarea class="comment-textarea" id="commentInput" maxlength="200" placeholder="分享您對這家店的看法..."></textarea>
+          <button type="button" class="comment-submit-btn" id="commentSubmitBtn">送出評論</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新增店家 Modal -->
+  <div class="sheet-modal-overlay" id="storeFormModalOverlay">
+    <div class="sheet-modal-container">
+      <div class="sheet-modal-header">
+        <h2>新增周邊店家</h2>
+        <button class="sheet-modal-close" id="storeFormModalClose" aria-label="關閉">&times;</button>
+      </div>
+      <div class="sheet-modal-body">
+        <form id="storeForm">
+          <div class="form-group">
+            <label>店家名稱 <span class="required">*</span></label>
+            <input type="text" id="newStoreName" class="form-input" placeholder="例如：巷口麵包坊" maxlength="30" required>
+          </div>
+          <div class="form-group">
+            <label>分類 <span class="required">*</span></label>
+            <select id="newStoreCategory" class="form-input" required>
+              <option value="">請選擇分類</option>
+              <option value="bank">銀行</option>
+              <option value="medical">醫療</option>
+              <option value="food">餐廳</option>
+              <option value="drink">飲料</option>
+              <option value="fruit">水果店</option>
+              <option value="market">超市</option>
+              <option value="convenience">超商</option>
+              <option value="family">親子</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>地址 <span class="required">*</span></label>
+            <input type="text" id="newStoreAddress" class="form-input" placeholder="例如：台北市大安區忠孝東路三段1號" maxlength="60" required>
+          </div>
+          <div class="form-group">
+            <label>特色標籤</label>
+            <select id="newStoreTag" class="form-input">
+              <option value="">無</option>
+              <option value="new">新開幕</option>
+              <option value="featured">社區特約</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>店家介紹</label>
+            <textarea id="newStoreDesc" class="form-input form-textarea" maxlength="100" placeholder="簡單介紹店家特色或住戶優惠..."></textarea>
+          </div>
+          <p class="form-hint">送出後將立即顯示於周邊店家清單，資訊如有錯誤請聯繫社區管理中心協助修改。</p>
+          <button type="submit" class="form-submit-btn">送出新增</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 常駐底部選單 -->
+  <div id="crmBottomNav"></div>
+
+  <!-- JavaScript -->
+  <script src="js/crm-header.js"></script>
+  <script src="js/crm-nearby-list.js" defer></script>
+  <script src="js/crm-bottom-nav.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

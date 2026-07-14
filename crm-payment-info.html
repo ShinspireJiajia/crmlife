@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>款項資訊</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-payment-info.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 款項資訊頁面容器 -->
+  <div class="crm-payment-info">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件，內含返回與首頁按鈕） -->
+    <div id="crmHeader" data-title="款項資訊" data-back="crm-index.html"></div>
+
+    <!-- 篩選列：分類（頁籤） / 交易狀態（標籤） -->
+    <div class="filter-bar" id="filterBar">
+      <div class="group-tabs" id="groupFilterRow">
+        <!-- 由 JS 動態產生分類頁籤 -->
+      </div>
+      <div class="filter-row" id="statusFilterRow">
+        <!-- 由 JS 動態產生交易狀態標籤 -->
+      </div>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" id="mainContent">
+
+      <!-- 點數餘額卡片 -->
+      <div class="points-banner">
+        <div class="points-banner-icon">🪙</div>
+        <div class="points-banner-text">
+          <span class="points-banner-label">目前可用點數</span>
+          <span class="points-banner-value"><span id="pointsBalance">320</span> 點</span>
+        </div>
+      </div>
+
+      <!-- 款項分類列表（由 JS 動態產生） -->
+      <div id="paymentGroupsList"></div>
+
+    </div>
+
+  </div>
+
+  <!-- 共用頂部導覽列元件 -->
+  <script src="js/crm-header.js" defer></script>
+
+  <!-- JavaScript -->
+  <script src="js/crm-payment-info.js" defer></script>
+
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

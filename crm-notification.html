@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>通知</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-notification.css">
+  <link rel="stylesheet" href="css/crm-bottom-nav.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 通知頁面容器 -->
+  <div class="crm-notification has-bottom-nav">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="通知" data-back="crm-index_life.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+
+      <div class="notify-item">
+        <div class="notify-item-icon">
+          <img src="assets/icon-payment-info.svg" alt="" loading="lazy">
+        </div>
+        <div class="notify-item-body">
+          <p class="notify-item-title"><span class="unread-dot"></span>款項提醒</p>
+          <p class="notify-item-desc">您有一筆款項即將到期，請盡快確認繳款明細。</p>
+          <p class="notify-item-time">2026-07-12 09:30</p>
+        </div>
+      </div>
+
+      <div class="notify-item">
+        <div class="notify-item-icon">
+          <img src="assets/icon-gas-meter.svg" alt="" loading="lazy">
+        </div>
+        <div class="notify-item-body">
+          <p class="notify-item-title"><span class="unread-dot"></span>超瓦斯表通知</p>
+          <p class="notify-item-desc">本期瓦斯用量已超過平均值，請留意用量狀況。</p>
+          <p class="notify-item-time">2026-07-10 14:05</p>
+        </div>
+      </div>
+
+      <div class="notify-item">
+        <div class="notify-item-icon">
+          <img src="assets/icon-repair-progress.svg" alt="" loading="lazy">
+        </div>
+        <div class="notify-item-body">
+          <p class="notify-item-title">報修進度更新</p>
+          <p class="notify-item-desc">您的報修單 20250808-002 已進入處理中。</p>
+          <p class="notify-item-time">2026-07-08 11:20</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-notification -->
+
+  <!-- 常駐底部選單 -->
+  <div id="crmBottomNav"></div>
+
+  <!-- JavaScript -->
+  <script src="js/crm-header.js" defer></script>
+  <script src="js/crm-bottom-nav.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

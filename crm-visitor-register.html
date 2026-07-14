@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>訪客登記</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-bottom-nav.css">
+  <link rel="stylesheet" href="css/crm-visitor-register.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+  <!-- 即時通知 Toast（模擬訪客抵達推播） -->
+  <div class="visitor-toast" id="visitorToast">
+    <img class="visitor-toast-icon" src="assets/icon-bell.svg" alt="">
+    <div class="visitor-toast-text">
+      <p class="visitor-toast-title" id="visitorToastTitle">通知</p>
+      <p class="visitor-toast-desc" id="visitorToastDesc"></p>
+    </div>
+  </div>
+
+  <!-- 訪客登記頁面容器 -->
+  <div class="crm-visitor has-bottom-nav">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+    <div id="crmHeader" data-title="訪客登記" data-back="crm-index_life.html" data-home="crm-index_life.html"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="visitor-content">
+
+      <!-- 新增登記入口 -->
+      <button class="btn-add-visitor" id="btnAddVisitor">
+        <span class="btn-add-icon">＋</span> 新增訪客登記
+      </button>
+
+      <!-- 篩選標籤列 -->
+      <div class="filter-tabs" id="visitorFilterTabs">
+        <button class="filter-tab active" data-filter="all">全部</button>
+        <button class="filter-tab" data-filter="pending">待到訪</button>
+        <button class="filter-tab" data-filter="arrived">已到訪</button>
+        <button class="filter-tab" data-filter="cancelled">已取消</button>
+      </div>
+
+      <!-- 訪客通行證清單 -->
+      <div class="visitor-list" id="visitorList">
+        <!-- 由 JS 動態產生 -->
+      </div>
+
+      <!-- 空狀態：篩選後無資料時顯示 -->
+      <div class="empty-state" id="visitorEmptyState" style="display: none;">
+        <div class="empty-icon">
+          <img src="assets/empty-record-icon.svg" alt="" loading="lazy">
+        </div>
+        <p class="empty-text">無相關訪客登記紀錄</p>
+      </div>
+
+    </div>
+    <!-- /visitor-content -->
+
+  </div>
+  <!-- /crm-visitor -->
+
+  <!-- 常駐底部選單 -->
+  <div id="crmBottomNav"></div>
+
+  <!-- 新增訪客登記 Modal -->
+  <div class="visitor-modal-overlay" id="visitorFormModalOverlay">
+    <div class="visitor-modal-container">
+
+      <div class="visitor-modal-header">
+        <h2>新增訪客登記</h2>
+        <button class="visitor-modal-close" id="visitorFormModalClose">&times;</button>
+      </div>
+
+      <div class="visitor-modal-body">
+        <form id="visitorForm">
+
+          <div class="visitor-form-group">
+            <label>訪客姓名 <span class="required">*</span></label>
+            <input type="text" id="visitorName" placeholder="王小華" required class="visitor-input">
+          </div>
+
+          <div class="visitor-form-group">
+            <label>聯絡電話 <span class="required">*</span></label>
+            <input type="tel" id="visitorPhone" placeholder="0912345678" required class="visitor-input">
+          </div>
+
+          <div class="visitor-form-row">
+            <div class="visitor-form-group">
+              <label>拜訪戶別 <span class="required">*</span></label>
+              <input type="text" id="visitorUnit" value="A3-3" readonly class="visitor-input readonly">
+            </div>
+            <div class="visitor-form-group">
+              <label>車　　號</label>
+              <input type="text" id="visitorCar" placeholder="不開車可留空" class="visitor-input">
+            </div>
+          </div>
+
+          <div class="visitor-form-group">
+            <label>預計來訪時間 <span class="required">*</span></label>
+            <input type="datetime-local" id="visitorTime" required class="visitor-input">
+          </div>
+
+          <div class="visitor-form-group">
+            <label>備註</label>
+            <textarea id="visitorNote" class="visitor-input" placeholder="例如：裝潢廠商、長照服務人員..."></textarea>
+          </div>
+
+          <p class="visitor-privacy-note">您所登記之訪客資料僅提供社區保全核對身分使用，將於到訪完成後自動歸檔刪除，不會另作他用。</p>
+
+          <button type="submit" class="visitor-submit-btn">產生通行證 QR Code</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- /新增訪客登記 Modal -->
+
+  <!-- 訪客通行證詳情 Modal -->
+  <div class="visitor-modal-overlay" id="visitorPassModalOverlay">
+    <div class="visitor-modal-container">
+
+      <div class="visitor-modal-header">
+        <h2>訪客通行證</h2>
+        <button class="visitor-modal-close" id="visitorPassModalClose">&times;</button>
+      </div>
+
+      <div class="visitor-modal-body">
+
+        <div class="pass-top">
+          <p class="pass-name" id="passName"></p>
+          <div class="pass-status" id="passStatus"><span></span></div>
+        </div>
+
+        <div class="pass-info-list" id="passInfoList">
+          <!-- 由 JS 動態產生 -->
+        </div>
+
+        <!-- QR Code + 通行密碼區（僅待到訪顯示） -->
+        <div class="pass-qr-section" id="passQrSection">
+          <div class="modal-section-title">訪客通行資訊</div>
+          <div class="pass-qr-visual" id="passQrVisual" aria-hidden="true"></div>
+          <p class="pass-code" id="passCode"></p>
+          <p class="pass-qr-hint">請將 QR Code 或通行密碼提供給訪客，於社區門口出示即可通行。</p>
+          <button class="btn-pass-share" id="btnPassShare">分享給訪客</button>
+        </div>
+
+        <!-- 操作按鈕：取消登記 / 模擬抵達（Demo） -->
+        <div class="pass-actions" id="passActions">
+          <button class="btn-pass-cancel" id="btnPassCancel">取消登記</button>
+          <button class="btn-pass-demo-arrive" id="btnPassDemoArrive">🔔 模擬訪客抵達（Demo）</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /訪客通行證詳情 Modal -->
+
+  <!-- 頁面互動邏輯 -->
+  <script src="js/crm-header.js" defer></script>
+  <script src="js/crm-bottom-nav.js" defer></script>
+  <script src="js/crm-visitor-register.js" defer></script>
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>
